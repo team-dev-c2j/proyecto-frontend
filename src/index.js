@@ -1,10 +1,10 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
-import UsersComponent from './componentes/Users';
+import ProductsComponent from './componentes/Products';
 
 ReactDOM.render(
   <React.StrictMode>
-    <UsersComponent></UsersComponent>
+    <ProductsComponent></ProductsComponent>
   </React.StrictMode>,
   document.getElementById('root')
 );

@@ -1,16 +1,16 @@
 import React, { useEffect, useState } from 'react';
 
-function UsersComponent() {
+function ProductsComponent() {
   const [users, setUsers] = useState([]);
 
   useEffect(() => {
     // Función para obtener los usuarios
     const fetchUsers = async () => {
       try {
-        const response = await fetch('http://127.0.0.1:8080/users');
+        const response = await fetch('http://127.0.0.1:8080/products');
         const data = await response.json();
         if (response.ok) {
-          setUsers(data.users);
+          setUsers(data.results);
           console.log('ok')
         } else {
           console.error(data.error);
@@ -26,7 +26,7 @@ function UsersComponent() {
 
   return (
     <div>
-      <h2>Users</h2>
+      <h2>Productos</h2>
       {users.length === 0 ? (
         <p>Loading users...</p>
       ) : (
@@ -44,4 +44,4 @@ function UsersComponent() {
   );
 }
 
-export default UsersComponent;
+export default ProductsComponent;
