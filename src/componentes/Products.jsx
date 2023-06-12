@@ -28,7 +28,7 @@ function ProductsComponent() {
     <div>
       <h2>Productos</h2>
       {users.length === 0 ? (
-        <p>Loading users...</p>
+        <p>Loading products...</p>
       ) : (
         <ul>
           {users.map((user) => (
