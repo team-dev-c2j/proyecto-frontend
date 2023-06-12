@@ -1,0 +1,43 @@
+.barra1{
+    background-color: #333;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    height: 50px;
+    border: 2px solid transparent;
+    border-top: 2px solid rgba(255, 255, 255, 0.3);
+    border-bottom: 2px solid rgba(255, 255, 255, 0.3);
+}
+
+.sector2{
+    display:flex;
+    width: 400px;
+    margin-right: 1%;
+}
+
+.name {
+    color: #1ee2e7;
+    margin-left: 5%;
+    margin-top: 8px;
+}
+
+.name:hover {
+    color: #ffffff;
+    cursor: pointer;
+}
+
+.items {
+    color: white;
+    margin-top: 15px;
+    margin-left: 25px;
+    margin-right: 20px;
+}
+
+.items:hover {
+    color: #1ee2e7;
+    cursor: pointer;
+}
+
+#botoninfo{
+    width: 50px;
+}
