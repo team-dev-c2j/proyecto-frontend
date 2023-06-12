@@ -1,10 +1,14 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
-import ProductsComponent from './componentes/Products';
+import Navbar from './componentes/NavBar';
+import Footer from './componentes/Footer';
+import CardProduct from './componentes/CardProduct';
 
 ReactDOM.render(
   <React.StrictMode>
-    <ProductsComponent></ProductsComponent>
+    <Navbar></Navbar>
+    <CardProduct></CardProduct>
+    <Footer></Footer>
   </React.StrictMode>,
   document.getElementById('root')
 );
