@@ -1,10 +1,10 @@
 import CardProduct from "./CardProduct"
-import '../styles/body.css';
+import '../styles/bodycard.css';
 
-function Body (){
+function BodyCard (){
     return(
         <CardProduct></CardProduct>
     )
 }
 
-export default Body;
+export default BodyCard;
