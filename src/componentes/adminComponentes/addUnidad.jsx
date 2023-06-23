@@ -1,13 +1,11 @@
-import React, { useState, useRef } from 'react';
+import React, { useState } from 'react';
 
 function AddProduct() {
-  const [selectedFiles, setSelectedFiles] = useState([null, null]);
+  const [selectedFiles, setSelectedFiles] = useState([]);
   const [modelo, setModelo] = useState('');
   const [marca, setMarca] = useState('');
   const [precio, setPrecio] = useState('');
   const [imageUrls, setImageUrls] = useState([]);
-
-  const formRef = useRef(null);
 
   const handleModelChange = (event) => {
     setModelo(event.target.value);
@@ -80,9 +78,8 @@ function AddProduct() {
 
           alert('Producto agregado exitosamente');
 
-          // Restablecer los campos del formulario
-          formRef.current.reset();
-          setSelectedFiles([null, null]);
+          // Limpiar los campos después de enviar el formulario
+          setSelectedFiles([]);
           setModelo('');
           setMarca('');
           setPrecio('');
@@ -97,7 +94,7 @@ function AddProduct() {
 
   return (
     <div>
-      <form onSubmit={handleSubmit} ref={formRef}>
+      <form onSubmit={handleSubmit}>
         <label>
           Modelo:
           <input type="text" value={modelo} onChange={handleModelChange} />

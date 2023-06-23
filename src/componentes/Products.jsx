@@ -38,7 +38,7 @@ function ProductsComponent() {
               <li key={product.talle}>{product.talle}</li>
               <li key={product.color}>{product.color}</li>
               <li key={product.precio}>{product.precio}</li>
-              {product.imageUrl && <img src={product.imageUrl[1]} alt="Product Image" />}
+              {product.imageUrl && <img src={product.imageUrl} alt="Product Image" />}
             </div>
           ))}
         </ul>
