@@ -20,7 +20,7 @@ function ProductsComponent() {
       }
     };
 
-    // Llamada a la función para obtener los usuarios al cargar el componente
+    // Llamada a la función para obtener los productos al cargar el componente
     fetchProducts();
   }, []);
 

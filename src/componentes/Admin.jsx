@@ -1,9 +1,14 @@
 import AddProduct from "./adminComponentes/AddProduct";
+import AddUnidad from "./adminComponentes/addUnidad";
 
 function Admin() {
 
   return (
-    <AddProduct></AddProduct>
+    <div>
+      <AddProduct></AddProduct>
+      <AddUnidad></AddUnidad>
+    </div>
+
   )
 
 }
