@@ -1,4 +1,5 @@
 import AddProduct from "./adminComponentes/AddProduct";
+import ProductTable from "./adminComponentes/ProductTable";
 import AddUnidad from "./adminComponentes/addUnidad";
 
 function Admin() {
@@ -7,6 +8,7 @@ function Admin() {
     <div>
       <AddProduct></AddProduct>
       <AddUnidad></AddUnidad>
+      <ProductTable></ProductTable>
     </div>
 
   )

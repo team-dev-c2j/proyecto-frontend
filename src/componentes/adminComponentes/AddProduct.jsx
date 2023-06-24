@@ -86,6 +86,9 @@ function AddProduct() {
           setModelo('');
           setMarca('');
           setPrecio('');
+
+          // Actualizar la página
+          window.location.reload();
         } catch (error) {
           console.error('Error al agregar el producto:', error);
         }
