@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from 'react';
 
 function AddUnidad() {
-  const [modelo, setModelo] = useState('');
+  const [modeloUnidad, setModeloUnidad] = useState('');
   const [color, setColor] = useState('');
   const [talle, setTalle] = useState('');
   const [stock, setStock] = useState('');
@@ -23,8 +23,8 @@ function AddUnidad() {
       .then((data) => data.results.map((product) => product.modelo));
   };
 
-  const handleModelChange = (event) => {
-    setModelo(event.target.value);
+  const handleModelUnidadChange = (event) => {
+    setModeloUnidad(event.target.value);
   };
 
   const handleColorChange = (event) => {
@@ -42,15 +42,15 @@ function AddUnidad() {
   const handleSubmit = async (event) => {
     event.preventDefault();
 
-    if (modelo && color && talle && stock) {
+    if (modeloUnidad && color && talle && stock) {
       try {
-        await fetch('http://localhost:3000/addProduct', {
+        await fetch('http://localhost:3000/addUnidad', {
           method: 'POST',
           headers: {
             'Content-Type': 'application/json',
           },
           body: JSON.stringify({
-            modelo: modelo,
+            modeloUnidad: modeloUnidad,
             color: color,
             talle: talle,
             stock: stock,
@@ -59,9 +59,10 @@ function AddUnidad() {
 
         alert('Producto agregado exitosamente');
 
-        setModelo('');
+        setModeloUnidad('');
         setColor('');
         setTalle('');
+        setStock('');
       } catch (error) {
         console.error('Error al agregar el producto:', error);
       }
@@ -73,7 +74,7 @@ function AddUnidad() {
       <form onSubmit={handleSubmit}>
         <label>
           Modelo:
-          <select value={modelo} onChange={handleModelChange}>
+          <select value={modeloUnidad} onChange={handleModelUnidadChange}>
             <option value="">Seleccione un modelo</option>
             {modelosDisponibles.map((modelo, index) => (
               <option key={index} value={modelo}>
