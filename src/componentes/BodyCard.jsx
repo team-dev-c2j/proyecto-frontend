@@ -1,9 +1,15 @@
 import CardProduct from "./CardProduct"
+import WhatsAppIcon from "./Whatsapp";
+import Marcas from "./marcas";
 
 
 function BodyCard (){
     return(
-        <CardProduct></CardProduct>
+        <div>
+            <WhatsAppIcon></WhatsAppIcon>
+            <Marcas></Marcas>
+            <CardProduct></CardProduct>
+        </div>
     )
 }
 
