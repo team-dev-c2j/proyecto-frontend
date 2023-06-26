@@ -1,0 +1,9 @@
+.whatsapp-icon {
+    position: fixed;
+    bottom: 20px;
+    right: 20px;
+    width: 50px; /* Ajusta el ancho según tus necesidades */
+    height: 50px; /* Ajusta el alto según tus necesidades */
+    z-index: 9999; /* Asegúrate de que el ícono esté en el frente de otros elementos */
+  }
+  

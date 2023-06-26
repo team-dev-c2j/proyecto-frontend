@@ -1,0 +1,22 @@
+.brand-container {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    color: white;
+  }
+  
+  .brand-item {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    margin: 10px;
+  }
+  
+  .brand-image {
+    border-radius: 50%;
+    width: 100px;
+    height: 100px;
+  }
+
+  
+  

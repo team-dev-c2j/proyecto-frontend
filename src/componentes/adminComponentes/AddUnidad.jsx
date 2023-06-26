@@ -70,33 +70,33 @@ function AddUnidad() {
   };
 
   return (
-    <div>
+    <div className='addAdmin'>
       <form onSubmit={handleSubmit}>
-        <label>
-          Modelo:
-          <select value={modeloUnidad} onChange={handleModelUnidadChange}>
-            <option value="">Seleccione un modelo</option>
-            {modelosDisponibles.map((modelo, index) => (
-              <option key={index} value={modelo}>
-                {modelo}
-              </option>
-            ))}
-          </select>
-        </label>
+          <label>
+            Modelo:
+             <select value={modeloUnidad} onChange={handleModelUnidadChange} required>
+               <option value="">Seleccione un modelo</option>
+                 {modelosDisponibles.map((modelo, index) => (
+                <option key={index} value={modelo}>
+                  {modelo}
+                  </option>
+                    ))}
+              </select>
+          </label>
         <br />
         <label>
           Color:
-          <input type="text" value={color} onChange={handleColorChange} />
+          <input type="text" value={color} onChange={handleColorChange} required/>
         </label>
         <br />
         <label>
           Talle:
-          <input type="text" value={talle} onChange={handleTalleChange} />
+          <input type="text" value={talle} onChange={handleTalleChange} required/>
         </label>
         <br />
         <label>
           Stock:
-          <input type="text" value={stock} onChange={handleStockChange} />
+          <input type="text" value={stock} onChange={handleStockChange} required/>
         </label>
         <br />
         <button type="submit">Submit</button>

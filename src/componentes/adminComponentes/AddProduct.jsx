@@ -1,4 +1,4 @@
-import React, { useState, useRef } from 'react';
+import React, { useState, useEffect } from 'react';
 
 function AddProduct() {
   const [selectedFiles, setSelectedFiles] = useState([null, null]);
@@ -6,8 +6,23 @@ function AddProduct() {
   const [marca, setMarca] = useState('');
   const [precio, setPrecio] = useState('');
   const [imageUrls, setImageUrls] = useState([]);
+  const [marcasDisponibles, setMarcasDisponibles] = useState([]);
 
-  const formRef = useRef(null);
+  useEffect(() => {
+    fetchMarcasDisponibles()
+      .then((marcas) => {
+        setMarcasDisponibles(marcas);
+      })
+      .catch((error) => {
+        console.error('Error al obtener las marcas:', error);
+      });
+  }, []);
+
+  const fetchMarcasDisponibles = () => {
+    return fetch('http://localhost:3000/marcas')
+      .then((response) => response.json())
+      .then((data) => data.results.map((marca) => marca.marca));
+  };
 
   const handleModelChange = (event) => {
     setModelo(event.target.value);
@@ -81,7 +96,6 @@ function AddProduct() {
           alert('Producto agregado exitosamente');
 
           // Restablecer los campos del formulario
-          formRef.current.reset();
           setSelectedFiles([null, null]);
           setModelo('');
           setMarca('');
@@ -96,8 +110,8 @@ function AddProduct() {
   };
 
   return (
-    <div>
-      <form onSubmit={handleSubmit} ref={formRef}>
+    <div className='addAdmin'>
+      <form onSubmit={handleSubmit}>
         <label>
           Modelo:
           <input type="text" value={modelo} onChange={handleModelChange} />
@@ -105,7 +119,14 @@ function AddProduct() {
         <br />
         <label>
           Marca:
-          <input type="text" value={marca} onChange={handleMarcaChange} />
+          <select value={marca} onChange={handleMarcaChange} required>
+            <option value="">Seleccione una marca</option>
+            {marcasDisponibles.map((marca, index) => (
+              <option key={index} value={marca}>
+                {marca}
+              </option>
+            ))}
+          </select>
         </label>
         <br />
         <label>
@@ -117,7 +138,7 @@ function AddProduct() {
           <div key={index}>
             <label>
               Imagen {index + 1}:
-              <input type="file" onChange={(event) => handleFileChange(event, index)} />
+              <input type="file" onChange={(event) => handleFileChange(event, index)} required/>
             </label>
             <button type="button" onClick={() => handleRemoveField(index)}>
               -
