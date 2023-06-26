@@ -1,10 +1,11 @@
 import React, { useEffect, useState } from "react";
+import '../styles/Products.css';
 
 function ProductsComponent() {
   const [products, setProducts] = useState([]);
 
   useEffect(() => {
-    // Función para obtener los usuarios
+    // Función para obtener los productos
     const fetchProducts = async () => {
       try {
         const response = await fetch("http://127.0.0.1:3000/products");
@@ -25,23 +26,31 @@ function ProductsComponent() {
   }, []);
 
   return (
-    <div>
-      <h2>Productos</h2>
+    <div class="main-cointainer">
       {products.length === 0 ? (
         <p>Loading products...</p>
       ) : (
-        <ul>
+        <div class="main">
           {products.map((product) => (
-            <div>
-              <li key={product.modelo}>{product.modelo}</li>
-              <li key={product.marca}>{product.marca}</li>
-              <li key={product.talle}>{product.talle}</li>
-              <li key={product.color}>{product.color}</li>
-              <li key={product.precio}>{product.precio}</li>
-              {product.imageUrl && <img src={product.imageUrl} alt="Product Image" />}
+            <div  class="card-container" key={product.modelo}>
+              <div className="divCard">
+                <div>
+                  <article>
+                    {product.imageUrls && (
+                      <>
+                        <img src={product.imageUrls[0]} alt="Product Image" />
+                        <img src={product.imageUrls[1]} alt="Product Image" />
+                      </>
+                    )}
+                  </article>
+                    {product.modelo}<br/>
+                    {product.marca}<br/>
+                    ${product.precio}
+                </div>
+              </div>
             </div>
           ))}
-        </ul>
+        </div>
       )}
     </div>
   );

@@ -6,6 +6,7 @@ import { BrowserRouter, Routes, Route } from "react-router-dom";
 import Login from './componentes/Login';
 import Admin from './componentes/Admin';
 import BodyCard from './componentes/BodyCard';
+import './styles/index.css'
 
 ReactDOM.render(
   <React.StrictMode>

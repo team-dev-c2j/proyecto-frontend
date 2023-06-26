@@ -1,5 +1,5 @@
 import CardProduct from "./CardProduct"
-import '../styles/bodycard.css';
+
 
 function BodyCard (){
     return(
