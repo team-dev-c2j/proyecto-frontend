@@ -88,3 +88,7 @@ article:hover img:last-child{
 .main-container{
     width: 100%;
 }
+
+.divCard{
+    color: white;
+}

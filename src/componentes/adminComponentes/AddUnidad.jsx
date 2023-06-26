@@ -70,7 +70,7 @@ function AddUnidad() {
   };
 
   return (
-    <div>
+    <div className='addAdmin'>
       <form onSubmit={handleSubmit}>
         <label>
           Modelo:

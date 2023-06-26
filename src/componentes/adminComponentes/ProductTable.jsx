@@ -51,7 +51,7 @@ function ProductTable() {
   };
 
   return (
-    <div>
+    <div className='addAdmin'>
       <h2>Productos</h2>
       {products.length === 0 ? (
         <p>Loading products...</p>
