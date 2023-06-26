@@ -21,7 +21,7 @@ function AddProduct() {
   const fetchMarcasDisponibles = () => {
     return fetch('http://localhost:3000/marcas')
       .then((response) => response.json())
-      .then((data) => data.results.map((marca) => marca.nombre));
+      .then((data) => data.results.map((marca) => marca.marca));
   };
 
   const handleModelChange = (event) => {
@@ -119,7 +119,7 @@ function AddProduct() {
         <br />
         <label>
           Marca:
-          <select value={marca} onChange={handleMarcaChange}>
+          <select value={marca} onChange={handleMarcaChange} required>
             <option value="">Seleccione una marca</option>
             {marcasDisponibles.map((marca, index) => (
               <option key={index} value={marca}>
@@ -138,7 +138,7 @@ function AddProduct() {
           <div key={index}>
             <label>
               Imagen {index + 1}:
-              <input type="file" onChange={(event) => handleFileChange(event, index)} />
+              <input type="file" onChange={(event) => handleFileChange(event, index)} required/>
             </label>
             <button type="button" onClick={() => handleRemoveField(index)}>
               -
