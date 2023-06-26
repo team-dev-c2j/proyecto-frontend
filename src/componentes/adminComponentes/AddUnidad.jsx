@@ -71,6 +71,7 @@ function AddUnidad() {
 
   return (
     <div className='addAdmin'>
+        <h6>añadir unidad</h6>
       <form onSubmit={handleSubmit}>
           <label>
             Modelo:

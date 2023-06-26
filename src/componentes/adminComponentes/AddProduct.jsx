@@ -5,7 +5,6 @@ function AddProduct() {
   const [modelo, setModelo] = useState('');
   const [marca, setMarca] = useState('');
   const [precio, setPrecio] = useState('');
-  const [imageUrls, setImageUrls] = useState([]);
   const [marcasDisponibles, setMarcasDisponibles] = useState([]);
 
   useEffect(() => {
@@ -57,28 +56,33 @@ function AddProduct() {
     event.preventDefault();
 
     try {
-      const urls = await Promise.all(
-        selectedFiles.map(async (file) => {
+      if (modelo && marca && precio) {
+        const formDataArray = selectedFiles.map((file) => {
           if (!file) return null;
 
           const formData = new FormData();
           formData.append('archivo', file);
+          return formData;
+        });
 
-          const response = await fetch('http://localhost:3000/upimage', {
+        const uploadPromises = formDataArray.map((formData) => {
+          if (!formData) return null;
+
+          return fetch('http://localhost:3000/upimage', {
             method: 'POST',
             body: formData,
-          });
+          }).then((response) => response.json());
+        });
 
-          const data = await response.json();
-          return data.url;
-        })
-      );
+        const uploadResults = await Promise.all(uploadPromises);
 
-      setImageUrls(urls);
-      console.log(urls);
-      console.log('Archivos subidos exitosamente');
+        const imageUrlArray = uploadResults.map((result) => {
+          return result ? result.url : null;
+        });
 
-      if (modelo && marca && precio) {
+        console.log(imageUrlArray);
+        console.log('Archivos subidos exitosamente');
+
         try {
           await fetch('http://localhost:3000/addProduct', {
             method: 'POST',
@@ -89,7 +93,7 @@ function AddProduct() {
               modelo: modelo,
               marca: marca,
               precio: precio,
-              imageUrls: urls,
+              imageUrls: imageUrlArray,
             }),
           });
 
@@ -111,6 +115,7 @@ function AddProduct() {
 
   return (
     <div className='addAdmin'>
+      <h6>Añadir producto</h6>
       <form onSubmit={handleSubmit}>
         <label>
           Modelo:
@@ -138,7 +143,7 @@ function AddProduct() {
           <div key={index}>
             <label>
               Imagen {index + 1}:
-              <input type="file" onChange={(event) => handleFileChange(event, index)} required/>
+              <input type="file" onChange={(event) => handleFileChange(event, index)} required />
             </label>
             <button type="button" onClick={() => handleRemoveField(index)}>
               -

@@ -1,4 +1,28 @@
 .footer {
     width: 100%;
     background-color: #616161;
-}
+    display: flex;
+    justify-content: flex-start; /* Alinea el contenido a la izquierda */
+    align-items: center;
+    height: auto; /* Ajusta la altura según el contenido */
+    padding-left: 10px; /* Añade un espacio de relleno a la izquierda */
+  }
+  
+  .iconosFooter {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex: 1; /* Ocupa el espacio disponible */
+  }
+  
+  .iconosFooter img {
+    width: 30px;
+    height: 30px;
+    margin: 0 10px;
+  }
+  
+  .contacto {
+    text-align: left;
+    margin-left: 10px; /* Ajusta el margen izquierdo según tus necesidades */
+  }
+  

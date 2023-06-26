@@ -1,5 +1,5 @@
 import React, { useState, useRef } from 'react';
-import '../../styles/admin.css'
+import '../../styles/admin.css';
 
 function AddProduct() {
   const [selectedFile, setSelectedFile] = useState(null);
@@ -15,6 +15,13 @@ function AddProduct() {
   const handleFileChange = (event) => {
     const file = event.target.files[0];
     setSelectedFile(file);
+
+    // Mostrar la imagen temporalmente
+    const reader = new FileReader();
+    reader.onload = () => {
+      setImageUrl(reader.result);
+    };
+    reader.readAsDataURL(file);
   };
 
   const handleSubmit = async (event) => {
@@ -52,17 +59,15 @@ function AddProduct() {
           }),
         });
 
-        alert('Marca agregado exitosamente');
+        alert('Marca agregada exitosamente');
 
         // Restablecer los campos del formulario
         formRef.current.reset();
         setSelectedFile(null);
         setMarca('');
-
-        // Actualizar la página
-        window.location.reload();
+        setImageUrl(''); // Ocultar la imagen después de enviar el formulario
       } catch (error) {
-        console.error('Error al agregar el producto:', error);
+        console.error('Error al agregar la marca:', error);
       }
     } catch (error) {
       console.error('Error al subir el archivo:', error);
@@ -71,17 +76,24 @@ function AddProduct() {
 
   return (
     <div className='addAdmin'>
+      <h6>Añadir marca</h6>
       <form onSubmit={handleSubmit} ref={formRef}>
         <label>
           Marca:
-          <input type="text" value={marca} onChange={handleMarcaChange} />
+          <input type="text" value={marca} onChange={handleMarcaChange} required />
         </label>
         <br />
         <label>
           Imagen:
-          <input type="file" onChange={handleFileChange} />
+          <input type="file" onChange={handleFileChange} required />
         </label>
         <br />
+        {imageUrl && (
+          <div>
+            <img src={imageUrl} alt="Selected" style={{ marginLeft: '120px', width: '100px', height: '100px', borderRadius: '50%' }} />
+            <br />
+          </div>
+        )}
         <button type="submit">Submit</button>
       </form>
     </div>

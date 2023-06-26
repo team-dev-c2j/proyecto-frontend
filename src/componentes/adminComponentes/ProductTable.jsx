@@ -1,4 +1,5 @@
 import React, { useEffect, useState } from 'react';
+import '../../styles/table.css'
 
 function ProductTable() {
   const [products, setProducts] = useState([]);
@@ -52,6 +53,7 @@ function ProductTable() {
 
   return (
     <div className='addAdmin'>
+          <div className='table'>
       <h2>Productos</h2>
       {products.length === 0 ? (
         <p>Loading products...</p>
@@ -98,6 +100,8 @@ function ProductTable() {
         </table>
       )}
     </div>
+    </div>
+
   );
 }
 
