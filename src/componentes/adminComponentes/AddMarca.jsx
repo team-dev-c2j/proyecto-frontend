@@ -90,7 +90,7 @@ function AddProduct() {
         <br />
         {imageUrl && (
           <div>
-            <img src={imageUrl} alt="Selected" style={{ marginLeft: '120px', width: '100px', height: '100px', borderRadius: '50%' }} />
+            <img src={imageUrl} alt="Selected" style={{marginBottom: '15px', marginLeft: '120px', width: '100px', height: '100px', borderRadius: '50%' }} />
             <br />
           </div>
         )}

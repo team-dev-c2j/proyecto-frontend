@@ -22,22 +22,23 @@
   
   table {
     width: 100%;
+    background-color: gray;
   }
   
   thead th {
-    background-color: #f2f2f2;
+    background-color: #f3f7f0cc;
     padding: 8px;
     text-align: left;
-    border-bottom: 1px solid #ddd;
+    border-bottom: 1px solid #e92525;
   }
   
   tbody td {
     padding: 8px;
     text-align: left;
-    border-bottom: 1px solid #ddd;
+    border-bottom: 1px solid #e21e1e;
   }
   
   tbody tr:hover {
-    background-color: #f5f5f5;
+    background-color: #4a5db4;
   }
   
