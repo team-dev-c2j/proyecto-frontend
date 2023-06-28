@@ -62,10 +62,7 @@ function AddProduct() {
         alert('Marca agregada exitosamente');
 
         // Restablecer los campos del formulario
-        formRef.current.reset();
-        setSelectedFile(null);
-        setMarca('');
-        setImageUrl(''); // Ocultar la imagen después de enviar el formulario
+        window.location.reload();
       } catch (error) {
         console.error('Error al agregar la marca:', error);
       }

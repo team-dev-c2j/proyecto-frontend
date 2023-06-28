@@ -32,7 +32,7 @@
   }
   
   .addAdmin button[type="submit"]:hover {
-    background-color: #005383;
+    background-color: #013b5c;
   }
   .addAdmin button[type="submit"]:active {
     background-color: #5fca18;
@@ -40,4 +40,9 @@
   
   .add {
     color: white;
+  }
+
+  .selected-image {
+    width: 100px; /* Ajusta el tamaño de la imagen según tus necesidades */
+    height: auto;
   }

@@ -100,10 +100,8 @@ function AddProduct() {
           alert('Producto agregado exitosamente');
 
           // Restablecer los campos del formulario
-          setSelectedFiles([null, null]);
-          setModelo('');
-          setMarca('');
-          setPrecio('');
+          window.location.reload();
+          
         } catch (error) {
           console.error('Error al agregar el producto:', error);
         }
@@ -114,7 +112,7 @@ function AddProduct() {
   };
 
   return (
-    <div className='addAdmin'>
+    <div className="addAdmin">
       <h6>Añadir producto</h6>
       <form onSubmit={handleSubmit}>
         <label>
@@ -145,6 +143,13 @@ function AddProduct() {
               Imagen {index + 1}:
               <input type="file" onChange={(event) => handleFileChange(event, index)} required />
             </label>
+            {file && (
+              <img
+                src={URL.createObjectURL(file)}
+                alt={`Imagen ${index + 1}`}
+                className="selected-image"
+              />
+            )}
             <button type="button" onClick={() => handleRemoveField(index)}>
               -
             </button>

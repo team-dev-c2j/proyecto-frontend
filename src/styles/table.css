@@ -19,6 +19,10 @@
     cursor: pointer;
     width: 200px;
   }
+
+  button:hover{
+    background-color: #005c03;
+  }
   
   table {
     width: 100%;
@@ -39,6 +43,16 @@
   }
   
   tbody tr:hover {
+    background-color: #8f9ee2;
+  }
+
+  .editBoton{
+    margin-left: 380px;
+    width: 50px;
     background-color: #4a5db4;
+  }
+
+  .editBoton:hover{
+    background-color: #082192;
   }
   
