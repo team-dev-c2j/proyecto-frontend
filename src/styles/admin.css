@@ -46,3 +46,7 @@
     width: 100px; /* Ajusta el tamaño de la imagen según tus necesidades */
     height: auto;
   }
+
+  .btn-danger{
+    margin-left: 25px;
+  }
