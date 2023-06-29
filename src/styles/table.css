@@ -17,7 +17,7 @@
     display: inline-block;
     font-size: 14px;
     cursor: pointer;
-    width: 200px;
+    width: 180px;
   }
 
   button:hover{
@@ -47,8 +47,10 @@
   }
 
   .editBoton{
-    margin-left: 380px;
-    width: 50px;
+    position: relative;
+    float: right;
+    margin-right: 10px;
+    width: 100px;
     background-color: #4a5db4;
   }
 
