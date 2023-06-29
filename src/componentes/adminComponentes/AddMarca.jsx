@@ -48,7 +48,7 @@ function AddProduct() {
       console.log('Archivo subido exitosamente:', imageUrl);
 
       try {
-        await fetch('http://localhost:3000/addMarca', {
+        await fetch('http://localhost:3000/Marcas', {
           method: 'POST',
           headers: {
             'Content-Type': 'application/json',

@@ -1,4 +1,5 @@
 import React, { useEffect, useState } from 'react';
+import { Link } from 'react-router-dom';
 import '../../styles/marcas.css'
 
 function MarcasTable() {
@@ -24,9 +25,8 @@ function MarcasTable() {
         <div key={brand._id} className="brand-item">
           <img src={brand.imageUrl} alt={brand.marca} className="brand-image" />
           <p className="brand-name">{brand.marca}</p>
-          <button>
-            Edit
-          </button>
+          <Link to={`/marcas/${brand._id}`}><button className='editBoton'>Edit</button></Link>
+          
         </div>
       ))}
     </div>
