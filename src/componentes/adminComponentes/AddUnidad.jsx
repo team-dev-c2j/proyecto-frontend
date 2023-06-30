@@ -44,7 +44,7 @@ function AddUnidad() {
 
     if (modeloUnidad && color && talle && stock) {
       try {
-        await fetch('http://localhost:3000/addUnidad', {
+        await fetch('http://localhost:3000/unidades', {
           method: 'POST',
           headers: {
             'Content-Type': 'application/json',

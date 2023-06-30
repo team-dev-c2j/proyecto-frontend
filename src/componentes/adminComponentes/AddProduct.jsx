@@ -84,7 +84,7 @@ function AddProduct() {
         console.log('Archivos subidos exitosamente');
 
         try {
-          await fetch('http://localhost:3000/addProduct', {
+          await fetch('http://localhost:3000/Products', {
             method: 'POST',
             headers: {
               'Content-Type': 'application/json',
