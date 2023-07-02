@@ -87,6 +87,24 @@ function EditMarcas(props) {
     setMarcaData({ ...marcaData, marca: event.target.value });
   };
 
+  const handleDelete = async () => {
+    const confirmDelete = window.confirm("¿Estás seguro de eliminar esta marca?");
+  
+    if (confirmDelete) {
+      try {
+        await fetch(`http://localhost:3000/marcas/${marcaData._id}`, {
+          method: 'DELETE',
+        });
+  
+        alert('Marca eliminada exitosamente');
+  
+        // Redireccionar a la página de marcas u otra acción necesaria
+      } catch (error) {
+        console.error('Error al eliminar la marca:', error);
+      }
+    }
+  };
+
   if (!marcaData) {
     return <div>Loading...</div>;
   }
@@ -137,7 +155,7 @@ function EditMarcas(props) {
                   <button type="submit" className="btn btn-primary">
                     EDITAR
                   </button>
-                  <button type="button" className="btn btn-danger">
+                  <button type="button" className="btn btn-danger" onClick={handleDelete}>
                     ELIMINAR
                   </button>
                 </form>
