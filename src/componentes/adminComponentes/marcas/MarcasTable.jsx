@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from 'react';
 import { Link } from 'react-router-dom';
-import '../../styles/marcas.css'
+import '../../../styles/marcas.css'
 
 function MarcasTable() {
   const [brands, setBrands] = useState([]);

@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from "react";
 import { useParams } from "react-router-dom";
-import '../../styles/admin.css';
+import '../../../styles/admin.css';
 
 function EditMarcas(props) {
   let { id } = useParams();

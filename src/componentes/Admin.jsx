@@ -1,8 +1,8 @@
-import AddProduct from "./adminComponentes/AddProduct";
-import ProductTable from "./adminComponentes/ProductTable";
+import AddProduct from "./adminComponentes/productos/AddProduct";
+import ProductTable from "./adminComponentes/productos/ProductTable";
 import AddUnidad from "./adminComponentes/AddUnidad";
-import AddMarca from "./adminComponentes/AddMarca";
-import MarcasTable from "./adminComponentes/MarcasTable";
+import AddMarca from "./adminComponentes/marcas/AddMarca";
+import MarcasTable from "./adminComponentes/marcas/MarcasTable";
 
 
 function Admin() {
