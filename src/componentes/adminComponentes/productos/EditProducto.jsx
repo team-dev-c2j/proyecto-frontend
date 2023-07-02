@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from "react";
-import { useParams } from "react-router-dom";
+import { useParams, Link } from "react-router-dom";
 import "../../../styles/admin.css";
 import { v4 as uuidv4 } from "uuid";
 
@@ -49,12 +49,6 @@ function EditProducto(props) {
     setSelectedFiles([...selectedFiles, null]);
   };
 
-  const handleRemoveField = (index) => {
-    const updatedFiles = [...selectedFiles];
-    updatedFiles.splice(index, 1);
-    setSelectedFiles(updatedFiles);
-  };
-
   const handleDeleteImage = async (index) => {
     try {
       const imageUrlToDelete = imageUrls[index];
@@ -99,16 +93,20 @@ function EditProducto(props) {
   }, [id]);
 
   const handleDelete = async () => {
-    try {
-      await fetch(`http://localhost:3000/products/${productoData._id}`, {
-        method: "DELETE",
-      });
-
-      alert("Producto eliminado exitosamente");
-
-      // Realizar otra acción necesaria después de eliminar el producto, como redirigir a otra página
-    } catch (error) {
-      console.error("Error al eliminar el producto:", error);
+    const confirmDelete = window.confirm("¿Estás seguro que quieres eliminar este producto?");
+  
+    if (confirmDelete) {
+      try {
+        await fetch(`http://localhost:3000/products/${productoData._id}`, {
+          method: "DELETE",
+        });
+  
+        alert("Producto eliminado exitosamente");
+  
+        // Realizar otra acción necesaria después de eliminar el producto, como redirigir a otra página
+      } catch (error) {
+        console.error("Error al eliminar el producto:", error);
+      }
     }
   };
 
@@ -239,26 +237,29 @@ function EditProducto(props) {
                         </div>
                       ))}
                   </div>
-                  <div className="form-group mb-1">
-                    <h6>Nuevas Imagenes</h6>
-                    {selectedFiles.map((file, index) => (
-                      <div key={uuidv4()}>
-                        <input
-                          type="file"
-                          accept="image/*"
-                          onChange={(e) => handleFileChange(index, e)}
-                        />
-                        {file && (
-                          <button
-                            className="btn btn-danger"
-                            onClick={() => handleRemoveField(index)}
-                          >
-                            Eliminar Imagen
-                          </button>
-                        )}
+                  {selectedFiles.length > 0 && (
+                      <div>
+                        <h6>Nuevas imágenes</h6>
+                        {selectedFiles.map((file, index) => (
+                          <div key={uuidv4()}>
+                            <img
+                              src={file ? URL.createObjectURL(file) : ""}
+                              alt={`Selected ${index + 1}`}
+                              style={{
+                                marginBottom: "15px",
+                                width: "100px",
+                                height: "auto",
+                              }}
+                            />
+                            <input
+                              type="file"
+                              accept="image/*"
+                              onChange={(event) => handleFileChange(index, event)}
+                            />
+                          </div>
+                        ))}
                       </div>
-                    ))}
-                  </div>
+                    )}
                   <button
                     className="btn btn-primary"
                     type="button"
@@ -271,12 +272,15 @@ function EditProducto(props) {
                   <button type="submit" className="btn btn-success">
                     Guardar
                   </button>
+                  <Link to={`/admin`}>
                   <button
                     className="btn btn-danger"
                     onClick={handleDelete}
                   >
                     Eliminar Producto
                   </button>
+                    </Link>
+
                 </form>
               </div>
             </div>
