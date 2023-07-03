@@ -92,7 +92,7 @@ function ProductTable() {
                                 <tr key={unit._id}>
                                   <td>{unit.color}</td>
                                   <td>{unit.talle}</td>
-                                  <td>{unit.stock}</td>
+                                  <td>{unit.stock}<Link to={`/unidad/${unit._id}`}><button className='editBoton'>Edit</button></Link></td>
                                 </tr>
                               ))}
                             </tbody>

@@ -171,9 +171,7 @@ function EditProducto(props) {
   }
 
   return (
-    <div className="brand-container">
       <div className="container mt-5">
-        <div className="row">
           <div className="col-md-5">
             <div className="card">
               <div className="card-body">
@@ -285,9 +283,7 @@ function EditProducto(props) {
               </div>
             </div>
           </div>
-        </div>
       </div>
-    </div>
   );
 }
 
