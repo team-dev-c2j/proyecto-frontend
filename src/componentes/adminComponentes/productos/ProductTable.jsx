@@ -1,5 +1,6 @@
 import React, { useEffect, useState } from 'react';
-import '../../styles/table.css';
+import { Link } from 'react-router-dom';
+import '../../../styles/table.css';
 
 function ProductTable() {
   const [products, setProducts] = useState([]);
@@ -69,7 +70,7 @@ function ProductTable() {
                       <button onClick={() => toggleDetails(product.modelo)}>
                         {product.modelo} {product.marca}
                       </button>
-                      <button className='editBoton'> Edit</button>
+                      <Link to={`/productos/${product._id}`}><button className='editBoton'>Edit</button></Link>
                     </td>
                   </tr>
                   {expandedProduct === product.modelo && (
@@ -91,7 +92,7 @@ function ProductTable() {
                                 <tr key={unit._id}>
                                   <td>{unit.color}</td>
                                   <td>{unit.talle}</td>
-                                  <td>{unit.stock}</td>
+                                  <td>{unit.stock}<Link to={`/unidad/${unit._id}`}><button className='editBoton'>Edit</button></Link></td>
                                 </tr>
                               ))}
                             </tbody>

@@ -134,7 +134,7 @@ function AddProduct() {
         <br />
         <label>
           Precio:
-          <input type="text" value={precio} onChange={handlePrecioChange} />
+          <input type="number" value={precio} onChange={handlePrecioChange} />
         </label>
         <br />
         {selectedFiles.map((file, index) => (

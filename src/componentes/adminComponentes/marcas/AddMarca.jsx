@@ -1,5 +1,5 @@
 import React, { useState, useRef } from 'react';
-import '../../styles/admin.css';
+import '../../../styles/admin.css';
 
 function AddProduct() {
   const [selectedFile, setSelectedFile] = useState(null);
