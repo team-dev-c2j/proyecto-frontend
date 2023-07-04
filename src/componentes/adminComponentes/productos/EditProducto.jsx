@@ -23,10 +23,6 @@ function EditProducto(props) {
     }
   };
 
-  const handleModeloChange = (event) => {
-    setProductoData({ ...productoData, modelo: event.target.value });
-  };
-
   const handleMarcaChange = (event) => {
     setMarca(event.target.value);
   };
@@ -99,11 +95,8 @@ function EditProducto(props) {
       try {
         await fetch(`http://localhost:3000/products/${productoData._id}`, {
           method: "DELETE",
-        });
-  
+        }); 
         alert("Producto eliminado exitosamente");
-  
-        // Realizar otra acción necesaria después de eliminar el producto, como redirigir a otra página
       } catch (error) {
         console.error("Error al eliminar el producto:", error);
       }
@@ -177,13 +170,9 @@ function EditProducto(props) {
               <div className="card-body">
                 <form onSubmit={handleEdit}>
                   <div className="form-group mb-1">
-                    <input
-                      type="text"
-                      name="name"
-                      value={productoData.modelo}
-                      className="form-control"
-                      onChange={handleModeloChange}
-                    />
+                  <h3>
+                      Modelo: {productoData.modelo}
+                  </h3>
                   </div>
                   <div className="form-group mb-1">
                     <label>
