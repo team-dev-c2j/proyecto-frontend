@@ -1,5 +1,7 @@
 import React, { useEffect, useState } from "react";
+import { Link } from 'react-router-dom';
 import '../styles/Products.css';
+
 
 function ProductsComponent() {
   const [products, setProducts] = useState([]);
@@ -33,13 +35,14 @@ function ProductsComponent() {
         <div class="main">
           {products.map((product) => (
             <div  class="card-container" key={product.modelo}>
+              <Link to={`/productoDetail/${product._id}`}>
               <div className="divCard">
                 <div>
                   <article>
                     {product.imageUrls && (
                       <>
-                        <img src={product.imageUrls[0]} alt="Product Image" />
-                        <img src={product.imageUrls[1]} alt="Product Image" />
+                        <img src={product.imageUrls[0]} alt="Product Image1" />
+                        <img src={product.imageUrls[1]} alt="Product Image2" />
                       </>
                     )}
                   </article>
@@ -47,7 +50,9 @@ function ProductsComponent() {
                     {product.marca}<br/>
                     ${product.precio}
                 </div>
-              </div>
+              </div>  
+              </Link>
+
             </div>
           ))}
         </div>
