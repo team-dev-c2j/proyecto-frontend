@@ -9,6 +9,8 @@ const ProductoDetail = (props) => {
   const { id } = useParams();
   const [producto, setProducto] = useState(null);
   const [unidades, setUnidades] = useState(null);
+  const [coloresUnicos, setColoresUnicos] = useState([]);
+  const [tallesUnicos, setTallesUnicos] = useState([]);
 
   useEffect(() => {
     const fetchData = async () => {
@@ -40,6 +42,15 @@ const ProductoDetail = (props) => {
     }
   }, [producto]);
 
+  useEffect(() => {
+    if (unidades) {
+      const uniqueColors = [...new Set(unidades.map((unidad) => unidad.color))];
+      const uniqueSizes = [...new Set(unidades.map((unidad) => unidad.talle))];
+      setColoresUnicos(uniqueColors);
+      setTallesUnicos(uniqueSizes);
+    }
+  }, [unidades]);
+
   if (!producto) {
     return <p>Cargando...</p>;
   }
@@ -67,18 +78,19 @@ const ProductoDetail = (props) => {
       <div className="detalles">
         <h3>{producto.modelo}</h3>
         <h3>${producto.precio}</h3>
-        {unidades ? (
-          <>
-            <p>Unidades:</p>
-            {unidades.map((unidad, index) => (
-              <div key={index}>
-                <p>Color: {unidad.color}</p>
-              </div>
-            ))}
-          </>
-        ) : (
-          <p>Cargando unidades...</p>
-        )}
+        <p>Unidades:</p>
+        <div>
+          <p>Colores:</p>
+          {coloresUnicos.map((color, index) => (
+            <p key={index}>{color}</p>
+          ))}
+        </div>
+        <div>
+          <p>Talles:</p>
+          {tallesUnicos.map((talle, index) => (
+            <p key={index}>{talle}</p>
+          ))}
+        </div>
       </div>
     </div>
   );
