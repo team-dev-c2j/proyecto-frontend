@@ -10,6 +10,7 @@ import './styles/index.css';
 import EditMarcas from './componentes/adminComponentes/marcas/EditcMarcas';
 import EditProducto from './componentes/adminComponentes/productos/EditProducto'
 import EditUnidad from './componentes/adminComponentes/unidades/EditUnidad'
+import ProductoDetail from './componentes/ProductoDetail';
 
 ReactDOM.render(
   <React.StrictMode>
@@ -21,6 +22,7 @@ ReactDOM.render(
         <Route path="/admin" element={<Admin />} />
         <Route path="/marcas/:id" element={ <EditMarcas/> } />
         <Route path="/productos/:id" element={ <EditProducto/> } />
+        <Route path="/productoDetail/:id" element={ <ProductoDetail/> } />
         <Route path="/unidad/:id" element={ <EditUnidad/> } />
       </Routes>
       <Footer />
