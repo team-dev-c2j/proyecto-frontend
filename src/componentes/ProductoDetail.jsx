@@ -1,16 +1,25 @@
-import { useEffect, useState } from "react";
+import { useEffect, useState, useContext } from "react";
 import { useParams } from "react-router-dom";
 import Slider from "react-slick";
 import "slick-carousel/slick/slick.css";
 import "slick-carousel/slick/slick-theme.css";
 import "../styles/productoDetail.css";
+import { CarritoContext } from "./context/CarritoContext";
+
 
 const ProductoDetail = (props) => {
   const { id } = useParams();
   const [producto, setProducto] = useState(null);
   const [unidades, setUnidades] = useState(null);
   const [coloresUnicos, setColoresUnicos] = useState([]);
-  const [tallesUnicos, setTallesUnicos] = useState([]);
+  const [unidadSeleccionada, setUnidadSeleccionada] = useState(null);
+  const [colorSeleccionado, setColorSeleccionado] = useState(null);
+
+  const { agregarProducto } = useContext(CarritoContext); // Mover la llamada a useContext aquí
+
+  const handleUnidadSeleccionada = (talle, color) => {
+    setUnidadSeleccionada({ talle, color });
+  };
 
   useEffect(() => {
     const fetchData = async () => {
@@ -45,11 +54,18 @@ const ProductoDetail = (props) => {
   useEffect(() => {
     if (unidades) {
       const uniqueColors = [...new Set(unidades.map((unidad) => unidad.color))];
-      const uniqueSizes = [...new Set(unidades.map((unidad) => unidad.talle))];
       setColoresUnicos(uniqueColors);
-      setTallesUnicos(uniqueSizes);
     }
   }, [unidades]);
+
+  const handleColorClick = (color) => {
+    setColorSeleccionado(color);
+    setUnidadSeleccionada(null); // Restablecer la unidad seleccionada cuando se cambia el color
+  };
+
+  const unidadesFiltradas = colorSeleccionado
+    ? unidades.filter((unidad) => unidad.color === colorSeleccionado)
+    : unidades;
 
   if (!producto) {
     return <p>Cargando...</p>;
@@ -63,6 +79,18 @@ const ProductoDetail = (props) => {
     slidesToScroll: 1,
   };
 
+  const agregarAlCarrito = () => {
+    if (unidadSeleccionada) {
+      const productoSeleccionado = {
+        id: unidades._id,
+        modelo: producto.modelo,
+        talle: unidadSeleccionada.talle,
+        color: unidadSeleccionada.color,
+      };
+      agregarProducto(productoSeleccionado);
+      alert(`agregaste al carrito ${producto.modelo} talle ${unidadSeleccionada.talle} color ${unidadSeleccionada.talle}`)
+    }
+  };
   return (
     <div className="app">
       <Slider {...settings}>
@@ -82,15 +110,44 @@ const ProductoDetail = (props) => {
         <div>
           <p>Colores:</p>
           {coloresUnicos.map((color, index) => (
-            <p key={index}>{color}</p>
+            <button
+              key={index}
+              onClick={() => handleColorClick(color)}
+              className={color === colorSeleccionado ? "selected" : ""}
+            >
+              {color}
+            </button>
           ))}
         </div>
-        <div>
-          <p>Talles:</p>
-          {tallesUnicos.map((talle, index) => (
-            <p key={index}>{talle}</p>
-          ))}
-        </div>
+        {colorSeleccionado && (
+          <div>
+            <p>Unidades con color {colorSeleccionado}:</p>
+            <h6>Talle:</h6>
+            {unidadesFiltradas.map((unidad, index) => (
+              <div key={index}>
+                <button
+                  onClick={() => handleUnidadSeleccionada(unidad.talle, unidad.color)}
+                  className={
+                    unidad.talle === unidadSeleccionada?.talle &&
+                    unidad.color === unidadSeleccionada?.color
+                      ? "selected"
+                      : ""
+                  }
+                >
+                  {unidad.talle}
+                </button>
+              </div>
+            ))}
+          </div>
+        )}
+        {unidadSeleccionada && (
+          <div>
+            <h3>Modelo seleccionado: {producto.modelo}</h3>
+            <h3>Talle seleccionado: {unidadSeleccionada.talle}</h3>
+            <h3>Color seleccionado: {unidadSeleccionada.color}</h3>
+            <button onClick={agregarAlCarrito}>agregar al carrito</button>
+          </div>
+        )}
       </div>
     </div>
   );
