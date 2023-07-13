@@ -1,5 +1,6 @@
 import React, { useEffect, useState } from 'react';
 import '../styles/marcas.css'
+import { Link } from 'react-router-dom';
 
 function Marcas() {
   const [brands, setBrands] = useState([]);
@@ -21,10 +22,13 @@ function Marcas() {
   return (
     <div className="brand-container">
       {brands.map((brand) => (
-        <div key={brand._id} className="brand-item">
-          <img src={brand.imageUrl} alt={brand.marca} className="brand-image" />
-          <p className="brand-name">{brand.marca}</p>
-        </div>
+        <Link to={`/${brand.marca}`}>
+            <div key={brand._id} className="brand-item">
+              <img src={brand.imageUrl} alt={brand.marca} className="brand-image" />
+              <p className="brand-name">{brand.marca}</p>
+            </div>
+        </Link>
+
       ))}
     </div>
   );
