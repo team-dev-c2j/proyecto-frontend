@@ -8,7 +8,7 @@
     margin: 0 -10px;
   }
   
-  .card {
+  .cardDetail {
     border: 1px solid #fff;
     background: black;
     border-radius: 8px;
@@ -21,7 +21,7 @@
   }
 
   @media (max-width: 480px) {
-    .card {
+    .cardDetail {
       height: 200px;
     }
   }
