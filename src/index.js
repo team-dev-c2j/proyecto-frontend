@@ -13,6 +13,7 @@ import EditUnidad from './componentes/adminComponentes/unidades/EditUnidad'
 import ProductoDetail from './componentes/ProductoDetail';
 import { CarritoProvider } from './componentes/context/CarritoContext';
 import Carrito from './componentes/context/Carrito';
+import FiltroMarcas from './componentes/FiltroMarcas';
 
 ReactDOM.render(
   <CarritoProvider>
@@ -22,11 +23,12 @@ ReactDOM.render(
         <Route path="/" element={<BodyCard />} />
         <Route path="/login" element={<Login />} />
         <Route path="/admin" element={<Admin />} />
-        <Route path="/marcas/:id" element={<EditMarcas />} />
+        <Route path="/marcas/" element={<EditMarcas />} />
         <Route path="/productos/:id" element={<EditProducto />} />
         <Route path="/productoDetail/:id" element={<ProductoDetail />} />
         <Route path="/unidad/:id" element={<EditUnidad />} />
         <Route path='/carrito' element={<Carrito />} />
+        <Route path='/:marca' element={<FiltroMarcas />} />
       </Routes>
       <Footer />
     </Router>
