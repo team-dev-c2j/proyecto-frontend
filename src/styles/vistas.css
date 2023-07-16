@@ -1,0 +1,9 @@
+.opcionesVistas{
+    color: white;
+    margin-top: 15px;
+    margin-bottom: 25px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    text-align: center;
+}

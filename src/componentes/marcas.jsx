@@ -22,7 +22,7 @@ function Marcas() {
   return (
     <div className="brand-container">
       {brands.map((brand) => (
-        <Link to={`/${brand.marca}`}>
+        <Link to={`/${brand.marca}`} style={{ textDecoration: 'none' }}>
             <div key={brand._id} className="brand-item">
               <img src={brand.imageUrl} alt={brand.marca} className="brand-image" />
               <p className="brand-name">{brand.marca}</p>

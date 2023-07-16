@@ -23,7 +23,7 @@ ReactDOM.render(
         <Route path="/" element={<BodyCard />} />
         <Route path="/login" element={<Login />} />
         <Route path="/admin" element={<Admin />} />
-        <Route path="/marcas/" element={<EditMarcas />} />
+        <Route path="/marcas/:id" element={<EditMarcas />} />
         <Route path="/productos/:id" element={<EditProducto />} />
         <Route path="/productoDetail/:id" element={<ProductoDetail />} />
         <Route path="/unidad/:id" element={<EditUnidad />} />

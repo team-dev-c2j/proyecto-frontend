@@ -86,6 +86,7 @@ const ProductoDetail = (props) => {
         modelo: producto.modelo,
         talle: unidadSeleccionada.talle,
         color: unidadSeleccionada.color,
+        imagen: producto.imageUrls[0],
       };
       agregarProducto(productoSeleccionado);
       alert(`agregaste al carrito ${producto.modelo} talle ${unidadSeleccionada.talle} color ${unidadSeleccionada.talle}`)
@@ -95,7 +96,7 @@ const ProductoDetail = (props) => {
     <div className="app">
       <Slider {...settings}>
         {producto.imageUrls.map((imageUrl, index) => (
-          <div className="card" key={index}>
+          <div className="cardDetail" key={index}>
             <div className="card-top">
               <img className="imagenCarrusel" src={imageUrl} alt={`Imagen ${index + 1}`} />
             </div>
@@ -106,11 +107,10 @@ const ProductoDetail = (props) => {
       <div className="detalles">
         <h3>{producto.modelo}</h3>
         <h3>${producto.precio}</h3>
-        <p>Unidades:</p>
         <div>
           <p>Colores:</p>
           {coloresUnicos.map((color, index) => (
-            <button
+            <button 
               key={index}
               onClick={() => handleColorClick(color)}
               className={color === colorSeleccionado ? "selected" : ""}

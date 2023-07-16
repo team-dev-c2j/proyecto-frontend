@@ -16,6 +16,24 @@
     border-radius: 50%;
     width: 100px;
     height: 100px;
+    transition: transform 0.5s;
+    transform-style: preserve-3d;
+  }
+  
+  .brand-image:hover {
+    animation: flip 1s;
+  }
+  
+  @keyframes flip {
+    0% {
+      transform: perspective(800px) rotateY(0deg);
+    }
+    50% {
+      transform: perspective(800px) rotateY(180deg);
+    }
+    100% {
+      transform: perspective(800px) rotateY(360deg);
+    }
   }
 
   .brand-name {
