@@ -86,6 +86,7 @@ const ProductoDetail = (props) => {
         modelo: producto.modelo,
         talle: unidadSeleccionada.talle,
         color: unidadSeleccionada.color,
+        imagen: producto.imageUrls[0],
       };
       agregarProducto(productoSeleccionado);
       alert(`agregaste al carrito ${producto.modelo} talle ${unidadSeleccionada.talle} color ${unidadSeleccionada.talle}`)
