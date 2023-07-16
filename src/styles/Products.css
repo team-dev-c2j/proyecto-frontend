@@ -92,3 +92,15 @@ article:hover img:last-child{
 .divCard{
     color: white;
 }
+
+.productDetail{
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    text-align: center;
+    margin-left: -100px;
+    white-space: nowrap;
+    font-size: 20px;
+}
+

@@ -35,7 +35,7 @@ function ProductsComponent() {
         <div class="main">
           {products.map((product) => (
             <div  class="card-container" key={product.modelo}>
-              <Link to={`/productoDetail/${product._id}`}>
+              <Link to={`/productoDetail/${product._id}`} style={{ textDecoration: 'none' }}>
               <div className="divCard">
                 <div>
                   <article>
@@ -46,9 +46,13 @@ function ProductsComponent() {
                       </>
                     )}
                   </article>
-                    {product.modelo}<br/>
-                    {product.marca}<br/>
+                  <div className="productDetail">
+                      <div>
+                      {product.modelo}  {product.marca}  
+                      </div>
                     ${product.precio}
+                  </div>
+
                 </div>
               </div>  
               </Link>

@@ -50,3 +50,11 @@
   .btn-danger{
     margin-left: 25px;
   }
+
+.row{
+  margin-bottom: 50px
+}
+
+.container.mt-5 {
+  margin-bottom: 50px;
+}
