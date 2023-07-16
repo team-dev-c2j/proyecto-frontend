@@ -107,11 +107,10 @@ const ProductoDetail = (props) => {
       <div className="detalles">
         <h3>{producto.modelo}</h3>
         <h3>${producto.precio}</h3>
-        <p>Unidades:</p>
         <div>
           <p>Colores:</p>
           {coloresUnicos.map((color, index) => (
-            <button
+            <button 
               key={index}
               onClick={() => handleColorClick(color)}
               className={color === colorSeleccionado ? "selected" : ""}
