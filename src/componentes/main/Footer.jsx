@@ -11,13 +11,12 @@ function Footer() {
             <h6>direcion 12155</h6>
             <h6>local saddd 45555</h6>
         </div>
-        <div className="iconosFooter">
+
           <div className="react-icons">
             <FaFacebook className='icono' />
             <FaInstagram className='icono' />
             <FaTiktok className='icono' />
           </div>
-        </div>
     </div>
   );
 }

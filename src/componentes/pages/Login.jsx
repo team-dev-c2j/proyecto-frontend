@@ -1,15 +1,18 @@
+import "../../styles/login.css"
+
 function Login () {
     return (
-        <div>
+        <div className="login">
                     <h2>login</h2>
             <div>
-                <label for="nameProd">User</label>
-                <input type="text" id="nameProd" name="nameProd" required />
+                <label for="user">User</label><br/>
+                <input type="text"  name="user" required />
             </div>
             <div>
-                <label for="size">Password</label>
-                <input type="password" id="size" name="size" required />
+                <label for="password">Password</label><br/>
+                <input type="password" id="size" name="password" required />
             </div>
+            <button className="ingresar">Ingresar</button>
         </div>
 
     )
