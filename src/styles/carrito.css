@@ -12,9 +12,6 @@
     margin-bottom: 25px;
 }
 
-.btn.btn-danger{
-    margin-bottom: 10px;
-}
 
 .btn.btn-success{
     margin-left: 22px;
@@ -29,4 +26,17 @@ button{
 button:active {
     background-color: blue;
     color: white;
+  }
+
+  .btn.btn-outline-danger{
+    margin-top: 15px;
+  }
+
+  .btn.btn-outline-success{
+    margin-top: 15px;
+    color:rgb(61, 117, 61) !important;
+  }
+
+  .btn.btn-outline-success:hover{
+    color:white !important;
   }

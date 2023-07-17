@@ -12,7 +12,7 @@ function Login () {
                 <label for="password">Password</label><br/>
                 <input type="password" id="size" name="password" required />
             </div>
-            <button className="ingresar">Ingresar</button>
+            <button class="btn btn-outline-info">Ingresar</button>
         </div>
 
     )

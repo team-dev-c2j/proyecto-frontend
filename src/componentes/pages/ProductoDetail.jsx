@@ -124,7 +124,7 @@ const ProductoDetail = (props) => {
             <p>Unidades con color {colorSeleccionado}:</p>
             <h6>Talle:</h6>
             {unidadesFiltradas.map((unidad, index) => (
-              <div key={index}>
+              <div id="buttonTalleColor" key={index}>
                 <button
                   onClick={() => handleUnidadSeleccionada(unidad.talle, unidad.color)}
                   className={

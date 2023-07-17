@@ -21,10 +21,10 @@ const Carrito = () => {
         <div key={producto.id}>
           <img src={producto.imagen} alt="img" style={{marginBottom: '15px', width: '100px', height: '100px', borderRadius: '50%' }}/>
           <h3>{index + 1} {producto.modelo} talle: {producto.talle} color: {producto.color}</h3>
-          <button className="btn btn-danger" onClick={() => eliminarDelCarrito(index)}>Eliminar</button>
+          <button class="btn btn-outline-danger" onClick={() => eliminarDelCarrito(index)}>Eliminar</button>
         </div>
       ))}
-      <button className="btn btn-success" onClick={enviarPeticion} style={{color: 'blue'}}>Enviar peticion</button>
+      <button class="btn btn-outline-success" onClick={enviarPeticion} style={{color: 'blue'}}>Enviar peticion</button>
     </div>
   );
 };
