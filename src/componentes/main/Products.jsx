@@ -1,22 +1,19 @@
-import { useParams } from "react-router-dom";
 import React, { useEffect, useState } from "react";
 import { Link } from 'react-router-dom';
-import '../styles/Products.css';
+import '../../styles/Products.css';
 
-const FiltroMarcas = () => {
 
-    const { marca } = useParams();
+function ProductsComponent() {
+  const [products, setProducts] = useState([]);
 
-    const [products, setProducts] = useState([]);
-
-    useEffect(() => {
-        // Función para obtener los productos
-        const fetchProducts = async () => {
-        try {
-            const response = await fetch(`http://127.0.0.1:3000/products/marca/${marca}`);
-            const data = await response.json();
+  useEffect(() => {
+    // Función para obtener los productos
+    const fetchProducts = async () => {
+      try {
+        const response = await fetch("http://127.0.0.1:3000/products");
+        const data = await response.json();
         if (response.ok) {
-          setProducts(data);
+          setProducts(data.results);
           console.log("ok");
         } else {
           console.error(data.error);
@@ -28,7 +25,7 @@ const FiltroMarcas = () => {
 
     // Llamada a la función para obtener los productos al cargar el componente
     fetchProducts();
-  }, [marca]);
+  }, []);
 
   return (
     <div class="main-cointainer">
@@ -38,7 +35,7 @@ const FiltroMarcas = () => {
         <div class="main">
           {products.map((product) => (
             <div  class="card-container" key={product.modelo}>
-              <Link to={`/productoDetail/${product._id}`}>
+              <Link to={`/productoDetail/${product._id}`} style={{ textDecoration: 'none' }}>
               <div className="divCard">
                 <div>
                   <article>
@@ -49,9 +46,13 @@ const FiltroMarcas = () => {
                       </>
                     )}
                   </article>
-                    {product.modelo}<br/>
-                    {product.marca}<br/>
+                  <div className="productDetail">
+                      <div>
+                      {product.modelo}  {product.marca}  
+                      </div>
                     ${product.precio}
+                  </div>
+
                 </div>
               </div>  
               </Link>
@@ -64,4 +65,4 @@ const FiltroMarcas = () => {
   );
 }
 
-export default FiltroMarcas;
+export default ProductsComponent;

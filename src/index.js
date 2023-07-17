@@ -1,19 +1,21 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
 import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
-import Navbar from './componentes/NavBar';
-import Footer from './componentes/Footer';
-import Login from './componentes/Login';
-import Admin from './componentes/adminComponentes/Admin';
-import BodyCard from './componentes/BodyCard';
-import './styles/index.css';
-import EditMarcas from './componentes/adminComponentes/marcas/EditcMarcas';
-import EditProducto from './componentes/adminComponentes/productos/EditProducto'
-import EditUnidad from './componentes/adminComponentes/unidades/EditUnidad'
-import ProductoDetail from './componentes/ProductoDetail';
 import { CarritoProvider } from './componentes/context/CarritoContext';
+
+// Componentes
+import Navbar from './componentes/main/NavBar';
+import Footer from './componentes/main/Footer';
+import BodyCard from './componentes/main/BodyCard';
+import Login from './componentes/pages/Login';
+import Admin from './componentes/adminComponentes/Admin';
+import EditMarcas from './componentes/adminComponentes/marcas/EditcMarcas';
+import EditProducto from './componentes/adminComponentes/productos/EditProducto';
+import EditUnidad from './componentes/adminComponentes/unidades/EditUnidad';
+import ProductoDetail from './componentes/pages/ProductoDetail';
 import Carrito from './componentes/context/Carrito';
-import FiltroMarcas from './componentes/FiltroMarcas';
+import FiltroMarcas from './componentes/pages/FiltroMarcas';
+import './styles/index.css';
 
 ReactDOM.render(
   <CarritoProvider>

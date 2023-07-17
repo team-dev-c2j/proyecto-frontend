@@ -3,8 +3,8 @@ import { useParams } from "react-router-dom";
 import Slider from "react-slick";
 import "slick-carousel/slick/slick.css";
 import "slick-carousel/slick/slick-theme.css";
-import "../styles/productoDetail.css";
-import { CarritoContext } from "./context/CarritoContext";
+import "../../styles/productoDetail.css";
+import { CarritoContext } from "../context/CarritoContext";
 
 
 const ProductoDetail = (props) => {

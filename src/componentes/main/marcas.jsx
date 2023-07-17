@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from 'react';
-import '../styles/marcas.css'
+import '../../styles/marcas.css'
 import { Link } from 'react-router-dom';
 
 function Marcas() {
