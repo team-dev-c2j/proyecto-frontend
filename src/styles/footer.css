@@ -9,19 +9,19 @@
     border: 2px solid transparent;
     border-top: 2px solid rgb(255, 190, 12);
     border-bottom: 2px solid rgb(255, 190, 12);
+    
   }
   
-  .iconosFooter {
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    flex: 1; 
+  .icono{
+    margin-top: 15px;
+    margin-left: 5px;
+    margin-right: 5px;
   }
+
   
-  .iconosFooter img {
-    width: 30px;
-    height: 30px;
-    margin: 0 10px;
+  
+  .iconosFooter{
+    margin-left: 35%;
   }
   
   .contacto {
@@ -29,3 +29,7 @@
     margin-left: 10px; 
   }
   
+  .react-icons{
+    color: #faaa33;
+    margin: auto;
+  }

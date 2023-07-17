@@ -1,7 +1,6 @@
 import React from 'react';
-import '../styles/footer.css';
-import instaIcono from '../styles/images/instaIcono.png';
-import faceIcono from '../styles/images/faceIcono.png';
+import '../../styles/footer.css';
+import { FaFacebook, FaInstagram, FaTiktok } from 'react-icons/fa';
 
 function Footer() {
   return (
@@ -13,8 +12,11 @@ function Footer() {
             <h6>local saddd 45555</h6>
         </div>
         <div className="iconosFooter">
-            <img className="instaIcono" src={instaIcono} alt="instaIcono" />
-            <img className="facebookIcono" src={faceIcono} alt="faceIcono" />
+          <div className="react-icons">
+            <FaFacebook className='icono' />
+            <FaInstagram className='icono' />
+            <FaTiktok className='icono' />
+          </div>
         </div>
     </div>
   );

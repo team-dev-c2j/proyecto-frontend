@@ -1,4 +1,4 @@
-import CardProduct from "./CardProduct"
+import ProductsComponent from "./Products"
 import WhatsAppIcon from "./Whatsapp";
 import Marcas from "./marcas";
 
@@ -8,7 +8,7 @@ function BodyCard (){
         <div>
             <WhatsAppIcon></WhatsAppIcon>
             <Marcas></Marcas>
-            <CardProduct></CardProduct>
+            <ProductsComponent></ProductsComponent>
         </div>
     )
 }

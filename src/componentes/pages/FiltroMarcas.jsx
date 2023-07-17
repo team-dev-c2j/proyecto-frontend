@@ -1,19 +1,22 @@
+import { useParams } from "react-router-dom";
 import React, { useEffect, useState } from "react";
 import { Link } from 'react-router-dom';
-import '../styles/Products.css';
+import '../../styles/Products.css';
 
+const FiltroMarcas = () => {
 
-function ProductsComponent() {
-  const [products, setProducts] = useState([]);
+    const { marca } = useParams();
 
-  useEffect(() => {
-    // Función para obtener los productos
-    const fetchProducts = async () => {
-      try {
-        const response = await fetch("http://127.0.0.1:3000/products");
-        const data = await response.json();
+    const [products, setProducts] = useState([]);
+
+    useEffect(() => {
+        // Función para obtener los productos
+        const fetchProducts = async () => {
+        try {
+            const response = await fetch(`http://127.0.0.1:3000/products/marca/${marca}`);
+            const data = await response.json();
         if (response.ok) {
-          setProducts(data.results);
+          setProducts(data);
           console.log("ok");
         } else {
           console.error(data.error);
@@ -25,7 +28,7 @@ function ProductsComponent() {
 
     // Llamada a la función para obtener los productos al cargar el componente
     fetchProducts();
-  }, []);
+  }, [marca]);
 
   return (
     <div class="main-cointainer">
@@ -35,7 +38,7 @@ function ProductsComponent() {
         <div class="main">
           {products.map((product) => (
             <div  class="card-container" key={product.modelo}>
-              <Link to={`/productoDetail/${product._id}`} style={{ textDecoration: 'none' }}>
+              <Link to={`/productoDetail/${product._id}`}>
               <div className="divCard">
                 <div>
                   <article>
@@ -46,13 +49,9 @@ function ProductsComponent() {
                       </>
                     )}
                   </article>
-                  <div className="productDetail">
-                      <div>
-                      {product.modelo}  {product.marca}  
-                      </div>
+                    {product.modelo}<br/>
+                    {product.marca}<br/>
                     ${product.precio}
-                  </div>
-
                 </div>
               </div>  
               </Link>
@@ -65,4 +64,4 @@ function ProductsComponent() {
   );
 }
 
-export default ProductsComponent;
+export default FiltroMarcas;

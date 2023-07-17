@@ -19,6 +19,14 @@
     transition: transform 0.5s;
     transform-style: preserve-3d;
   }
+
+  @media (max-width: 600px) {
+    .brand-image{
+      width: 65px;
+      height: 65px;
+    }
+  }
+
   
   .brand-image:hover {
     animation: flip 1s;
