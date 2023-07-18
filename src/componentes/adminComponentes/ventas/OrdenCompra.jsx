@@ -15,45 +15,81 @@ const OrdenesCompra = () => {
       });
   }, []);
 
-  const eliminarOrden = (ordenId) => {
-    fetch(`http://127.0.0.1:3000/ordenCompra/${ordenId}`, {
-      method: "DELETE"
-    })
-      .then((response) => response.json())
-      .then((data) => {
-        // Actualizar la lista de órdenes después de eliminar
-        setOrdenes((prevOrdenes) => prevOrdenes.filter((orden) => orden._id !== ordenId));
-      })
-      .catch((error) => {
+  const eliminarOrden = async (ordenId) => {
+    const confirmDelete = window.confirm("¿Estás seguro de eliminar esta marca?");
+    if (confirmDelete) {
+      try {
+        await fetch(`http://127.0.0.1:3000/ordenCompra/${ordenId}`, {
+          method: "DELETE"
+        })
+        .then((response) => response.json())
+        .then((data) => {
+          // Actualizar la lista de órdenes después de eliminar
+          setOrdenes((prevOrdenes) => prevOrdenes.filter((orden) => orden._id !== ordenId));
+        })
+        .catch((error) => {
+          console.error(error);
+        });
+      } catch (error) {
         console.error(error);
-      });
+      }
+    }
   };
-
-  const finalizarOrden = (ordenId) => {
-    fetch(`http://127.0.0.1:3000/ordenCompra/${ordenId}`, {
-      method: "PUT",
-      headers: {
-        "Content-Type": "application/json"
-      },
-      body: JSON.stringify({ estado: "finalizado" })
-    })
-      .then((response) => response.json())
-      .then((data) => {
-        // Actualizar la lista de órdenes después de cambiar el estado
-        setOrdenes((prevOrdenes) => {
-          return prevOrdenes.map((orden) => {
-            if (orden._id === ordenId) {
-              return { ...orden, estado: "finalizado" };
-            } else {
-              return orden;
-            }
+  
+  const finalizarOrden = async (ordenId) => {
+    try {
+      await fetch(`http://127.0.0.1:3000/ordenCompra/${ordenId}`, {
+        method: "PUT",
+        headers: {
+          "Content-Type": "application/json"
+        },
+        body: JSON.stringify({ estado: "finalizado" })
+      })
+        .then((response) => response.json())
+        .then((data) => {
+          // Actualizar la lista de órdenes después de cambiar el estado
+          setOrdenes((prevOrdenes) => {
+            return prevOrdenes.map((orden) => {
+              if (orden._id === ordenId) {
+                return { ...orden, estado: "finalizado" };
+              } else {
+                return orden;
+              }
+            });
           });
         });
-      })
-      .catch((error) => {
-        console.error(error);
-      });
+    } catch (error) {
+      console.error(error);
+    }
   };
+
+  const pendienteOrden = async (ordenId) => {
+    try {
+      await fetch(`http://127.0.0.1:3000/ordenCompra/${ordenId}`, {
+        method: "PUT",
+        headers: {
+          "Content-Type": "application/json"
+        },
+        body: JSON.stringify({ estado: "pendiente" })
+      })
+        .then((response) => response.json())
+        .then((data) => {
+          // Actualizar la lista de órdenes después de cambiar el estado
+          setOrdenes((prevOrdenes) => {
+            return prevOrdenes.map((orden) => {
+              if (orden._id === ordenId) {
+                return { ...orden, estado: "pendiente" };
+              } else {
+                return orden;
+              }
+            });
+          });
+        });
+    } catch (error) {
+      console.error(error);
+    }
+  };
+  
 
   const obtenerFecha = (fecha) => {
     const fechaFormateada = new Date(fecha).toLocaleDateString();
@@ -91,6 +127,9 @@ const OrdenesCompra = () => {
               <td>{orden.estado}</td>
               <td>{obtenerFecha(orden.createdAt)}</td>
               <td>
+              {orden.estado === "finalizado" && (
+                  <button className="✔" onClick={() => pendienteOrden(orden._id)}>*</button>
+                )}
                 {orden.estado === "pendiente" && (
                   <button className="✔" onClick={() => finalizarOrden(orden._id)}>✔</button>
                 )}

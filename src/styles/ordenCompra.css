@@ -12,11 +12,16 @@
 .ordenCompraTable{
     margin-left: 20px;
     margin-right: 0px;
+    color: black;
 }
 
 .X{
     width: 30px;
     background-color: red;
+}
+
+.X:hover{
+    background-color: rgb(110, 8, 8);
 }
 
 .✔{
