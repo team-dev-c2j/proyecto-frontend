@@ -1,0 +1,24 @@
+.ordenCompraMain{
+    margin-bottom: 40px;
+    margin-right: 40px;
+}
+.ordenCompra{
+    color: white;
+    margin-top: 30px;
+    margin-left: 40%;
+    margin-bottom: 30px;
+}
+
+.ordenCompraTable{
+    margin-left: 20px;
+    margin-right: 0px;
+}
+
+.X{
+    width: 30px;
+    background-color: red;
+}
+
+.✔{
+    width: 30px;
+}

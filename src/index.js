@@ -15,7 +15,9 @@ import EditUnidad from './componentes/adminComponentes/unidades/EditUnidad';
 import ProductoDetail from './componentes/pages/ProductoDetail';
 import Carrito from './componentes/context/Carrito';
 import FiltroMarcas from './componentes/pages/FiltroMarcas';
+import OrdenCompra from './componentes/adminComponentes/ventas/OrdenCompra';
 import './styles/index.css';
+
 
 ReactDOM.render(
   <CarritoProvider>
@@ -31,6 +33,7 @@ ReactDOM.render(
         <Route path="/unidad/:id" element={<EditUnidad />} />
         <Route path='/carrito' element={<Carrito />} />
         <Route path='/:marca' element={<FiltroMarcas />} />
+        <Route path='/OrdenCompra' element={<OrdenCompra />} />
       </Routes>
       <Footer />
     </Router>
