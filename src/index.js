@@ -9,14 +9,17 @@ import Footer from './componentes/main/Footer';
 import BodyCard from './componentes/main/BodyCard';
 import Login from './componentes/pages/Login';
 import Admin from './componentes/adminComponentes/Admin';
-import EditMarcas from './componentes/adminComponentes/marcas/EditcMarcas';
+import EditMarcas from './componentes/adminComponentes/marcas/EditMarcas';
 import EditProducto from './componentes/adminComponentes/productos/EditProducto';
 import EditUnidad from './componentes/adminComponentes/unidades/EditUnidad';
 import ProductoDetail from './componentes/pages/ProductoDetail';
 import Carrito from './componentes/context/Carrito';
 import FiltroMarcas from './componentes/pages/FiltroMarcas';
 import OrdenCompra from './componentes/adminComponentes/ventas/OrdenCompra';
+import MarcaPanel from './componentes/adminComponentes/marcas/MarcasPanel';
 import './styles/index.css';
+import ProductosPanel from './componentes/adminComponentes/productos/ProductosPanel';
+
 
 
 ReactDOM.render(
@@ -34,6 +37,8 @@ ReactDOM.render(
         <Route path='/carrito' element={<Carrito />} />
         <Route path='/:marca' element={<FiltroMarcas />} />
         <Route path='/OrdenCompra' element={<OrdenCompra />} />
+        <Route path='/marcasPanel' element={<MarcaPanel />} />
+        <Route path='/productosPanel' element={<ProductosPanel />} />
       </Routes>
       <Footer />
     </Router>
