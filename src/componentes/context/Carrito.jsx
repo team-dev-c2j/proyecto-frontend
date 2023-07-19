@@ -10,8 +10,8 @@ const Carrito = () => {
   const [email, setEmail] = useState("");
 
   const enviarPeticion = () => {
+    // Validar campos obligatorios
     if (!name || !telefono || !email) {
-      // Validación de campos vacíos
       alert("Por favor, complete todos los campos obligatorios.");
       return;
     }
@@ -27,7 +27,8 @@ const Carrito = () => {
     const productos = carrito.map((producto) => ({
       modelo: producto.modelo,
       talle: producto.talle,
-      color: producto.color
+      color: producto.color,
+      precio: producto.precio
     }));
 
     const estado = "pendiente";
@@ -38,7 +39,7 @@ const Carrito = () => {
       headers: {
         "Content-Type": "application/json"
       },
-      body: JSON.stringify({ cliente, productos, estado })
+      body: JSON.stringify({ cliente, productos, total, estado })
     })
       .then((response) => response.json())
       .then((data) => {
@@ -52,6 +53,9 @@ const Carrito = () => {
 
     alert("Compra solicitada");
   };
+
+  // Calcular el precio total de los productos en el carrito
+  const total = carrito.reduce((accum, producto) => accum + producto.precio, 0);
 
   return (
     <div className="carritoForm">
@@ -74,13 +78,14 @@ const Carrito = () => {
             style={{ marginBottom: "15px", width: "100px", height: "100px", borderRadius: "50%" }}
           />
           <h3>
-            {index + 1} {producto.modelo} talle: {producto.talle} color: {producto.color}
+            {index + 1} {producto.modelo} talle: {producto.talle} color: {producto.color} precio: {producto.precio}
           </h3>
           <button className="btn btn-outline-danger" onClick={() => eliminarDelCarrito(index)}>
             Eliminar
           </button>
         </div>
       ))}
+      <h3>Total: {total}</h3>
       <button className="btn btn-outline-success" onClick={enviarPeticion} style={{ color: "blue" }}>
         Enviar petición
       </button>

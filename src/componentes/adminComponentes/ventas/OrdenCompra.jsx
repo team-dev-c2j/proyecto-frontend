@@ -106,6 +106,7 @@ const OrdenesCompra = () => {
             <th>Teléfono</th>
             <th>Correo Electrónico</th>
             <th>Productos</th>
+            <th>Total</th>
             <th>Estado</th>
             <th>Fecha</th>
             <th>Acciones</th>
@@ -124,6 +125,7 @@ const OrdenesCompra = () => {
                   </div>
                 ))}
               </td>
+              <td>{orden.total}</td>
               <td>{orden.estado}</td>
               <td>{obtenerFecha(orden.createdAt)}</td>
               <td>

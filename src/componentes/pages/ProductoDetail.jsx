@@ -17,8 +17,8 @@ const ProductoDetail = (props) => {
 
   const { agregarProducto } = useContext(CarritoContext); // Mover la llamada a useContext aquí
 
-  const handleUnidadSeleccionada = (talle, color) => {
-    setUnidadSeleccionada({ talle, color });
+  const handleUnidadSeleccionada = (talle, color, precio) => {
+    setUnidadSeleccionada({ talle, color, precio });
   };
 
   useEffect(() => {
@@ -86,10 +86,11 @@ const ProductoDetail = (props) => {
         modelo: producto.modelo,
         talle: unidadSeleccionada.talle,
         color: unidadSeleccionada.color,
+        precio: producto.precio,
         imagen: producto.imageUrls[0],
       };
       agregarProducto(productoSeleccionado);
-      alert(`agregaste al carrito ${producto.modelo} talle ${unidadSeleccionada.talle} color ${unidadSeleccionada.talle}`)
+      alert(`agregaste al carrito ${producto.modelo} talle ${unidadSeleccionada.talle} color ${unidadSeleccionada.talle} precio ${producto.precio}`)
     }
   };
   return (

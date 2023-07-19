@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from "react";
-import { useParams } from "react-router-dom";
+import { useParams, Link } from "react-router-dom";
 import '../../../styles/admin.css';
 
 function EditMarcas(props) {
@@ -155,9 +155,11 @@ function EditMarcas(props) {
                   <button type="submit" className="btn btn-primary">
                     EDITAR
                   </button>
-                  <button type="button" className="btn btn-danger" onClick={handleDelete}>
-                    ELIMINAR
-                  </button>
+                  <Link to={`/marcasPanel`}>
+                    <button type="button" className="btn btn-danger" onClick={handleDelete}>
+                      ELIMINAR
+                    </button>
+                  </Link>
                 </form>
               </div>
             </div>
