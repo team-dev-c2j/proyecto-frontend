@@ -83,6 +83,7 @@ const ProductoDetail = (props) => {
     if (unidadSeleccionada) {
       const productoSeleccionado = {
         id: unidades._id,
+        marca: producto.marca,
         modelo: producto.modelo,
         talle: unidadSeleccionada.talle,
         color: unidadSeleccionada.color,

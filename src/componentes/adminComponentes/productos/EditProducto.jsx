@@ -51,9 +51,21 @@ function EditProducto(props) {
       const updatedUrls = [...imageUrls];
       updatedUrls.splice(index, 1);
       setImageUrls(updatedUrls);
+      alert(imageUrlToDelete)
+    
+      const idimg = (imageUrl) => {
+        const publicIdRegex = /\/v\d+\/([^\.]+)/;
+        const match = imageUrl.match(publicIdRegex);
+        if (match && match[1]) {
+          return match[1];
+        }
+        return null;
+      }
 
-      await fetch(`http://localhost:3000/deleteImage`, {
-        method: "POST",
+    
+
+      await fetch(`http://localhost:3000/products/deleteImg/${idimg(imageUrlToDelete)}`, {
+        method: "Delete",
         headers: {
           "Content-Type": "application/json",
         },
@@ -62,7 +74,7 @@ function EditProducto(props) {
         }),
       });
 
-      alert("Imagen eliminada exitosamente");
+      alert(imageUrlToDelete + "Imagen eliminada exitosamente");
     } catch (error) {
       console.error("Error al eliminar la imagen:", error);
     }

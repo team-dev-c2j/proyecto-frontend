@@ -121,11 +121,11 @@ const OrdenesCompra = () => {
               <td>
                 {orden.productos.map((producto) => (
                   <div key={producto._id}>
-                    Modelo: {producto.modelo}, Talle: {producto.talle}, Color: {producto.color}
+                    {producto.marca} {producto.modelo} Talle: {producto.talle} Color: {producto.color} Precio: ${producto.precio}
                   </div>
                 ))}
               </td>
-              <td>{orden.total}</td>
+              <td>${orden.total}</td>
               <td>{orden.estado}</td>
               <td>{obtenerFecha(orden.createdAt)}</td>
               <td>

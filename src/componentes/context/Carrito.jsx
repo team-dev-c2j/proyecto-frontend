@@ -25,6 +25,7 @@ const Carrito = () => {
 
     // Crear arreglo de productos
     const productos = carrito.map((producto) => ({
+      marca: producto.marca,
       modelo: producto.modelo,
       talle: producto.talle,
       color: producto.color,
@@ -78,7 +79,7 @@ const Carrito = () => {
             style={{ marginBottom: "15px", width: "100px", height: "100px", borderRadius: "50%" }}
           />
           <h3>
-            {index + 1} {producto.modelo} talle: {producto.talle} color: {producto.color} precio: {producto.precio}
+            {index + 1} {producto.marca} {producto.modelo} talle: {producto.talle} color: {producto.color} precio: {producto.precio}
           </h3>
           <button className="btn btn-outline-danger" onClick={() => eliminarDelCarrito(index)}>
             Eliminar
