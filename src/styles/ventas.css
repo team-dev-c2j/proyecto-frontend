@@ -1,0 +1,29 @@
+.ventasCompraMain{
+    margin-bottom: 40px;
+    margin-right: 40px;
+}
+.ventasCompra{
+    color: white;
+    margin-top: 30px;
+    margin-left: 48%;
+    margin-bottom: 30px;
+}
+
+.ventasCompraTable{
+    margin-left: 20px;
+    margin-right: 0px;
+    color: black;
+}
+
+.X{
+    width: 30px;
+    background-color: red;
+}
+
+.X:hover{
+    background-color: rgb(110, 8, 8);
+}
+
+.✔{
+    width: 30px;
+}

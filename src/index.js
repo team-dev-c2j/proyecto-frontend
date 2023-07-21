@@ -19,6 +19,7 @@ import OrdenCompra from './componentes/adminComponentes/ventas/OrdenCompra';
 import MarcaPanel from './componentes/adminComponentes/marcas/MarcasPanel';
 import './styles/index.css';
 import ProductosPanel from './componentes/adminComponentes/productos/ProductosPanel';
+import Ventas from './componentes/adminComponentes/ventas/Ventas';
 
 
 
@@ -39,6 +40,7 @@ ReactDOM.render(
         <Route path='/OrdenCompra' element={<OrdenCompra />} />
         <Route path='/marcasPanel' element={<MarcaPanel />} />
         <Route path='/productosPanel' element={<ProductosPanel />} />
+        <Route path='/ventas' element={<Ventas />} />
       </Routes>
       <Footer />
     </Router>
