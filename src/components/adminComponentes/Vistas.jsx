@@ -11,8 +11,10 @@ const Vistas = () => {
                 </Link>
                 <Link to={'/ventas'}>
                     <button class="btn btn-outline-info">ver ventas</button>
+                </Link >
+                <Link to={'/register'}>
+                   <button class="btn btn-outline-info">agregar vendedores</button><br/>
                 </Link>
-                <button class="btn btn-outline-info">agregar vendedores</button><br/>
             </div>
 
             <div>

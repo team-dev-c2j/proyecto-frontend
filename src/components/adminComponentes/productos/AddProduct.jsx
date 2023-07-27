@@ -99,8 +99,6 @@ function AddProduct() {
 
           alert('Producto agregado exitosamente');
 
-          // Restablecer los campos del formulario
-          window.location.reload();
           
         } catch (error) {
           console.error('Error al agregar el producto:', error);

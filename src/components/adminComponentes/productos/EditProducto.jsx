@@ -54,7 +54,7 @@ function EditProducto(props) {
       alert(imageUrlToDelete)
     
       const idimg = (imageUrl) => {
-        const publicIdRegex = /\/v\d+\/([^\.]+)/;
+        const publicIdRegex = /\/v\d+\/([^.]+)/;
         const match = imageUrl.match(publicIdRegex);
         if (match && match[1]) {
           return match[1];
@@ -196,7 +196,7 @@ function EditProducto(props) {
                       >
                         <option value="">Seleccione una marca</option>
                         {marcasDisponibles.map((marca, index) => (
-                          <option key={index} value={marca}>
+                          <option key={index} value={marcasDisponibles.marca}>
                             {marca}
                           </option>
                         ))}
@@ -204,6 +204,7 @@ function EditProducto(props) {
                     </label>
                   </div>
                   <div className="form-group mb-1">
+                    Precio:
                     <input
                       type="number"
                       name="precio"

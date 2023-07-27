@@ -23,7 +23,7 @@ function Navbar () {
                 <Link to="/carrito">
                 <button type="button" id='botoninfo' class="btn btn-outline-info">Carro</button>    
                 </Link>       
-                <Link to="/admin" style={{ textDecoration: 'none' }}>
+                <Link to="/login" style={{ textDecoration: 'none' }}>
                     <FaRegUser className='userIcono'/>
                 </Link>     
             </div>

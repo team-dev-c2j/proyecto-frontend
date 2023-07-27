@@ -1,49 +1,59 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
 import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
-import { CarritoProvider } from './componentes/context/CarritoContext';
+import { CarritoProvider } from './components/context/CarritoContext';
 
 // Componentes
-import Navbar from './componentes/main/NavBar';
-import Footer from './componentes/main/Footer';
-import BodyCard from './componentes/main/BodyCard';
-import Login from './componentes/pages/Login';
-import Admin from './componentes/adminComponentes/Admin';
-import EditMarcas from './componentes/adminComponentes/marcas/EditMarcas';
-import EditProducto from './componentes/adminComponentes/productos/EditProducto';
-import EditUnidad from './componentes/adminComponentes/unidades/EditUnidad';
-import ProductoDetail from './componentes/pages/ProductoDetail';
-import Carrito from './componentes/context/Carrito';
-import FiltroMarcas from './componentes/pages/FiltroMarcas';
-import OrdenCompra from './componentes/adminComponentes/ventas/OrdenCompra';
-import MarcaPanel from './componentes/adminComponentes/marcas/MarcasPanel';
+import Navbar from './components/main/NavBar';
+import Footer from './components/main/Footer';
+import BodyCard from './components/main/BodyCard';
+import Login from './components/pages/Login';
+import Admin from './components/adminComponentes/Admin';
+import EditMarcas from './components/adminComponentes/marcas/EditMarcas';
+import EditProducto from './components/adminComponentes/productos/EditProducto';
+import EditUnidad from './components/adminComponentes/unidades/EditUnidad';
+import ProductoDetail from './components/pages/ProductoDetail';
+import Carrito from './components/context/Carrito';
+import FiltroMarcas from './components/pages/FiltroMarcas';
+import OrdenCompra from './components/adminComponentes/ventas/OrdenCompra';
+import MarcaPanel from './components/adminComponentes/marcas/MarcasPanel';
 import './styles/index.css';
-import ProductosPanel from './componentes/adminComponentes/productos/ProductosPanel';
-import Ventas from './componentes/adminComponentes/ventas/Ventas';
+import ProductosPanel from './components/adminComponentes/productos/ProductosPanel';
+import Ventas from './components/adminComponentes/ventas/Ventas';
+import { AuthProvider } from './components/context/AuthContext';
+import Register from './components/pages/Register';
+import ProtectedRoute from './ProtectedRoute';
 
 
 
 ReactDOM.render(
-  <CarritoProvider>
+  <AuthProvider>
+      <CarritoProvider>
     <Router>
       <Navbar />
       <Routes>
         <Route path="/" element={<BodyCard />} />
         <Route path="/login" element={<Login />} />
-        <Route path="/admin" element={<Admin />} />
-        <Route path="/marcas/:id" element={<EditMarcas />} />
-        <Route path="/productos/:id" element={<EditProducto />} />
         <Route path="/productoDetail/:id" element={<ProductoDetail />} />
         <Route path="/unidad/:id" element={<EditUnidad />} />
-        <Route path='/carrito' element={<Carrito />} />
         <Route path='/:marca' element={<FiltroMarcas />} />
+        <Route path='/carrito' element={<Carrito />} />
+
+
+        <Route element={<ProtectedRoute></ProtectedRoute>}>
+        <Route path="/admin" element={<Admin />} />
+        <Route path="/Register" element={<Register />} />
+        <Route path="/marcas/:id" element={<EditMarcas />} />
+        <Route path="/productos/:id" element={<EditProducto />} />
         <Route path='/OrdenCompra' element={<OrdenCompra />} />
         <Route path='/marcasPanel' element={<MarcaPanel />} />
         <Route path='/productosPanel' element={<ProductosPanel />} />
         <Route path='/ventas' element={<Ventas />} />
+        </Route>
       </Routes>
       <Footer />
     </Router>
-  </CarritoProvider>,
+  </CarritoProvider>
+  </AuthProvider>,
   document.getElementById('root')
 );
