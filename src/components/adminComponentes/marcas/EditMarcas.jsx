@@ -74,7 +74,6 @@ function EditMarcas(props) {
         alert('Marca actualizada exitosamente');
 
         // Restablecer los campos del formulario
-        window.location.reload();
       } catch (error) {
         console.error('Error al actualizar la marca:', error);
       }
@@ -83,9 +82,6 @@ function EditMarcas(props) {
     }
   };
 
-  const handleMarcaChange = (event) => {
-    setMarcaData({ ...marcaData, marca: event.target.value });
-  };
 
   const handleDelete = async () => {
     const confirmDelete = window.confirm("¿Estás seguro de eliminar esta marca?");
@@ -118,13 +114,7 @@ function EditMarcas(props) {
               <div className="card-body">
                 <form onSubmit={handleEdit}>
                   <div className="form-group mb-1">
-                    <input
-                      type="text"
-                      name="name"
-                      value={marcaData.marca}
-                      className="form-control"
-                      onChange={handleMarcaChange}
-                    />
+                    <h4>{marcaData.marca}</h4>
                   </div>
                   <div className="form-group mb-1">
                     <input type="file" onChange={handleFileChange} />

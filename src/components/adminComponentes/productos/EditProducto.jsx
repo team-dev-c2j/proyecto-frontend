@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from "react";
-import { useParams, Link } from "react-router-dom";
+import { useParams, Link, useNavigate } from "react-router-dom";
 import "../../../styles/admin.css";
 import { v4 as uuidv4 } from "uuid";
 
@@ -11,6 +11,8 @@ function EditProducto(props) {
   const [selectedFiles, setSelectedFiles] = useState([]);
   const [marcasDisponibles, setMarcasDisponibles] = useState([]);
   const [imageUrls, setImageUrls] = useState([]);
+
+  const navigate = useNavigate()
 
   const fetchMarcasDisponibles = async () => {
     try {
@@ -160,9 +162,7 @@ function EditProducto(props) {
         });
 
         alert("Producto actualizado exitosamente");
-
-        // Recargar la página o realizar otra acción necesaria después de la actualización
-        window.location.reload();
+        navigate("/admin")
       } catch (error) {
         console.error("Error al actualizar el producto:", error);
       }
@@ -197,7 +197,7 @@ function EditProducto(props) {
                         <option value="">Seleccione una marca</option>
                         {marcasDisponibles.map((marca, index) => (
                           <option key={index} value={marcasDisponibles.marca}>
-                            {marca}
+                            {productoData.marca}
                           </option>
                         ))}
                       </select>

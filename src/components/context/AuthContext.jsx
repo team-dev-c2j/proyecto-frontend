@@ -16,7 +16,7 @@ export const AuthProvider = ({children}) => {
     const [user, setUser] = useState(null)
     const [isAuthenticated, setIsAuthenticated] = useState(false)
     const [errors, setErrors] = useState([])
-    const [loading, setLoading] = useState(true)
+
 
     const signup = async (user) => {
         try {
@@ -57,7 +57,6 @@ export const AuthProvider = ({children}) => {
 
             if (!cookies.token){
                 setIsAuthenticated(false)
-                setLoading(false)
                 console.log(cookies.token)
                 return setUser(null)
             }
@@ -65,17 +64,14 @@ export const AuthProvider = ({children}) => {
                 const res = await verifyTokenRequest(cookies.token)
                if (!res.data) {
                     setIsAuthenticated(false)
-                    setLoading(false)
                     return 
                 }
                     
                 setIsAuthenticated(true)
                 setUser(res.data)
-                setLoading(false)
             } catch(err) {
                 setIsAuthenticated(false)
                 setUser(null)
-                setLoading(false)
             }
             
         }
@@ -85,7 +81,7 @@ export const AuthProvider = ({children}) => {
 
 
     return (
-        <AuthContext.Provider value= {{signup, signin, loading,  user, isAuthenticated, errors}}>
+        <AuthContext.Provider value= {{signup, signin,  user, isAuthenticated, errors}}>
             {children}
         </AuthContext.Provider>
 

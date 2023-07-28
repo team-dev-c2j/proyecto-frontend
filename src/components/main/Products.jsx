@@ -38,14 +38,19 @@ function ProductsComponent() {
               <Link to={`/productoDetail/${product._id}`} style={{ textDecoration: 'none' }}>
               <div className="divCard">
                 <div>
-                  <article>
-                    {product.imageUrls && (
-                      <>
-                        <img src={product.imageUrls[0]} alt="Product Image1" />
+                <article>
+                  {product.imageUrls && product.imageUrls.length > 0 && (
+                    <>
+                      <img src={product.imageUrls[0]} alt="Product Image1" />
+                      {product.imageUrls.length > 1 ? (
                         <img src={product.imageUrls[1]} alt="Product Image2" />
-                      </>
-                    )}
-                  </article>
+                      ) : (
+                        <img src={product.imageUrls[1]} alt="Product Image2" className="alternative-image" style={{ display: 'none' }} />
+                      )}
+                    </>
+                  )}
+                </article>
+
                   <div className="productDetail">
                       <div>
                       {product.modelo}  {product.marca}  

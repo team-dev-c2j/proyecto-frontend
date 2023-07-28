@@ -16,9 +16,6 @@ function Navbar () {
             <div className='sector2'>
                 <Link to="/contacto" style={{ textDecoration: 'none' }}>
                     <h5 className='items'>Contacto</h5>
-                </Link>
-                <Link to="/contacto" style={{ textDecoration: 'none' }}>
-                    <h5 className='items'>Contacto</h5>
                 </Link>   
                 <Link to="/carrito">
                 <button type="button" id='botoninfo' class="btn btn-outline-info">Carro</button>    
