@@ -2,12 +2,16 @@ import '../../styles/NavBar.css';
 import "bootstrap/dist/css/bootstrap.css"
 import { Link } from 'react-router-dom';
 import { FaRegUser } from 'react-icons/fa';
+import { useAuth } from '../context/AuthContext';
 
 
 
 
 
 function Navbar () {
+
+    const { userNav } = useAuth()
+
     return (
         <div className='barra1'>
             <Link to={'/'} style={{ textDecoration: 'none' }}>
@@ -22,7 +26,9 @@ function Navbar () {
                 </Link>       
                 <Link to="/login" style={{ textDecoration: 'none' }}>
                     <FaRegUser className='userIcono'/>
-                </Link>     
+
+                </Link>    
+                <h8 className="userNav">{userNav}</h8> 
             </div>
 
 

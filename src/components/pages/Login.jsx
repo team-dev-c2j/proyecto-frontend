@@ -7,17 +7,20 @@ import { useEffect } from 'react';
 function Login() {
 
     const { register, handleSubmit, formState: { errors } } = useForm()
-    const {signin, errors: signinErrors, isAuthenticated } = useAuth()
+    const {signin, errors: signinErrors, isAuthenticated, setUserNav } = useAuth()
     const navigate = useNavigate()
 
     const onSubmit = handleSubmit (async (values) => {
         signin(values)
+        setUserNav(values.username)
     })
 
     useEffect(() => {
         if (isAuthenticated) navigate("/admin")
 
-    },[isAuthenticated])
+    },[isAuthenticated, navigate])
+
+    
 
     return (
         <div className="login">

@@ -15,6 +15,7 @@ const Ventas = () => {
         console.error(error);
       });
   }, []);
+  
 
   const eliminarVenta = async (ventaId) => {
     const confirmDelete = window.confirm("¿Estás seguro de eliminar esta venta?");

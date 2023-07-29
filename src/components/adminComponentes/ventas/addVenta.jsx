@@ -1,5 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import "../../../styles/addVentas.css"
+import { useAuth } from '../../context/AuthContext';
 
 const VentasForm = () => {
   const [vendedor, setVendedor] = useState('');
@@ -17,6 +18,12 @@ const VentasForm = () => {
   const [comentarios, setComentarios] = useState('');
   const [estado, setEstado] = useState('pendiente')
   const [total, setTotal] = useState(0);
+  const { userNav } = useAuth()
+
+  useEffect(() => {
+    setVendedor(userNav);
+  }, [userNav]);
+
 
   const handleProductChange = (e) => {
     const { name, value } = e.target;
@@ -89,9 +96,6 @@ const VentasForm = () => {
       });
 
       alert('Venta agregada exitosamente');
-
-      // Restablecer los campos del formulario
-      window.location.reload();
   };
 
   const handleEstadoChange = (event) => {
@@ -111,12 +115,21 @@ const VentasForm = () => {
     <div className='addVentasMain'>
       <div>
         <label htmlFor="vendedor">Vendedor:</label>
-        <input
-          type="text"
-          id="vendedor"
-          value={vendedor}
-          onChange={(e) => setVendedor(e.target.value)}
-        />
+        {userNav === 'juli' ? (
+          <input
+            type="text"
+            id="vendedor"
+            value={vendedor}
+            onChange={(e) => setVendedor(e.target.value)}
+          />
+        ) : (
+          <input
+            type="text"
+            id="vendedor"
+            value={userNav}
+            disabled
+          />
+        )}
       </div>
       <div>
         <label htmlFor="nombreCliente">Nombre Cliente:</label>
