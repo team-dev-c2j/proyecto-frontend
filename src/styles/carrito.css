@@ -1,4 +1,11 @@
 .carritoForm {
+    top: -75%;
+    position: fixed;
+    right: -80%; /* Empieza oculto fuera del área visible de la página */
+    width: 300px; /* Ancho del carrito */
+    height: 200vh;
+    z-index: 990; /* Asegúrate de que el carrito esté en capas por encima del contenido de la página */
+    transition: left 0.3s ease;
     color: white;
     margin-bottom: 25px;
     display: flex;
@@ -6,7 +13,27 @@
     align-items: center;
     justify-content: center;
     text-align: center;
+    margin-top: 0%;
+    padding-top: 0;
+    background-color: rgb(0, 0, 0);
 }
+
+.carritoForm.mostrar {
+  right: 0%; /* Muestra el carrito desplazándolo hacia la derecha */
+}
+
+
+
+.iconoCarrito{
+  margin-left: -120%;
+  margin-top: -12%;
+  color: #1ee2e7;
+}
+
+.iconoCarrito:hover{
+  cursor: pointer;
+}
+
 
 .formCarro {
     margin-bottom: 25px;

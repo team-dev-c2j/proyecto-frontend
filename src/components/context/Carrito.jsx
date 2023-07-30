@@ -1,8 +1,9 @@
 import React, { useContext, useState } from "react";
 import { CarritoContext } from "./CarritoContext";
 import "../../styles/carrito.css";
+import { FaArrowCircleRight } from "react-icons/fa";
 
-const Carrito = () => {
+const Carrito = ({ cerrarCarrito }) => {
   const { carrito, eliminarDelCarrito } = useContext(CarritoContext);
 
   const [name, setName] = useState("");
@@ -16,7 +17,6 @@ const Carrito = () => {
       return;
     }
 
-    // Crear objeto con los datos del cliente
     const cliente = {
       name,
       telefono,
@@ -59,15 +59,16 @@ const Carrito = () => {
   const total = carrito.reduce((accum, producto) => accum + producto.precio, 0);
 
   return (
-    <div className="carritoForm">
+    <div className="">
+      <div className="iconoCarrito"><FaArrowCircleRight size="30px" onClick={cerrarCarrito} /></div>
       <form className="formCarro">
-        <h4>Nombre</h4>
+        <h5>Nombre</h5>
         <input type="text" value={name} onChange={(e) => setName(e.target.value)} required />
         <br />
-        <h4>Teléfono</h4>
+        <h5>Teléfono</h5>
         <input type="text" value={telefono} onChange={(e) => setTelefono(e.target.value)} required />
         <br />
-        <h4>Correo</h4>
+        <h5>Correo</h5>
         <input type="text" value={email} onChange={(e) => setEmail(e.target.value)} required />
         <br />
       </form>

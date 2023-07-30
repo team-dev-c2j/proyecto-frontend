@@ -83,7 +83,6 @@ const VentasForm = () => {
         // Handle the response from the server if needed.
         console.log(data);
         // Reset form fields after successful submission if required.
-         setVendedor('');
          setNombreCliente('');
          setTelefonoCliente('');
          setEmailCliente('');

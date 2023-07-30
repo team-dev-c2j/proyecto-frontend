@@ -5,7 +5,7 @@ import "../../../styles/ventas.css"
 const Ventas = () => {
   const [ventas, setVentas] = useState([]);
 
-  useEffect(() => {
+  const obtenerVentas = () => {
     fetch("http://127.0.0.1:3000/ventas")
       .then((response) => response.json())
       .then((data) => {
@@ -14,8 +14,11 @@ const Ventas = () => {
       .catch((error) => {
         console.error(error);
       });
+  };
+
+  useEffect(() => {
+    obtenerVentas();
   }, []);
-  
 
   const eliminarVenta = async (ventaId) => {
     const confirmDelete = window.confirm("¿Estás seguro de eliminar esta venta?");
@@ -100,6 +103,7 @@ const Ventas = () => {
   return (
     <div>
         <AddVenta></AddVenta>
+        <button onClick={obtenerVentas}>Actualizar Ventas</button>
         <div className="ventasCompraMain">
         <h2 className="ventasCompra">Ventas</h2>
         <table className="ventasCompraTable">
