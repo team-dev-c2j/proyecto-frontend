@@ -73,7 +73,7 @@
 .userIcono{
     margin-top: 7px;
     margin-right: 15px;
-    margin-left: 55px;
+    margin-left: 20px;
     height: 30px;
     color: #1ee2e7;
 }
@@ -94,9 +94,10 @@
   .carritoIconNav {
     margin-top: 2.5%;
     margin-left: 20%;
-    margin-right: 10px;
+    margin-right: 20px;
   }
 
   .carritoIconNav:hover {
     cursor: pointer;
   }
+  

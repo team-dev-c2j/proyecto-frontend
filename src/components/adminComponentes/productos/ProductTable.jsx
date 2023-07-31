@@ -67,7 +67,7 @@ function ProductTable() {
                 <React.Fragment key={product.modelo}>
                   <tr>
                     <td>
-                      <button onClick={() => toggleDetails(product.modelo)}>
+                      <button className='buttonTable' onClick={() => toggleDetails(product.modelo)}>
                         {product.modelo} {product.marca}
                       </button>
                       <Link to={`/productos/${product._id}`}><button className='editBoton'>Edit</button></Link>

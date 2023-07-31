@@ -12,7 +12,7 @@ import { FaCartPlus  } from "react-icons/fa";
 
 function Navbar () {
 
-    const [mostrarCarrito, setMostrarCarrito] = useState(true);
+    const [mostrarCarrito, setMostrarCarrito] = useState(false);
     const toggleCarrito = () => {
         console.log("Antes del cambio:", mostrarCarrito);
         setMostrarCarrito(!mostrarCarrito);
@@ -43,9 +43,12 @@ function Navbar () {
             </div>
 
         </div>
+        <div className='pp'>
         <div className={`carritoForm ${mostrarCarrito ? "mostrar" : ""}`}>
             <Carrito cerrarCarrito={toggleCarrito} />
         </div>
+        </div>
+
 
         </div>
 

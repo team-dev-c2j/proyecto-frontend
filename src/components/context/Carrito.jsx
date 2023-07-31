@@ -17,6 +17,11 @@ const Carrito = ({ cerrarCarrito }) => {
       return;
     }
 
+    if (carrito.length === 0) {
+      alert("Por favor, elija algun producto");
+      return;
+    }
+
     const cliente = {
       name,
       telefono,
@@ -62,34 +67,45 @@ const Carrito = ({ cerrarCarrito }) => {
     <div className="">
       <div className="iconoCarrito"><FaArrowCircleRight size="30px" onClick={cerrarCarrito} /></div>
       <form className="formCarro">
-        <h5>Nombre</h5>
+        <div className="box">
+        <h6 className="boxItem">Nombre:<span className="spanNom"></span></h6>
         <input type="text" value={name} onChange={(e) => setName(e.target.value)} required />
-        <br />
-        <h5>Teléfono</h5>
+        <br/>
+        <h6 className="boxItem">Teléfono:<span className="spanTel"></span> </h6>
         <input type="text" value={telefono} onChange={(e) => setTelefono(e.target.value)} required />
-        <br />
-        <h5>Correo</h5>
+        <br /></div>
+        <h6 className="boxItem correo">Correo: <span className="spanCorreo"></span>  </h6>
         <input type="text" value={email} onChange={(e) => setEmail(e.target.value)} required />
         <br />
       </form>
+      <div className="carritoItems">
       {carrito.map((producto, index) => (
-        <div key={producto.id}>
-          <img
+        <div className="itemPro" key={producto.id}>
+          <div className="itemCarro">
+          <img className="imgCarro"
             src={producto.imagen}
-            alt="img"
-            style={{ marginBottom: "15px", width: "100px", height: "100px", borderRadius: "50%" }}
-          />
-          <h3>
-            {index + 1} {producto.marca} {producto.modelo} talle: {producto.talle} color: {producto.color} precio: {producto.precio}
-          </h3>
-          <button className="btn btn-outline-danger" onClick={() => eliminarDelCarrito(index)}>
-            Eliminar
-          </button>
+            alt="img"/>
+          <h6 className="textoCarro">
+          <span>{producto.marca} {producto.modelo}</span> <br />
+          <span>talle: {producto.talle}</span> <br />
+          <span>color: {producto.color}</span> <br />
+          <span>${producto.precio} C/U</span>
+          </h6>
+          </div>
+          <div className="cantidadBoton">
+            <button class="smallButton">-</button>
+            0
+            <button class="smallButton">+</button>
+            <button className="btn btn-outline-danger" onClick={() => eliminarDelCarrito(index)}>X</button>
+          </div>
+
         </div>
       ))}
-      <h3>Total: {total}</h3>
+      </div>
+
+      <h4>Total ${total}</h4>
       <button className="btn btn-outline-success" onClick={enviarPeticion} style={{ color: "blue" }}>
-        Enviar petición
+        Enviar
       </button>
     </div>
   );
