@@ -2,7 +2,8 @@ import "../../styles/login-register.css"
 import { useForm } from "react-hook-form"
 import { useAuth } from "../context/AuthContext"
 import { useNavigate } from "react-router-dom";
-import { useEffect } from 'react';
+import { useEffect, useState } from 'react';
+import { AiFillEyeInvisible  } from "react-icons/ai";
 
 function Login() {
 
@@ -20,7 +21,11 @@ function Login() {
 
     },[isAuthenticated, navigate])
 
-    
+    const [showPassword, setShowPassword] = useState(false);
+
+    const handleTogglePassword = () => {
+      setShowPassword((prevShowPassword) => !prevShowPassword);
+    };
 
     return (
         <div className="login">
@@ -39,13 +44,17 @@ function Login() {
                 {errors.username && (<p className="error" >Username is required</p>)}
             </div>
             <div>
-                <label for="password">Password</label><br/>
-                <input type="password" {...register("password", {required: true})}  />
-                {errors.password && (<p className="error" >Password is required</p>)}
-            </div>
+        <label htmlFor="password">Password</label>
+        <br />
+        <input className="passwordInput"
+          type={showPassword ? 'text' : 'password'} // Cambia el tipo según el estado showPassword
+          {...register('password', { required: true })}
+        /><AiFillEyeInvisible className="eye" onClick={handleTogglePassword}/>
+        {errors.password && <p className="error">Password is required</p>}
+      </div>
             <button type="submit" class="btn btn-outline-info">Ingresar</button>
                 </form>
-
+                
         </div>
 
     )

@@ -13,7 +13,6 @@ import EditMarcas from './components/adminComponentes/marcas/EditMarcas';
 import EditProducto from './components/adminComponentes/productos/EditProducto';
 import EditUnidad from './components/adminComponentes/unidades/EditUnidad';
 import ProductoDetail from './components/pages/ProductoDetail';
-import Carrito from './components/context/Carrito';
 import FiltroMarcas from './components/pages/FiltroMarcas';
 import OrdenCompra from './components/adminComponentes/ventas/OrdenCompra';
 import MarcaPanel from './components/adminComponentes/marcas/MarcasPanel';
@@ -23,6 +22,7 @@ import Ventas from './components/adminComponentes/ventas/Ventas';
 import { AuthProvider } from './components/context/AuthContext';
 import Register from './components/pages/Register';
 import ProtectedRoute from './ProtectedRoute';
+import Contacto from './components/pages/Contacto';
 
 
 
@@ -37,7 +37,8 @@ ReactDOM.render(
         <Route path="/productoDetail/:id" element={<ProductoDetail />} />
         <Route path="/unidad/:id" element={<EditUnidad />} />
         <Route path='/:marca' element={<FiltroMarcas />} />
-        <Route path='/carrito' element={<Carrito />} />
+        <Route path='/contacto' element={<Contacto />} />
+
 
 
         <Route element={<ProtectedRoute></ProtectedRoute>}>

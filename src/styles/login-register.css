@@ -20,3 +20,16 @@ input{
 .error {
     color: red;
 }
+
+.eye{
+    color: #1ee2e7;
+    margin-left: 15px;
+}
+
+.eye:hover{
+    cursor: pointer;
+}
+
+.passwordInput{
+    margin-left: 35px;
+}
