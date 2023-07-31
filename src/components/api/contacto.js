@@ -9,3 +9,21 @@ export const contactoRequest = async (data) => {
       throw error; // Lanza el error si ocurre una excepción durante la solicitud
     }
   };
+
+export const seeContactosRquest = async (req, res) => {
+  try {
+    const response = await axios.get("/contacto")
+    return response 
+  } catch (error) {
+    throw error; // Lanza el error si ocurre una excepción durante la solicitud
+  }
+}
+
+export const deleteContactoRequest = async (id) => {
+  try {
+    const response = await axios.delete(`/contacto/${id}`)
+    return response 
+  } catch (error) {
+    throw error; // Lanza el error si ocurre una excepción durante la solicitud
+  }
+}

@@ -18,6 +18,7 @@
 .X{
     width: 30px;
     background-color: red;
+    border-radius: 10px;
 }
 
 .X:hover{
@@ -26,4 +27,16 @@
 
 .✔{
     width: 30px;
+    background-color: rgb(48, 235, 23);
+    border-radius: 10px;
+}
+
+.pendiente{
+    width: 30px;
+    background-color: rgb(92, 243, 248);
+    border-radius: 10px;
+}
+
+.pendiente:hover{
+    background-color: blue;
 }

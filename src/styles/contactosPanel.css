@@ -1,0 +1,23 @@
+.mensaje {
+    max-width: 200px;
+    overflow: auto;
+    word-wrap: break-word;
+
+  }
+.contactosTitle{
+    color: white;
+    margin-top: 30px;
+    margin-left: 40%;
+    margin-bottom: 30px;
+}
+
+.contactosMain{
+    margin-bottom: 40px;
+    margin-right: 40px;
+}
+
+.contactosTable{
+    margin-left: 20px;
+    margin-right: 0px;
+    color: black;
+}

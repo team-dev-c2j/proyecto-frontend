@@ -24,6 +24,7 @@ input{
 .eye{
     color: #1ee2e7;
     margin-left: 15px;
+    margin-bottom: 4px;
 }
 
 .eye:hover{

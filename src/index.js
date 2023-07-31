@@ -23,6 +23,7 @@ import { AuthProvider } from './components/context/AuthContext';
 import Register from './components/pages/Register';
 import ProtectedRoute from './ProtectedRoute';
 import Contacto from './components/pages/Contacto';
+import ContactosPanel from './components/adminComponentes/contactos/contactosPanel';
 
 
 
@@ -43,6 +44,7 @@ ReactDOM.render(
 
         <Route element={<ProtectedRoute></ProtectedRoute>}>
         <Route path="/admin" element={<Admin />} />
+        <Route path="/contactosPanel" element={<ContactosPanel />} />
         <Route path="/Register" element={<Register />} />
         <Route path="/marcas/:id" element={<EditMarcas />} />
         <Route path="/productos/:id" element={<EditProducto />} />

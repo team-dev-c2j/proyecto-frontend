@@ -16,7 +16,7 @@ const OrdenesCompra = () => {
   }, []);
 
   const eliminarOrden = async (ordenId) => {
-    const confirmDelete = window.confirm("¿Estás seguro de eliminar esta marca?");
+    const confirmDelete = window.confirm("¿Estás seguro de eliminar esta orden de compra?");
     if (confirmDelete) {
       try {
         await fetch(`http://127.0.0.1:3000/ordenCompra/${ordenId}`, {
@@ -92,10 +92,16 @@ const OrdenesCompra = () => {
   
 
   const obtenerFecha = (fecha) => {
-    const fechaFormateada = new Date(fecha).toLocaleDateString();
-    return fechaFormateada;
+    if (!fecha || isNaN(new Date(fecha))) {
+      return "Fecha inválida";
+    }
+    const date = new Date(fecha);
+    const dia = date.getDate().toString().padStart(2, '0');
+    const mes = (date.getMonth() + 1).toString().padStart(2, '0');
+    const anio = date.getFullYear();
+    return `${dia}/${mes}/${anio}`;
   };
-
+  
   return (
     <div className="ordenCompraMain">
       <h2 className="ordenCompra">Órdenes de Compra</h2>
@@ -130,10 +136,10 @@ const OrdenesCompra = () => {
               <td>{obtenerFecha(orden.createdAt)}</td>
               <td>
               {orden.estado === "finalizado" && (
-                  <button className="✔" onClick={() => pendienteOrden(orden._id)}>*</button>
+                  <button className="✔" onClick={() => pendienteOrden(orden._id)}>✔</button>
                 )}
                 {orden.estado === "pendiente" && (
-                  <button className="✔" onClick={() => finalizarOrden(orden._id)}>✔</button>
+                  <button className="pendiente" onClick={() => finalizarOrden(orden._id)}>*</button>
                 )}
                 <button className="X" onClick={() => eliminarOrden(orden._id)}>X</button>
               </td>

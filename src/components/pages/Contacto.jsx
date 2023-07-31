@@ -15,6 +15,7 @@ const Contacto = () => {
     alert("Mensaje enviado con éxito");
     reset(); // Resetea el formulario después del envío exitoso
   });
+  const MAX_MESSAGE_LENGTH = 250;
 
   return (
     <div className="contactoForm">
@@ -48,11 +49,19 @@ const Contacto = () => {
           <br />
           <textarea
             className="mensajeInput"
-            {...register("mensaje", { required: true })}
+            {...register("mensaje", {
+              required: true,
+              maxLength: MAX_MESSAGE_LENGTH, // Aplica la restricción de longitud máxima
+            })}
             rows="4"
             cols="50"
           />
-          {errors.mensaje && <p className="error">Ingresar un mensaje</p>}
+          {errors.mensaje?.type === "required" && (
+            <p className="error">Ingresar un mensaje</p>
+          )}
+          {errors.mensaje?.type === "maxLength" && (
+            <p className="error">Mensaje demasiado largo</p>
+          )}
         </div>
         <button type="submit" className="btn btn-outline-info">
           Ingresar

@@ -24,6 +24,9 @@ const Vistas = () => {
                 <Link to={`/productosPanel`}>
                     <button class="btn btn-outline-info">Productos panel</button>
                 </Link>
+                <Link to={`/contactosPanel`}>
+                    <button class="btn btn-outline-info">Contactos panel</button>
+                </Link>
             </div>
         </div>
     )
