@@ -105,3 +105,12 @@ article:hover img:last-child{
     font-size: 20px;
 }
 
+
+/* Estilo para la segunda imagen alternativa */
+.article img.alternative-image {
+    /* Agrega los estilos que desees para la segunda imagen alternativa */
+    /* Por ejemplo, puedes cambiar el tamaño, opacidad, etc. */
+    margin-top: 200px;
+    color: aliceblue;
+}
+  

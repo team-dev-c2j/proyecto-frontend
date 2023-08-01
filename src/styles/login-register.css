@@ -1,0 +1,36 @@
+.login{
+    color: white;
+    margin-top: 80px;
+    margin-bottom: 230px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    text-align: center;
+}
+
+input{
+    margin-bottom: 20px;
+}
+
+.btn.btn-outline-info{
+    margin-top: 20px;
+}
+
+.error {
+    color: red;
+}
+
+.eye{
+    color: #1ee2e7;
+    margin-left: 15px;
+    margin-bottom: 4px;
+}
+
+.eye:hover{
+    cursor: pointer;
+}
+
+.passwordInput{
+    margin-left: 35px;
+}

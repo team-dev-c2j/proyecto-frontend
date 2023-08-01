@@ -1,0 +1,31 @@
+/* Estilos para el contenedor del calendario */
+.my-calendar-container {
+    max-width: 300px;
+    margin: 0 auto;
+    font-family: Arial, sans-serif;
+  }
+  
+  /* Estilos para el calendario */
+  .my-calendar {
+    width: 100%;
+    font-size: 14px;
+    background-color: rgba(203, 206, 204, 0.871);
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+    border: 3px solid #334de2;
+    border-radius: 15px;
+  }
+  
+  /* Estilos para las celdas de día */
+  .my-calendar-day {
+    cursor: pointer;
+    font-size: 14px;
+    padding: 8px;
+    border-radius: 50%;
+  }
+  
+  /* Estilos para las celdas de día cuando están seleccionadas */
+  .my-calendar-day.react-calendar__tile--active {
+    background-color: #007bff;
+    color: #fff;
+  }
+  

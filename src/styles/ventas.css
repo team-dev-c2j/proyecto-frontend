@@ -1,0 +1,48 @@
+.ventasCompraMain{
+    margin-bottom: 40px;
+    margin-right: 40px;
+}
+.ventasCompra{
+    color: white;
+    margin-top: 30px;
+    margin-left: 48%;
+    margin-bottom: 30px;
+}
+
+.ventasCompraTable{
+    margin-left: 20px;
+    margin-right: 0px;
+    color: black;
+}
+
+.X{
+    width: 30px;
+    background-color: red;
+}
+
+.X:hover{
+    background-color: rgb(110, 8, 8);
+}
+
+.✔{
+    width: 30px;
+}
+
+.sumaTotal{
+    float: right;
+    color: rgb(255, 255, 255);
+}
+
+.actualizarVentas{
+    font-size: 15px;
+    padding: 3px 11px; 
+    color: #1ee2e7;
+    border-radius: 10px;
+    border: 1px solid #1ee2e7;
+    background-color: black; 
+    margin-left: 80%;
+}
+
+.actualizarVentas:hover{
+    background-color: blue;
+}

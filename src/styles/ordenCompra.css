@@ -1,0 +1,42 @@
+.ordenCompraMain{
+    margin-bottom: 40px;
+    margin-right: 40px;
+}
+.ordenCompra{
+    color: white;
+    margin-top: 30px;
+    margin-left: 40%;
+    margin-bottom: 30px;
+}
+
+.ordenCompraTable{
+    margin-left: 20px;
+    margin-right: 0px;
+    color: black;
+}
+
+.X{
+    width: 30px;
+    background-color: red;
+    border-radius: 10px;
+}
+
+.X:hover{
+    background-color: rgb(110, 8, 8);
+}
+
+.✔{
+    width: 30px;
+    background-color: rgb(48, 235, 23);
+    border-radius: 10px;
+}
+
+.pendiente{
+    width: 30px;
+    background-color: rgb(92, 243, 248);
+    border-radius: 10px;
+}
+
+.pendiente:hover{
+    background-color: blue;
+}
