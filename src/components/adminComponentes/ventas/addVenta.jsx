@@ -15,8 +15,6 @@ const VentasForm = () => {
     color: '',
     precio: 0,
   });
-  const [comentarios, setComentarios] = useState('');
-  const [estado, setEstado] = useState('pendiente')
   const [total, setTotal] = useState(0);
   const { userNav } = useAuth()
 
@@ -65,8 +63,6 @@ const VentasForm = () => {
         email: emailCliente,
       },
       productos,
-      comentarios,
-      estado,
       total,
     };
 
@@ -87,7 +83,6 @@ const VentasForm = () => {
          setTelefonoCliente('');
          setEmailCliente('');
          setProductos([]);
-         setComentarios('');
          setTotal(0);
       })
       .catch((error) => {
@@ -97,18 +92,6 @@ const VentasForm = () => {
       alert('Venta agregada exitosamente');
   };
 
-  const handleEstadoChange = (event) => {
-    setEstado(event.target.value);
-  };
-
-  function toggleButton() {
-    var button = document.getElementById("toggleButton");
-    if (button.checked) {
-      alert("Encendido");
-      // Aquí puedes agregar la lógica que se ejecutará cuando el botón esté encendido.
-    } else {
-      alert("Apagado")};
-    }
 
   return (
     <div className='addVentasMain'>
@@ -123,6 +106,7 @@ const VentasForm = () => {
           />
         ) : (
           <input
+            style={{ color: "white" }}
             type="text"
             id="vendedor"
             value={userNav}
@@ -193,8 +177,8 @@ const VentasForm = () => {
         />
       </div>
 
-      <button type="button" onClick={handleAddProduct}>
-        Add Product
+      <button className='agregarVentaProducto' type="button" onClick={handleAddProduct}>
+        Agregar Producto
       </button>
 
       {/* Product List */}
@@ -209,29 +193,11 @@ const VentasForm = () => {
           <p className='itemLista'>Precio: {producto.precio}</p>
         </div>
       ))}
+
       <div>
-      <select id="estado" onChange={handleEstadoChange}>
-        <option value="pendiente">Pendiente</option>
-        <option value="finalizado">Finalizado</option>
-      </select>
+        <label htmlFor="total">Total ${total}</label>
       </div>
-      <div>
-        <label>
-          <h5>descontar del stock</h5><input type="checkbox" id="toggleButton" onClick={toggleButton}/> 
-        </label>
-        </div>
-      <div>
-        <label htmlFor="comentarios">Comentarios:</label>
-        <textarea
-          id="comentarios"
-          value={comentarios}
-          onChange={(e) => setComentarios(e.target.value)}
-        />
-      </div>
-      <div>
-        <label htmlFor="total">Total: {total}</label>
-      </div>
-      <button onClick={handleSubmit} type="submit">Submit</button>
+      <button className='agregarVentaProducto' onClick={handleSubmit} type="submit">Agregar venta</button>
     </div>
 
   );

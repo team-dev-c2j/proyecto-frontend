@@ -1,5 +1,5 @@
 .addVentasMain{
-    color: white;
+    color: rgb(47, 107, 238);
     margin-top: 15px;
     margin-bottom: 25px;
     display: flex;
@@ -23,4 +23,19 @@
 .itemLista{
     margin-left: 5px;
     margin-right: 5px;
+}
+
+.agregarVentaProducto{
+    font-size: 15px;
+    padding: 3px 11px; 
+    color: #1ee2e7;
+    border-radius: 10px;
+    border: 1px solid #1ee2e7;
+    background-color: black; 
+    margin-top: 15px;
+    margin-bottom: 15px;
+}
+
+.agregarVentaProducto:hover{
+    background-color: blue;
 }

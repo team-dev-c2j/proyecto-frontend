@@ -27,3 +27,22 @@
 .✔{
     width: 30px;
 }
+
+.sumaTotal{
+    float: right;
+    color: rgb(255, 255, 255);
+}
+
+.actualizarVentas{
+    font-size: 15px;
+    padding: 3px 11px; 
+    color: #1ee2e7;
+    border-radius: 10px;
+    border: 1px solid #1ee2e7;
+    background-color: black; 
+    margin-left: 80%;
+}
+
+.actualizarVentas:hover{
+    background-color: blue;
+}

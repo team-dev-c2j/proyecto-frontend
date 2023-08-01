@@ -60,9 +60,6 @@ function AddProduct() {
         });
 
         alert('Marca agregada exitosamente');
-
-        // Restablecer los campos del formulario
-        window.location.reload();
       } catch (error) {
         console.error('Error al agregar la marca:', error);
       }
