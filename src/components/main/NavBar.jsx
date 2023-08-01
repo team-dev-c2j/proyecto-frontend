@@ -6,11 +6,19 @@ import { useAuth } from '../context/AuthContext';
 import Carrito from '../context/Carrito'
 import { useState } from 'react';
 import { FaCartPlus  } from "react-icons/fa";
-
-
-
+import { logoutRequest } from '../api/auth';
+import { useNavigate } from "react-router-dom";
 
 function Navbar () {
+
+    const navigate = useNavigate()
+    const { setUserNav, setIsAuthenticated } = useAuth()
+    const logout = () => {
+        logoutRequest()
+        setUserNav('')
+        setIsAuthenticated(false)
+        navigate('/login')
+    }
 
     const [mostrarCarrito, setMostrarCarrito] = useState(false);
     const toggleCarrito = () => {
@@ -38,15 +46,21 @@ function Navbar () {
                 <Link to="/login" style={{ textDecoration: 'none' }}>
                     <FaRegUser className='userIcono'/>
 
-                </Link>    
+                </Link>  
                 <h8 className="userNav">{userNav}</h8> 
             </div>
-
+            
+        </div>
+        <div className="logout">
+        {userNav && (
+                
+                <h8 className="logoutChild" onClick={() => logout()}>Cerrar sesión</h8>
+                )}  
         </div>
         <div className='pp'>
-        <div className={`carritoForm ${mostrarCarrito ? "mostrar" : ""}`}>
-            <Carrito cerrarCarrito={toggleCarrito} />
-        </div>
+            <div className={`carritoForm ${mostrarCarrito ? "mostrar" : ""}`}>
+                <Carrito cerrarCarrito={toggleCarrito} />
+            </div>
         </div>
 
 

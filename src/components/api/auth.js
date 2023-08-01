@@ -13,9 +13,18 @@ export const registerRequest = async (user) => {
   export const loginRequest = async (user) => {
     try {
       const response = await axios.post("/login", user);
-      return response.data; // Devuelve los datos de la respuesta si la solicitud se completa con éxito
+      return response.data;
     } catch (error) {
-      throw error; // Lanza el error si ocurre una excepción durante la solicitud
+      throw error; 
+    }
+  };
+
+  export const logoutRequest = async (user) => {
+    try {
+      const response = await axios.get("/logout");
+      return response.data;
+    } catch (error) {
+      throw error; 
     }
   };
 
