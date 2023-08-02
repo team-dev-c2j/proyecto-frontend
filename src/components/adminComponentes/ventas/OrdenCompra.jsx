@@ -127,7 +127,7 @@ const OrdenesCompra = () => {
               <td>
                 {orden.productos.map((producto) => (
                   <div key={producto._id}>
-                    {producto.marca} {producto.modelo} Talle: {producto.talle} Color: {producto.color} Precio: ${producto.precio}
+                    {producto.marca} {producto.modelo} Talle: {producto.talle} Color: {producto.color} Cantidad: {producto.cantidad} Precio: ${producto.precio}
                   </div>
                 ))}
               </td>

@@ -135,11 +135,17 @@
   display: flex;
   flex-wrap: wrap;
   justify-content: center;
-  margin: 5px;
+  margin: 15px;
   flex-direction: row;
 }
 
 .cantidad{
   display: flex;
   justify-content: center;
+  margin-top: 15px;
+  margin-bottom: 15px;
+}
+
+.desProSelected{
+  margin-bottom: 20px;
 }

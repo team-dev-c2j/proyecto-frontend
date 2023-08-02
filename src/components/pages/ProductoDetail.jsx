@@ -14,6 +14,7 @@ const ProductoDetail = (props) => {
   const [coloresUnicos, setColoresUnicos] = useState([]);
   const [unidadSeleccionada, setUnidadSeleccionada] = useState(null);
   const [colorSeleccionado, setColorSeleccionado] = useState(null);
+  const [cantidad, setCantidad] = useState(1)
 
   const { agregarProducto } = useContext(CarritoContext); // Mover la llamada a useContext aquí
 
@@ -103,11 +104,23 @@ const ProductoDetail = (props) => {
         color: unidadSeleccionada.color,
         precio: producto.precio,
         imagen: producto.imageUrls[0],
+        cantidad: cantidad
       };
       agregarProducto(productoSeleccionado);
       alert(`agregaste al carrito ${producto.modelo} talle ${unidadSeleccionada.talle} color ${unidadSeleccionada.talle} precio ${producto.precio}`)
     }
   };
+
+  function masCantidad () {
+    setCantidad(cantidad + 1);
+  };
+
+  function menosCantidad () {
+    if (cantidad !==1) {
+      setCantidad(cantidad - 1);
+    }
+  };
+
   return (
     <div className="app">
       <div className="sliderCard">
@@ -165,10 +178,10 @@ const ProductoDetail = (props) => {
           <div>
             <h5>Cantidad</h5>
             <div className="cantidad">
-            <p>-</p>1<p>+</p>
+            <button class="smallButton" onClick={ menosCantidad }>-</button>{cantidad}<button onClick={ masCantidad } class="smallButton">+</button>
             </div>
             
-            <h5>{producto.modelo} Talle {unidadSeleccionada.talle} color {unidadSeleccionada.color}</h5>
+            <h5 className="desProSelected">{producto.modelo} Talle {unidadSeleccionada.talle} color {unidadSeleccionada.color}</h5>
             <button className="noSelected" onClick={agregarAlCarrito}>agregar al carrito</button>
           </div>
         )}

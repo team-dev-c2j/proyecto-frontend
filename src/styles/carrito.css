@@ -143,6 +143,8 @@ button:active {
     border-radius: 10px;
     border: 1px solid #1ee2e7;
     background-color: black;
+    margin-left: 10px;
+    margin-right: 10px;
   }
 
   .smallButton:hover {
