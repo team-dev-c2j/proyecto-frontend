@@ -71,11 +71,25 @@ const ProductoDetail = (props) => {
     return <p>Cargando...</p>;
   }
 
+  let toShow; // Declarar toShow fuera del bloque if-else
+
+  if (producto.imageUrls.length === 1) {
+    toShow = 1;
+  } 
+
+  if (producto.imageUrls.length === 2) {
+    toShow = 2;
+  } 
+
+  if (producto.imageUrls.length > 2) {
+    toShow = 3;
+  } 
+
   const settings = {
     dots: true,
     infinite: true,
     speed: 500,
-    slidesToShow: 2,
+    slidesToShow: toShow,
     slidesToScroll: 1,
   };
 
@@ -96,6 +110,7 @@ const ProductoDetail = (props) => {
   };
   return (
     <div className="app">
+      <div className="sliderCard">
       <Slider {...settings}>
         {producto.imageUrls.map((imageUrl, index) => (
           <div className="cardDetail" key={index}>
@@ -105,26 +120,28 @@ const ProductoDetail = (props) => {
           </div>
         ))}
       </Slider>
+      </div>
+
       <div className="before-after"></div>
       <div className="detalles">
-        <h3>{producto.modelo}</h3>
-        <h3>${producto.precio}</h3>
+        <h3>{producto.modelo} ${producto.precio}</h3>
         <div>
-          <p>Colores:</p>
+          <p>Seleccionar color</p>
           {coloresUnicos.map((color, index) => (
-            <button 
+            <button
               key={index}
               onClick={() => handleColorClick(color)}
-              className={color === colorSeleccionado ? "selected" : ""}
+              className={color === colorSeleccionado ? "selected" : "noSelected"}
             >
               {color}
             </button>
           ))}
         </div>
         {colorSeleccionado && (
-          <div>
+          <div className="buttonTalleColorContainer">
             <p>Unidades con color {colorSeleccionado}:</p>
             <h6>Talle:</h6>
+            <div className="talleCard">
             {unidadesFiltradas.map((unidad, index) => (
               <div id="buttonTalleColor" key={index}>
                 <button
@@ -133,21 +150,26 @@ const ProductoDetail = (props) => {
                     unidad.talle === unidadSeleccionada?.talle &&
                     unidad.color === unidadSeleccionada?.color
                       ? "selected"
-                      : ""
+                      : "noSelected"
                   }
                 >
                   {unidad.talle}
                 </button>
               </div>
             ))}
+            </div>
+
           </div>
         )}
         {unidadSeleccionada && (
           <div>
-            <h3>Modelo seleccionado: {producto.modelo}</h3>
-            <h3>Talle seleccionado: {unidadSeleccionada.talle}</h3>
-            <h3>Color seleccionado: {unidadSeleccionada.color}</h3>
-            <button onClick={agregarAlCarrito}>agregar al carrito</button>
+            <h5>Cantidad</h5>
+            <div className="cantidad">
+            <p>-</p>1<p>+</p>
+            </div>
+            
+            <h5>{producto.modelo} Talle {unidadSeleccionada.talle} color {unidadSeleccionada.color}</h5>
+            <button className="noSelected" onClick={agregarAlCarrito}>agregar al carrito</button>
           </div>
         )}
       </div>
