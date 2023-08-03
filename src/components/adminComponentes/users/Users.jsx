@@ -1,8 +1,8 @@
 import React, { useState, useEffect } from "react";
-import { deleteUserRequest, getUsersRequest } from "../../api/auth";
 import "../../../styles/user.css";
+import { deleteUserRequest, getUsersRequest } from "../../api/auth";
 
-const Users = () => {
+const Users = ({ userCreated }) => {
   const [users, setUsers] = useState([]);
 
   const deleteUser = (id) => {
@@ -10,7 +10,6 @@ const Users = () => {
     if (confirmDelete) {
       deleteUserRequest(id)
         .then(() => {
-          // Una vez que se ha eliminado el usuario con éxito, volvemos a obtener la lista actualizada de usuarios
           getUsersRequest()
             .then((response) => {
               setUsers(response);
@@ -36,7 +35,7 @@ const Users = () => {
       }
     };
     fetchUsers();
-  }, []); // El array vacío [] asegura que el efecto se ejecute solo una vez, al montar el componente.
+  }, [userCreated]); // La dependencia userCreated hace que el efecto se ejecute cada vez que userCreated cambie.
 
   return (
     <div className="tableMain">
