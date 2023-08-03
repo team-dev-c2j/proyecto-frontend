@@ -28,4 +28,22 @@ export const registerRequest = async (user) => {
     }
   };
 
+  export const getUsersRequest = async () => {
+    try {
+      const response = await axios.get("/users");
+      return response.data;
+    } catch (error) {
+      throw error; 
+    }
+  };
+
+  export const deleteUserRequest = async (id) => {
+    try {
+      const response = await axios.delete(`/users/${id}`)
+      return response 
+    } catch (error) {
+      throw error; // Lanza el error si ocurre una excepción durante la solicitud
+    }
+  }
+
 export const verifyTokenRequest = () => axios.get(`/verify`)

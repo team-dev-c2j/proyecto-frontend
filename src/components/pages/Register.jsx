@@ -1,9 +1,9 @@
 import "../../styles/login-register.css"
 import { useForm } from "react-hook-form"
 import { useAuth } from "../context/AuthContext"
+import Users from "../adminComponentes/users/Users"
 
 function Register () {
-
     const { register, handleSubmit, formState: { errors } } = useForm()
     const { signup, errors: registerErrors } = useAuth()
 
@@ -35,7 +35,7 @@ function Register () {
             </div>
             <button type="submit" class="btn btn-outline-info">Registrar</button>
                 </form>
-
+            <Users></Users>
         </div>
 
     )
