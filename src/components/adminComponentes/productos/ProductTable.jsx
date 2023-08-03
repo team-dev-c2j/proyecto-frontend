@@ -1,14 +1,18 @@
 import React, { useEffect, useState } from 'react';
 import { Link } from 'react-router-dom';
 import '../../../styles/table.css';
+import { useAuth } from '../../context/AuthContext';
 
 function ProductTable() {
   const [products, setProducts] = useState([]);
   const [expandedProduct, setExpandedProduct] = useState(null);
   const [matchingUnits, setMatchingUnits] = useState([]);
   const [loadingMatchingUnits, setLoadingMatchingUnits] = useState(false); // Estado de carga de las unidades coincidentes
+  const { userNav } = useAuth();
 
   useEffect(() => {
+
+
     const fetchProducts = async () => {
       try {
         const response = await fetch('http://127.0.0.1:3000/products');
@@ -70,7 +74,8 @@ function ProductTable() {
                       <button className='buttonTable' onClick={() => toggleDetails(product.modelo)}>
                         {product.modelo} {product.marca}
                       </button>
-                      <Link to={`/productos/${product._id}`}><button className='editBoton'>Edit</button></Link>
+                      <Link to={`/productos/${product._id}`}>
+                      {userNav === "juli" && <button className="editBoton">Edit</button>}</Link>
                     </td>
                   </tr>
                   {expandedProduct === product.modelo && (
@@ -92,7 +97,12 @@ function ProductTable() {
                                 <tr key={unit._id}>
                                   <td>{unit.color}</td>
                                   <td>{unit.talle}</td>
-                                  <td>{unit.stock}<Link to={`/unidad/${unit._id}`}><button className='editBoton'>Edit</button></Link></td>
+                                  <td>
+                                    {unit.stock}
+                                    <Link to={`/unidad/${unit._id}`}>
+                                      {userNav === "juli" && <button className="editBoton">Edit</button>}
+                                    </Link>
+                                  </td>
                                 </tr>
                               ))}
                             </tbody>

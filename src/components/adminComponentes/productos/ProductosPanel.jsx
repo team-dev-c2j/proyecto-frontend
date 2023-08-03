@@ -1,6 +1,6 @@
 import AddUnidad from "../unidades/AddUnidad";
 import AddProduct from "./AddProduct";
-
+  
 
 
 const ProductosPanel = () => {
