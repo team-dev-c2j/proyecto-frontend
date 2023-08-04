@@ -2,6 +2,7 @@ import React, { useState, useEffect } from 'react';
 import "../../../styles/addVentas.css"
 import { useAuth } from '../../context/AuthContext';
 import { getMarcasRequest } from '../../api/marcas';
+import { getModelosRequest } from '../../api/modelos';
 
 const VentasForm = () => {
   const [vendedor, setVendedor] = useState('');
@@ -20,6 +21,8 @@ const VentasForm = () => {
   const [total, setTotal] = useState(0);
   const { userNav } = useAuth()
   const [ marcasApi, setMarcasApi ] = useState([])
+  const [modelosApi, setModelosApi] = useState([]);
+
 
   useEffect(() => {
     const fetchMarcas = async () => {
@@ -45,22 +48,35 @@ const VentasForm = () => {
   }, [userNav]);
 
 
-  const handleProductChange = (e) => {
+  const handleProductChange = async (e) => {
     const { name, value } = e.target;
   
     if (name === "marca") {
-      // Encuentra el objeto de marca correspondiente
       const selectedMarca = marcasApi.find((marcaObj) => marcaObj._id === value);
       setProductoActual((prevProduct) => ({
         ...prevProduct,
-        marca: selectedMarca, // Guardar todo el objeto de la marca
+        marca: selectedMarca,
       }));
+  
+      try {
+        // Obtener los modelos disponibles para la marca seleccionada
+        const modelos = await getModelosRequest(value); // Asegúrate de tener una función getModelosRequest para obtener los modelos según la marca.
+        console.log(modelos)
+        if (Array.isArray(modelos.results)) {
+          setModelosApi(modelos.results);
+        } else {
+          console.error('La respuesta de la API de modelos no es un array:', modelos);
+        }
+      } catch (error) {
+        console.error('Error al obtener los modelos:', error);
+      }
     } else if (name === "precio") {
       setProductoActual((prevProduct) => ({ ...prevProduct, [name]: parseFloat(value) }));
     } else {
       setProductoActual((prevProduct) => ({ ...prevProduct, [name]: value }));
     }
   };
+  
   
 const handleAddProduct = () => {
   // Guardar solo el nombre de la marca en productoActual antes de agregarlo a productos
@@ -213,21 +229,23 @@ const handleAddProduct = () => {
           <p>Cargando marcas...</p>
         )}
       </label>
-        <label htmlFor="modelo">Modelo Producto:</label>
-        <input
-          type="text"
+            <label>
+        Modelo:
+        <select
           name="modelo"
+          onChange={handleProductChange}
+          required
           value={productoActual.modelo}
-          onChange={handleProductChange}
-        />
-        <br />
-                <label htmlFor="talle">Talle:</label>
-        <input
-          type="text"
-          name="talle"
-          value={productoActual.talle}
-          onChange={handleProductChange}
-        />
+        >
+          <option value="">Seleccione un modelo</option>
+          {modelosApi.map((modeloObj) => (
+            <option key={modeloObj._id} value={modeloObj.modelo}>
+              {modeloObj.modelo}
+            </option>
+          ))}
+        </select>
+      </label>
+
                 <label htmlFor="color">Color:</label>
         <input
           type="text"
@@ -253,8 +271,8 @@ const handleAddProduct = () => {
         <div className="productosLista" key={index}>
           <hr />
           <p className='itemLista'>Unidades {producto.unidades}</p>
-          <p className='itemLista'>Modelo: {producto.modelo}</p>
           <p className='itemLista'>Marca: {producto.marca}</p>
+          <p className='itemLista'>Modelo: {producto.modelo}</p>
           <p className='itemLista'>Talle: {producto.talle}</p>
           <p className='itemLista'>Color: {producto.color}</p>
           <p className='itemLista'>Precio: {producto.precio}</p>
