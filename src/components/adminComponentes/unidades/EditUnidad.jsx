@@ -58,8 +58,7 @@ function EditUnidad () {
             });
     
             alert("Unidades actualizadas exitosamente");
-    
-            window.location.reload();
+  
         } catch (error) {
             console.error("Error al actualizar el producto:", error);
         }

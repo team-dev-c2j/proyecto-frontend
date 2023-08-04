@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import "../../../styles/addVentas.css"
 import { useAuth } from '../../context/AuthContext';
+import { getMarcasRequest } from '../../api/marcas';
 
 const VentasForm = () => {
   const [vendedor, setVendedor] = useState('');
@@ -9,6 +10,7 @@ const VentasForm = () => {
   const [emailCliente, setEmailCliente] = useState('');
   const [productos, setProductos] = useState([]);
   const [productoActual, setProductoActual] = useState({
+    unidades: 1,
     modelo: '',
     marca: '',
     talle: '',
@@ -17,6 +19,26 @@ const VentasForm = () => {
   });
   const [total, setTotal] = useState(0);
   const { userNav } = useAuth()
+  const [ marcasApi, setMarcasApi ] = useState([])
+
+  useEffect(() => {
+    const fetchMarcas = async () => {
+      try {
+        const mar = await getMarcasRequest();
+        if (Array.isArray(mar.results)) {
+          setMarcasApi(mar.results);
+        } else {
+          console.error('La respuesta de la API no es un array:', mar);
+        }
+      } catch (error) {
+        console.error('Error al obtener las marcas:', error);
+      }
+    };
+  
+    fetchMarcas();
+    
+  }, []);
+ 
 
   useEffect(() => {
     setVendedor(userNav);
@@ -25,15 +47,37 @@ const VentasForm = () => {
 
   const handleProductChange = (e) => {
     const { name, value } = e.target;
-    if (name === "precio") {
+  
+    if (name === "marca") {
+      // Encuentra el objeto de marca correspondiente
+      const selectedMarca = marcasApi.find((marcaObj) => marcaObj._id === value);
+      setProductoActual((prevProduct) => ({
+        ...prevProduct,
+        marca: selectedMarca, // Guardar todo el objeto de la marca
+      }));
+    } else if (name === "precio") {
       setProductoActual((prevProduct) => ({ ...prevProduct, [name]: parseFloat(value) }));
     } else {
       setProductoActual((prevProduct) => ({ ...prevProduct, [name]: value }));
     }
   };
+  
   const handleAddProduct = () => {
-    setProductos((prevProducts) => [...prevProducts, productoActual]);
+    // Guardar solo el nombre de la marca en productoActual antes de agregarlo a productos
+    setProductoActual((prevProduct) => ({
+      ...prevProduct,
+      marca: prevProduct.marca.marca,
+    }));
+  
+    // Crear una copia de productoActual, extrayendo solo el nombre de la marca, y agregarla a la lista de productos
+    setProductos((prevProducts) => [
+      ...prevProducts,
+      { ...productoActual, marca: productoActual.marca.marca },
+    ]);
+  
+    // Reiniciar productoActual
     setProductoActual({
+      unidades: 1,
       modelo: '',
       marca: '',
       talle: '',
@@ -41,6 +85,8 @@ const VentasForm = () => {
       precio: 0,
     });
   };
+  
+  
 
   useEffect(() => {
     const calculatedTotal = productos.reduce((acc, producto) => acc + producto.precio, 0);
@@ -140,6 +186,33 @@ const VentasForm = () => {
 
       {/* Product Details */}
       <div>
+      <label htmlFor="unidades">Unidades:</label>
+        <input
+          type="number"
+          name="unidades"
+          value={productoActual.unidades}
+          onChange={handleProductChange}
+        />
+      <label>
+        Marca:
+        {Array.isArray(marcasApi) ? (
+          <select
+            name="marca" // Asegúrate de asignar el nombre "marca" al selector
+            onChange={handleProductChange}
+            required
+            value={productoActual.marca ? productoActual.marca._id : ''} // Utiliza el _id de la marca como valor
+          >
+            <option value="">Seleccione una marca</option>
+            {marcasApi.map((marcaObj) => (
+              <option key={marcaObj._id} value={marcaObj._id}>
+                {marcaObj.marca}
+              </option>
+            ))}
+          </select>
+        ) : (
+          <p>Cargando marcas...</p>
+        )}
+      </label>
         <label htmlFor="modelo">Modelo Producto:</label>
         <input
           type="text"
@@ -147,13 +220,7 @@ const VentasForm = () => {
           value={productoActual.modelo}
           onChange={handleProductChange}
         />
-                <label htmlFor="marca">Marca:</label>
-        <input
-          type="text"
-          name="marca"
-          value={productoActual.marca}
-          onChange={handleProductChange}
-        />
+        <br />
                 <label htmlFor="talle">Talle:</label>
         <input
           type="text"
@@ -172,7 +239,7 @@ const VentasForm = () => {
         <input
           type="number"
           name="precio"
-          value={productoActual.precio}
+          value={productoActual.precio * productoActual.unidades}
           onChange={handleProductChange}
         />
       </div>
@@ -185,9 +252,9 @@ const VentasForm = () => {
       {productos.map((producto, index) => (
         <div className="productosLista" key={index}>
           <hr />
-          <p className='itemLista'>Product {index + 1}</p>
+          <p className='itemLista'>Unidades {producto.unidades}</p>
           <p className='itemLista'>Modelo: {producto.modelo}</p>
-          <p className='itemLista'>Marca: {producto.marca}</p>
+          <p className='itemLista'>Marca: {producto.marca.marca}</p>
           <p className='itemLista'>Talle: {producto.talle}</p>
           <p className='itemLista'>Color: {producto.color}</p>
           <p className='itemLista'>Precio: {producto.precio}</p>
