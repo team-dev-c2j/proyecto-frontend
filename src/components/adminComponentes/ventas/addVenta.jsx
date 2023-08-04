@@ -62,30 +62,30 @@ const VentasForm = () => {
     }
   };
   
-  const handleAddProduct = () => {
-    // Guardar solo el nombre de la marca en productoActual antes de agregarlo a productos
-    setProductoActual((prevProduct) => ({
-      ...prevProduct,
-      marca: prevProduct.marca.marca,
-    }));
-  
-    // Crear una copia de productoActual, extrayendo solo el nombre de la marca, y agregarla a la lista de productos
-    setProductos((prevProducts) => [
-      ...prevProducts,
-      { ...productoActual, marca: productoActual.marca.marca },
-    ]);
-  
-    // Reiniciar productoActual
-    setProductoActual({
-      unidades: 1,
-      modelo: '',
-      marca: '',
-      talle: '',
-      color: '',
-      precio: 0,
-    });
-  };
-  
+const handleAddProduct = () => {
+  // Guardar solo el nombre de la marca en productoActual antes de agregarlo a productos
+  setProductoActual((prevProduct) => ({
+    ...prevProduct,
+    marca: prevProduct.marca.marca,
+  }));
+
+  // Crear una copia de productoActual, extrayendo solo el nombre de la marca, y agregarla a la lista de productos
+  setProductos((prevProducts) => [
+    ...prevProducts,
+    { ...productoActual, marca: productoActual.marca.marca },
+  ]);
+
+  // Reiniciar productoActual
+  setProductoActual({
+    unidades: 1,
+    modelo: '',
+    marca: '',
+    talle: '',
+    color: '',
+    precio: 0,
+  });
+};
+
   
 
   useEffect(() => {
@@ -254,7 +254,7 @@ const VentasForm = () => {
           <hr />
           <p className='itemLista'>Unidades {producto.unidades}</p>
           <p className='itemLista'>Modelo: {producto.modelo}</p>
-          <p className='itemLista'>Marca: {producto.marca.marca}</p>
+          <p className='itemLista'>Marca: {producto.marca}</p>
           <p className='itemLista'>Talle: {producto.talle}</p>
           <p className='itemLista'>Color: {producto.color}</p>
           <p className='itemLista'>Precio: {producto.precio}</p>
