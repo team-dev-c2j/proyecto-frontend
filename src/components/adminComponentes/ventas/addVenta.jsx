@@ -53,22 +53,29 @@ const VentasForm = () => {
   
     if (name === "marca") {
       const selectedMarca = marcasApi.find((marcaObj) => marcaObj._id === value);
-      setProductoActual((prevProduct) => ({
-        ...prevProduct,
-        marca: selectedMarca,
-      }));
-      console.log(selectedMarca.marca);
-      try {
-        // Obtener los modelos disponibles para la marca seleccionada
-        const modelos = await getModelosRequest(selectedMarca.marca);
-        console.log(modelos);
-        if (Array.isArray(modelos)) { // Ajustamos el chequeo de si es un array
-          setModelosApi(modelos);
-        } else {
-          console.error('La respuesta de la API de modelos no es un array:', modelos);
+      if (selectedMarca) {
+        setProductoActual((prevProduct) => ({
+          ...prevProduct,
+          marca: selectedMarca,
+        }));
+        console.log(selectedMarca.marca);
+        try {
+          // Obtener los modelos disponibles para la marca seleccionada
+          const modelos = await getModelosRequest(selectedMarca.marca);
+          console.log(modelos);
+          if (Array.isArray(modelos)) {
+            setModelosApi(modelos);
+          } else {
+            console.error('La respuesta de la API de modelos no es un array:', modelos);
+          }
+        } catch (error) {
+          console.error('Error al obtener los modelos:', error);
         }
-      } catch (error) {
-        console.error('Error al obtener los modelos:', error);
+      } else {
+        setProductoActual((prevProduct) => ({
+          ...prevProduct,
+          marca: '', // Establecemos la marca en una cadena vacía si no se encuentra en el array
+        }));
       }
     } else if (name === "precio") {
       setProductoActual((prevProduct) => ({ ...prevProduct, [name]: parseFloat(value) }));
@@ -76,6 +83,7 @@ const VentasForm = () => {
       setProductoActual((prevProduct) => ({ ...prevProduct, [name]: value }));
     }
   };
+  
   
   
 const handleAddProduct = () => {
