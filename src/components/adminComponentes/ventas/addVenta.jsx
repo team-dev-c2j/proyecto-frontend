@@ -57,13 +57,13 @@ const VentasForm = () => {
         ...prevProduct,
         marca: selectedMarca,
       }));
-  
+      console.log(selectedMarca.marca);
       try {
         // Obtener los modelos disponibles para la marca seleccionada
-        const modelos = await getModelosRequest(value); // Asegúrate de tener una función getModelosRequest para obtener los modelos según la marca.
-        console.log(modelos)
-        if (Array.isArray(modelos.results)) {
-          setModelosApi(modelos.results);
+        const modelos = await getModelosRequest(selectedMarca.marca);
+        console.log(modelos);
+        if (Array.isArray(modelos)) { // Ajustamos el chequeo de si es un array
+          setModelosApi(modelos);
         } else {
           console.error('La respuesta de la API de modelos no es un array:', modelos);
         }
