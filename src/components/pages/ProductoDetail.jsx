@@ -40,9 +40,10 @@ const ProductoDetail = (props) => {
     if (producto && producto.modelo) {
       const fetchUnidades = async () => {
         try {
-          const response = await fetch(`http://localhost:3000/unidades/modelo/${producto.modelo}`);
+          const response = await fetch(`http://localhost:3000/unidades/modelo/${producto.modelo}/marca/${producto.marca}`);
           const data2 = await response.json();
           setUnidades(data2);
+          console.log(data2)
         } catch (error) {
           console.log(error);
         }

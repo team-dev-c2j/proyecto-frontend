@@ -81,7 +81,7 @@ function AddUnidad() {
         });
 
         alert('Producto agregado exitosamente');
-
+        setMarca('')
         setModeloUnidad('');
         setColor('');
         setTalle('');
