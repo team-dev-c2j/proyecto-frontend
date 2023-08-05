@@ -3,6 +3,7 @@ import "../../../styles/addVentas.css"
 import { useAuth } from '../../context/AuthContext';
 import { getMarcasRequest } from '../../api/marcas';
 import { getModelosRequest } from '../../api/modelos';
+import { getColoresRequest } from '../../api/unidades';
 
 const VentasForm = () => {
   const [vendedor, setVendedor] = useState('');
@@ -22,6 +23,8 @@ const VentasForm = () => {
   const { userNav } = useAuth()
   const [ marcasApi, setMarcasApi ] = useState([])
   const [modelosApi, setModelosApi] = useState([]);
+  const [coloresApi, setColoresApi] = useState([]);
+  const [colorSeleccionado, setColorSeleccionado] = useState('');
 
 
   useEffect(() => {
@@ -48,41 +51,57 @@ const VentasForm = () => {
   }, [userNav]);
 
 
-  const handleProductChange = async (e) => {
-    const { name, value } = e.target;
-  
-    if (name === "marca") {
-      const selectedMarca = marcasApi.find((marcaObj) => marcaObj._id === value);
-      if (selectedMarca) {
-        setProductoActual((prevProduct) => ({
-          ...prevProduct,
-          marca: selectedMarca,
-        }));
-        console.log(selectedMarca.marca);
-        try {
-          // Obtener los modelos disponibles para la marca seleccionada
-          const modelos = await getModelosRequest(selectedMarca.marca);
-          console.log(modelos);
-          if (Array.isArray(modelos)) {
-            setModelosApi(modelos);
-          } else {
-            console.error('La respuesta de la API de modelos no es un array:', modelos);
-          }
-        } catch (error) {
-          console.error('Error al obtener los modelos:', error);
+const handleProductChange = async (e) => {
+  const { name, value } = e.target;
+
+  if (name === "marca") {
+    const selectedMarca = marcasApi.find((marcaObj) => marcaObj._id === value);
+    if (selectedMarca) {
+      setProductoActual((prevProduct) => ({
+        ...prevProduct,
+        marca: selectedMarca.marca, // Pasar solo el nombre de la marca
+        modelo: '', // Reiniciar el modelo cuando cambia la marca
+        color: '', // Reiniciar el color cuando cambia la marca
+      }));
+
+      try {
+        // Obtener los modelos disponibles para la marca seleccionada
+        const modelos = await getModelosRequest(selectedMarca.marca);
+        if (Array.isArray(modelos)) {
+          setModelosApi(modelos);
+        } else {
+          console.error('La respuesta de la API de modelos no es un array:', modelos);
         }
-      } else {
-        setProductoActual((prevProduct) => ({
-          ...prevProduct,
-          marca: '', // Establecemos la marca en una cadena vacía si no se encuentra en el array
-        }));
+      } catch (error) {
+        console.error('Error al obtener los modelos:', error);
       }
-    } else if (name === "precio") {
-      setProductoActual((prevProduct) => ({ ...prevProduct, [name]: parseFloat(value) }));
+
+      // Reiniciar los colores disponibles y el color seleccionado cuando cambia la marca
+      setColoresApi([]);
+      setColorSeleccionado('');
     } else {
-      setProductoActual((prevProduct) => ({ ...prevProduct, [name]: value }));
+      setProductoActual((prevProduct) => ({
+        ...prevProduct,
+        marca: value, // Establecer la marca en una cadena vacía si no se encuentra en el array
+        modelo: '', // Reiniciar el modelo cuando cambia la marca
+        color: '', // Reiniciar el color cuando cambia la marca
+      }));
     }
-  };
+  } else if (name === "modelo") {
+    // Obtener los colores disponibles para la marca y el modelo seleccionados
+    const colores = await getColoresRequest(productoActual.marca, value);
+    setColoresApi(colores);
+    setColorSeleccionado(''); // Reiniciar el color seleccionado al cambiar el modelo
+    setProductoActual((prevProduct) => ({ ...prevProduct, [name]: value, color: '' }));
+  } else if (name === "color") {
+    setProductoActual((prevProduct) => ({ ...prevProduct, [name]: value }));
+  } else if (name === "precio") {
+    setProductoActual((prevProduct) => ({ ...prevProduct, [name]: parseFloat(value) }));
+  } else {
+    setProductoActual((prevProduct) => ({ ...prevProduct, [name]: value }));
+  }
+};
+
   
   
   
@@ -254,13 +273,21 @@ const handleAddProduct = () => {
         </select>
       </label>
 
-                <label htmlFor="color">Color:</label>
-        <input
-          type="text"
-          name="color"
-          value={productoActual.color}
-          onChange={handleProductChange}
-        />
+      <label htmlFor="color">Color:</label>
+<select
+  name="color"
+  value={colorSeleccionado}
+  onChange={(e) => setColorSeleccionado(e.target.value)}
+>
+  <option value="">Seleccione un color</option>
+  {[...new Set(coloresApi.map((color) => color.color))].map((color) => (
+    <option key={color} value={color}>
+      {color}
+    </option>
+  ))}
+</select>
+
+
                 <label htmlFor="precio">Precio:</label>
         <input
           type="number"
