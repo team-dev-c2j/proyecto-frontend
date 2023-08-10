@@ -109,7 +109,7 @@ const Ventas = () => {
                 <td>
                     {venta.productos.map((producto) => (
                     <div key={producto._id}>
-                        {producto.marca} {producto.modelo} Talle: {producto.talle} Color: {producto.color} Precio: ${producto.precio}
+                        U: {producto.unidades} {producto.marca} {producto.modelo} T: {producto.talle} Color: {producto.color} $/U {producto.precio}
                     </div>
                     ))}
                 </td>
