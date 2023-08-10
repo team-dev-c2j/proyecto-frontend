@@ -13,3 +13,12 @@ const instance = axios.create({
       throw new Error('Error al obtener las unidades:', error);
     }
   };
+
+  export const getStockRequest = async (marca, modelo, color) => {
+    try {
+      const response = await instance.get(`unidades/modelo/${modelo}/marca/${marca}/color/${color}`);
+      return response.data;
+    } catch (error) {
+      throw new Error('Error al obtener las unidades:', error);
+    }
+  };
