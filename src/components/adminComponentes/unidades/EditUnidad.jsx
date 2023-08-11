@@ -44,7 +44,7 @@ function EditUnidad () {
     
     
         try {
-            await fetch(`http://localhost:3000/unidades/${id}`, {
+            await fetch(`http://localhost:3000/unidades/edit/${id}`, {
               method: "PUT",
               headers: {
                 "Content-Type": "application/json",

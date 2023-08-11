@@ -22,3 +22,23 @@ const instance = axios.create({
       throw new Error('Error al obtener las unidades:', error);
     }
   };
+
+
+  export const deleteStockRequest = async (marca, modeloUnidad, color, talle, unidadesDelete) => {
+    console.log('debug')
+    try {
+      const response = await instance.put('unidades/unidadStock', {
+        marca,
+        modeloUnidad,
+        color,
+        talle,
+        unidadesDelete
+      });
+      return response.data;
+    } catch (error) {
+      throw new Error('Error al eliminar unidades de stock:', error);
+    }
+  };
+  
+
+  

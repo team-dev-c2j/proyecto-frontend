@@ -3,7 +3,7 @@ import "../../../styles/addVentas.css"
 import { useAuth } from '../../context/AuthContext';
 import { getMarcasRequest } from '../../api/marcas';
 import { getModelosRequest } from '../../api/modelos';
-import { getColoresRequest } from '../../api/unidades';
+import { getColoresRequest, deleteStockRequest } from '../../api/unidades';
 
 const VentasForm = () => {
   const [vendedor, setVendedor] = useState('');
@@ -181,15 +181,14 @@ const VentasForm = () => {
     setTotal(calculatedTotal);
   }, [productos]);
 
-  const handleSubmit = (event) => {
+  const handleSubmit = async (event) => {
     event.preventDefault();
-
+  
     if (productos.length === 0) {
-        alert('Debes agregar al menos un producto antes de enviar la venta.');
-        return;
-      }
-
-      
+      alert('Debes agregar al menos un producto antes de enviar la venta.');
+      return;
+    }
+  
     const newVenta = {
       vendedor,
       cliente: {
@@ -200,32 +199,42 @@ const VentasForm = () => {
       productos,
       total,
     };
-
-    // Replace 'YOUR_BACKEND_API_URL' with your actual backend API URL.
-    fetch('http://localhost:3000/ventas', {
-      method: 'POST',
-      headers: {
-        'Content-Type': 'application/json',
-      },
-      body: JSON.stringify(newVenta),
-    })
-      .then((response) => response.json())
-      .then((data) => {
-        // Handle the response from the server if needed.
-        console.log(data);
-        // Reset form fields after successful submission if required.
-         setNombreCliente('');
-         setTelefonoCliente('');
-         setEmailCliente('');
-         setProductos([]);
-         setTotal(0);
-      })
-      .catch((error) => {
-        console.error('Error:', error);
+  
+    try {
+      // Hacer la solicitud para agregar la venta
+      const response = await fetch('http://localhost:3000/ventas', {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+        },
+        body: JSON.stringify(newVenta),
       });
-
+      const data = await response.json();
+  
+      console.log(data);
+  
+      // Actualizar el stock para restar las unidades vendidas
+      for (const producto of productos) {
+        const { modelo, marca, color, talle, unidades } = producto;
+        try {
+          await deleteStockRequest(marca, modelo, color, talle, unidades);
+        } catch (error) {
+          console.error('Error al actualizar el stock:', error);
+        }
+      }
+  
+      // Limpiar los campos después de una venta exitosa
+      setNombreCliente('');
+      setTelefonoCliente('');
+      setEmailCliente('');
+      setProductos([]);
+      setTotal(0);
       alert('Venta agregada exitosamente');
+    } catch (error) {
+      console.error('Error:', error);
+    }
   };
+  
 
 
   return (
