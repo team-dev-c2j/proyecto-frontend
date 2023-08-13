@@ -149,12 +149,9 @@ const VentasForm = () => {
       setProductoActual((prevProduct) => ({ ...prevProduct, [name]: value }));
     }
   };
-  
 
-  
-  
   const handleAddProduct = () => {
-    // Agregar directamente productoActual a la lista de productos
+
     setProductos((prevProducts) => [
       ...prevProducts,
       { ...productoActual, color: colorSeleccionado }, // Usar el estado colorSeleccionado
@@ -202,17 +199,16 @@ const VentasForm = () => {
   
     try {
       // Hacer la solicitud para agregar la venta
-      const response = await fetch('http://localhost:3000/ventas', {
+      await fetch('http://localhost:3000/ventas', {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json',
         },
         body: JSON.stringify(newVenta),
       });
-      const data = await response.json();
-  
-      console.log(data);
-  
+
+      
+
       // Actualizar el stock para restar las unidades vendidas
       for (const producto of productos) {
         const { modelo, marca, color, talle, unidades } = producto;
@@ -352,7 +348,7 @@ const VentasForm = () => {
   <option value="">Seleccione un talle</option>
   {coloresApi.map((color) => (
     <option key={color._id} value={color.talle}>
-      {color.talle}
+      {color.talle} - Stock: {color.stock}
     </option>
   ))}
 </select>
@@ -374,6 +370,7 @@ const VentasForm = () => {
           <p className='itemLista'>Color: {producto.color}</p>
           <p className='itemLista'>Precio: {producto.precio}</p>
           <p className='itemLista'>Precio Total: {producto.precio * producto.unidades}</p> {/* Nuevo campo de Precio Total */}
+        
         </div>
       ))}
 
