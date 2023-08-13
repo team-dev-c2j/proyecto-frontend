@@ -139,7 +139,7 @@ function AddProduct() {
           <div key={index}>
             <label>
               Imagen {index + 1}:
-              <input type="file" onChange={(event) => handleFileChange(event, index)} required />
+              <input className="selectedImage" type="file" onChange={(event) => handleFileChange(event, index)} required />
             </label>
             {file && (
               <img

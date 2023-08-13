@@ -58,3 +58,7 @@
 .container.mt-5 {
   margin-bottom: 50px;
 }
+
+.selectedImage{
+  height: 40px;
+}

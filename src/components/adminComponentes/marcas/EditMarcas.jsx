@@ -117,7 +117,7 @@ function EditMarcas(props) {
                     <h4>{marcaData.marca}</h4>
                   </div>
                   <div className="form-group mb-1">
-                    <input type="file" onChange={handleFileChange} />
+                    <input className="selectedImage" type="file" onChange={handleFileChange} />
                     {imageUrl && (
                       <div>
                         <h6>Nueva imagen</h6>
