@@ -4,8 +4,14 @@
     margin: 10px 10px;
     
   }
+
+  .slick-slide.slick-active > div {
+    width: auto;
+    
+  }
+
   .slick-list {
-    margin: 0 -10px;
+    margin: auto;
   }
   
   .cardDetail {
@@ -13,11 +19,10 @@
     background: black;
     border-radius: 8px;
     overflow: hidden;
-    margin-left: 10px;
-    margin-left: 10px;
-    height: 400px;
+    height: 300px;
     color: #fff;
     cursor: pointer;
+
   }
 
   @media (max-width: 480px) {
@@ -35,9 +40,10 @@
   .card-top > img {
     margin: auto;
     width: auto;
-    height: 400px;
+    height: 300px;
     object-fit: cover;
     background: black;
+    
   }
 
   @media (max-width: 480px) {
@@ -82,3 +88,64 @@
     margin-bottom: 50px !important;
   }
   
+.sliderCard{
+  width: 100%;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  text-align: center;
+}
+
+.selected{
+  background-color: #1ee2e7;
+  border-radius: 10px;
+}
+
+.noSelected{
+  color: #1ee2e7;
+  background-color:#000000;
+  border: 2px solid #1ee2e7;
+  border-radius: 10px;
+}
+
+.selected:hover{
+  background-color: #111e8b;
+}
+
+.noSelected:hover{
+  background-color: #111e8b;
+}
+
+.buttonTalleContainer {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.buttonTalleColorContainer{
+  margin: 5px;
+}
+
+.buttonTalleContainer button {
+  display: inline-block;
+  margin: 5px; /* Espaciado entre los botones de talle */
+}
+
+.talleCard{
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  margin: 15px;
+  flex-direction: row;
+}
+
+.cantidad{
+  display: flex;
+  justify-content: center;
+  margin-top: 15px;
+  margin-bottom: 15px;
+}
+
+.desProSelected{
+  margin-bottom: 20px;
+}

@@ -1,7 +1,7 @@
 .carritoForm {
   top: -86%;
   position: fixed;
-  right: -90%; /* Empieza oculto fuera del área visible de la página */
+  right: -1000%; /* Empieza oculto fuera del área visible de la página */
   width: 400px; /* Ancho del carrito */
   height: 200vh;
   z-index: 990; /* Asegúrate de que el carrito esté en capas por encima del contenido de la página */
@@ -143,6 +143,8 @@ button:active {
     border-radius: 10px;
     border: 1px solid #1ee2e7;
     background-color: black;
+    margin-left: 10px;
+    margin-right: 10px;
   }
 
   .smallButton:hover {

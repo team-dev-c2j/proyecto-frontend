@@ -4,11 +4,12 @@ import "../../styles/carrito.css";
 import { FaArrowCircleRight } from "react-icons/fa";
 
 const Carrito = ({ cerrarCarrito }) => {
-  const { carrito, eliminarDelCarrito } = useContext(CarritoContext);
-
+  const { carrito,  eliminarDelCarrito } = useContext(CarritoContext);
+  const [ carro , setCarrito] = useState(carrito);
   const [name, setName] = useState("");
   const [telefono, setTelefono] = useState("");
   const [email, setEmail] = useState("");
+
 
   const enviarPeticion = () => {
     // Validar campos obligatorios
@@ -34,7 +35,8 @@ const Carrito = ({ cerrarCarrito }) => {
       modelo: producto.modelo,
       talle: producto.talle,
       color: producto.color,
-      precio: producto.precio
+      precio: ( producto.precio * producto.cantidad),
+      cantidad: producto.cantidad
     }));
 
     const estado = "pendiente";
@@ -57,11 +59,28 @@ const Carrito = ({ cerrarCarrito }) => {
         console.error(error);
       });
 
-    alert("Compra solicitada");
+    alert("Compra solicitada", carro);
+
   };
 
   // Calcular el precio total de los productos en el carrito
-  const total = carrito.reduce((accum, producto) => accum + producto.precio, 0);
+  const total = carrito.reduce((accum, producto) => accum + (producto.precio * producto.cantidad), 0);
+
+  const aumentarCantidad = (index) => {
+    const newCarrito = [...carrito];
+    newCarrito[index].cantidad += 1;
+    setCarrito(newCarrito);
+  };
+
+  const disminuirCantidad = (index) => {
+    const newCarrito = [...carrito];
+    if (newCarrito[index].cantidad > 1) {
+      newCarrito[index].cantidad -= 1;
+      setCarrito(newCarrito);
+    } else {
+      eliminarDelCarrito(index);
+    }
+  };
 
   return (
     <div className="">
@@ -93,10 +112,14 @@ const Carrito = ({ cerrarCarrito }) => {
           </h6>
           </div>
           <div className="cantidadBoton">
-            <button class="smallButton">-</button>
-            0
-            <button class="smallButton">+</button>
-            <button className="btn btn-outline-danger" onClick={() => eliminarDelCarrito(index)}>X</button>
+          <button className="smallButton" onClick={() => disminuirCantidad(index)}>
+                -
+              </button>
+              {producto.cantidad}
+              <button className="smallButton" onClick={() => aumentarCantidad(index)}>
+                +
+              </button>
+              <button className="btn btn-outline-danger" onClick={() => eliminarDelCarrito(index)}>X</button>
           </div>
 
         </div>

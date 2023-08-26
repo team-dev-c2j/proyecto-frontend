@@ -14,6 +14,7 @@ const ProductoDetail = (props) => {
   const [coloresUnicos, setColoresUnicos] = useState([]);
   const [unidadSeleccionada, setUnidadSeleccionada] = useState(null);
   const [colorSeleccionado, setColorSeleccionado] = useState(null);
+  const [cantidad, setCantidad] = useState(1)
 
   const { agregarProducto } = useContext(CarritoContext); // Mover la llamada a useContext aquí
 
@@ -39,9 +40,10 @@ const ProductoDetail = (props) => {
     if (producto && producto.modelo) {
       const fetchUnidades = async () => {
         try {
-          const response = await fetch(`http://localhost:3000/unidades/modelo/${producto.modelo}`);
+          const response = await fetch(`http://localhost:3000/unidades/modelo/${producto.modelo}/marca/${producto.marca}`);
           const data2 = await response.json();
           setUnidades(data2);
+          console.log(data2)
         } catch (error) {
           console.log(error);
         }
@@ -71,11 +73,25 @@ const ProductoDetail = (props) => {
     return <p>Cargando...</p>;
   }
 
+  let toShow; // Declarar toShow fuera del bloque if-else
+
+  if (producto.imageUrls.length === 1) {
+    toShow = 1;
+  } 
+
+  if (producto.imageUrls.length === 2) {
+    toShow = 2;
+  } 
+
+  if (producto.imageUrls.length > 2) {
+    toShow = 3;
+  } 
+
   const settings = {
     dots: true,
     infinite: true,
     speed: 500,
-    slidesToShow: 2,
+    slidesToShow: toShow,
     slidesToScroll: 1,
   };
 
@@ -89,13 +105,26 @@ const ProductoDetail = (props) => {
         color: unidadSeleccionada.color,
         precio: producto.precio,
         imagen: producto.imageUrls[0],
+        cantidad: cantidad
       };
       agregarProducto(productoSeleccionado);
       alert(`agregaste al carrito ${producto.modelo} talle ${unidadSeleccionada.talle} color ${unidadSeleccionada.talle} precio ${producto.precio}`)
     }
   };
+
+  function masCantidad () {
+    setCantidad(cantidad + 1);
+  };
+
+  function menosCantidad () {
+    if (cantidad !==1) {
+      setCantidad(cantidad - 1);
+    }
+  };
+
   return (
     <div className="app">
+      <div className="sliderCard">
       <Slider {...settings}>
         {producto.imageUrls.map((imageUrl, index) => (
           <div className="cardDetail" key={index}>
@@ -105,26 +134,28 @@ const ProductoDetail = (props) => {
           </div>
         ))}
       </Slider>
+      </div>
+
       <div className="before-after"></div>
       <div className="detalles">
-        <h3>{producto.modelo}</h3>
-        <h3>${producto.precio}</h3>
+        <h3>{producto.modelo} ${producto.precio}</h3>
         <div>
-          <p>Colores:</p>
+          <p>Seleccionar color</p>
           {coloresUnicos.map((color, index) => (
-            <button 
+            <button
               key={index}
               onClick={() => handleColorClick(color)}
-              className={color === colorSeleccionado ? "selected" : ""}
+              className={color === colorSeleccionado ? "selected" : "noSelected"}
             >
               {color}
             </button>
           ))}
         </div>
         {colorSeleccionado && (
-          <div>
+          <div className="buttonTalleColorContainer">
             <p>Unidades con color {colorSeleccionado}:</p>
             <h6>Talle:</h6>
+            <div className="talleCard">
             {unidadesFiltradas.map((unidad, index) => (
               <div id="buttonTalleColor" key={index}>
                 <button
@@ -133,21 +164,26 @@ const ProductoDetail = (props) => {
                     unidad.talle === unidadSeleccionada?.talle &&
                     unidad.color === unidadSeleccionada?.color
                       ? "selected"
-                      : ""
+                      : "noSelected"
                   }
                 >
                   {unidad.talle}
                 </button>
               </div>
             ))}
+            </div>
+
           </div>
         )}
         {unidadSeleccionada && (
           <div>
-            <h3>Modelo seleccionado: {producto.modelo}</h3>
-            <h3>Talle seleccionado: {unidadSeleccionada.talle}</h3>
-            <h3>Color seleccionado: {unidadSeleccionada.color}</h3>
-            <button onClick={agregarAlCarrito}>agregar al carrito</button>
+            <h5>Cantidad</h5>
+            <div className="cantidad">
+            <button class="smallButton" onClick={ menosCantidad }>-</button>{cantidad}<button onClick={ masCantidad } class="smallButton">+</button>
+            </div>
+            
+            <h5 className="desProSelected">{producto.modelo} Talle {unidadSeleccionada.talle} color {unidadSeleccionada.color}</h5>
+            <button className="noSelected" onClick={agregarAlCarrito}>agregar al carrito</button>
           </div>
         )}
       </div>

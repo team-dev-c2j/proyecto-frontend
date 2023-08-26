@@ -78,8 +78,8 @@ function AddProduct() {
         </label>
         <br />
         <label>
-          Imagen:
-          <input type="file" onChange={handleFileChange} required />
+          Imagen: 
+          <input className="selectedImage" type="file" onChange={handleFileChange} required />
         </label>
         <br />
         {imageUrl && (

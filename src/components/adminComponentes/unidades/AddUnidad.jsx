@@ -1,11 +1,29 @@
 import React, { useState, useEffect } from 'react';
 
 function AddUnidad() {
+  const [marca, setMarca] = useState('');
   const [modeloUnidad, setModeloUnidad] = useState('');
   const [color, setColor] = useState('');
   const [talle, setTalle] = useState('');
   const [stock, setStock] = useState('');
   const [modelosDisponibles, setModelosDisponibles] = useState([]);
+  const [marcasDisponibles, setMarcasDisponibles] = useState([]);
+
+  useEffect(() => {
+    fetchMarcasDisponibles()
+      .then((marcas) => {
+        setMarcasDisponibles(marcas);
+      })
+      .catch((error) => {
+        console.error('Error al obtener las marcas:', error);
+      });
+  }, []);
+
+  const fetchMarcasDisponibles = () => {
+    return fetch('http://localhost:3000/marcas')
+      .then((response) => response.json())
+      .then((data) => data.results.map((marca) => marca.marca));
+  };
 
   useEffect(() => {
     fetchModelosDisponibles()
@@ -21,6 +39,10 @@ function AddUnidad() {
     return fetch('http://localhost:3000/products')
       .then((response) => response.json())
       .then((data) => data.results.map((product) => product.modelo));
+  };
+
+  const handleMarcaChange = (event) => {
+    setMarca(event.target.value);
   };
 
   const handleModelUnidadChange = (event) => {
@@ -42,7 +64,7 @@ function AddUnidad() {
   const handleSubmit = async (event) => {
     event.preventDefault();
 
-    if (modeloUnidad && color && talle && stock) {
+    if (marca && modeloUnidad && color && talle && stock) {
       try {
         await fetch('http://localhost:3000/unidades', {
           method: 'POST',
@@ -50,6 +72,7 @@ function AddUnidad() {
             'Content-Type': 'application/json',
           },
           body: JSON.stringify({
+            marca: marca,
             modeloUnidad: modeloUnidad,
             color: color,
             talle: talle,
@@ -58,7 +81,7 @@ function AddUnidad() {
         });
 
         alert('Producto agregado exitosamente');
-
+        setMarca('')
         setModeloUnidad('');
         setColor('');
         setTalle('');
@@ -73,6 +96,17 @@ function AddUnidad() {
     <div className='addAdmin'>
         <h6>añadir unidad</h6>
       <form onSubmit={handleSubmit}>
+      <label>
+          Marca:
+          <select value={marca} onChange={handleMarcaChange} required>
+            <option value="">Seleccione una marca</option>
+            {marcasDisponibles.map((marca, index) => (
+              <option key={index} value={marca}>
+                {marca}
+              </option>
+            ))}
+          </select>
+        </label>
           <label>
             Modelo:
              <select value={modeloUnidad} onChange={handleModelUnidadChange} required>

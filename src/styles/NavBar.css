@@ -45,8 +45,8 @@
 .items {
     color: white;
     margin-top: 12px;
-    margin-left: 70px;
-    margin-right: 25px;
+    margin-left: 90px;
+    margin-right: 5px;
 }
 
 @media (max-width: 500px) {
@@ -87,17 +87,34 @@
 
   .userNav{
     color: #1ee2e7;
-    margin-left: 5px;
+    margin-left: 0px;
     margin-top: 10px;
   }
 
   .carritoIconNav {
     margin-top: 2.5%;
     margin-left: 20%;
-    margin-right: 20px;
+    margin-right: 15px;
   }
 
   .carritoIconNav:hover {
     cursor: pointer;
   }
   
+  .logout {
+    color: #1ee2e7;
+    width: 100%; /* Ancho del 100% para ocupar todo el ancho del contenedor */
+    position: absolute; /* Posicionamos el elemento absolutamente */
+    right: 0; /* Lo ubicamos a la derecha del contenedor */
+    clear: both; /* Opcional: si es necesario evitar el flotado de otros elementos */
+  }
+
+  .logoutChild{
+    float: right;
+    margin-right: 5px;
+  }
+
+  .logoutChild:hover{
+    cursor: pointer;
+    
+  }
