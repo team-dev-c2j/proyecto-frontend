@@ -23,7 +23,7 @@ function EditUnidad () {
     useEffect(() => {
         const fetchUnidades = async () => {
           try {
-            const response = await fetch("http://localhost:3000/unidades");
+            const response = await fetch(`${process.env.REACT_APP_URL}/unidades`);
             const data = await response.json();
             console.log(data);
             const foundUnidad = data.results.find((item) => item._id === id);
@@ -44,7 +44,7 @@ function EditUnidad () {
     
     
         try {
-            await fetch(`http://localhost:3000/unidades/edit/${id}`, {
+            await fetch(`${process.env.REACT_APP_URL}/unidades/edit/${id}`, {
               method: "PUT",
               headers: {
                 "Content-Type": "application/json",
@@ -69,7 +69,7 @@ function EditUnidad () {
       
         if (confirmDelete) {
           try {
-            await fetch(`http://localhost:3000/unidades/${id}`, {
+            await fetch(`${process.env.REACT_APP_URL}/unidades/${id}`, {
               method: "DELETE",
             });      
             alert("Unidades eliminadas exitosamente");      

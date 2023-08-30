@@ -25,7 +25,7 @@ const ProductoDetail = (props) => {
   useEffect(() => {
     const fetchData = async () => {
       try {
-        const response = await fetch(`http://127.0.0.1:3000/products/${id}`);
+        const response = await fetch(`${process.env.REACT_APP_URL}/products/${id}`);
         const data = await response.json();
         setProducto(data);
       } catch (error) {
@@ -40,7 +40,7 @@ const ProductoDetail = (props) => {
     if (producto && producto.modelo) {
       const fetchUnidades = async () => {
         try {
-          const response = await fetch(`http://localhost:3000/unidades/modelo/${producto.modelo}/marca/${producto.marca}`);
+          const response = await fetch(`${process.env.REACT_APP_URL}/unidades/modelo/${producto.modelo}/marca/${producto.marca}`);
           const data2 = await response.json();
           setUnidades(data2);
           console.log(data2)

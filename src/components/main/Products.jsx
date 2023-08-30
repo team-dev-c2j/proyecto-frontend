@@ -3,6 +3,7 @@ import { Link } from 'react-router-dom';
 import '../../styles/Products.css';
 
 
+
 function ProductsComponent() {
   const [products, setProducts] = useState([]);
 
@@ -10,7 +11,7 @@ function ProductsComponent() {
     // Función para obtener los productos
     const fetchProducts = async () => {
       try {
-        const response = await fetch("http://127.0.0.1:3000/products");
+        const response = await fetch(`${process.env.REACT_APP_URL}/products`);
         const data = await response.json();
         if (response.ok) {
           setProducts(data.results);

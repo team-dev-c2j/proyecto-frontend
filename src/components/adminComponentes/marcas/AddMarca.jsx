@@ -36,7 +36,7 @@ function AddProduct() {
       const formData = new FormData();
       formData.append('archivo', selectedFile);
 
-      const response = await fetch('http://localhost:3000/upimage', {
+      const response = await fetch(`${process.env.REACT_APP_URL}/upimage`, {
         method: 'POST',
         body: formData,
       });
@@ -48,7 +48,7 @@ function AddProduct() {
       console.log('Archivo subido exitosamente:', imageUrl);
 
       try {
-        await fetch('http://localhost:3000/Marcas', {
+        await fetch(`${process.env.REACT_APP_URL}/Marcas`, {
           method: 'POST',
           headers: {
             'Content-Type': 'application/json',

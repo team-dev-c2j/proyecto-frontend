@@ -11,7 +11,7 @@ function Marcas() {
 
   const fetchBrands = async () => {
     try {
-      const response = await fetch('http://localhost:3000/marcas');
+      const response = await fetch(`${process.env.REACT_APP_URL}/marcas`);
       const data = await response.json();
       setBrands(data.results);
     } catch (error) {

@@ -16,7 +16,7 @@ function EditProducto(props) {
 
   const fetchMarcasDisponibles = async () => {
     try {
-      const response = await fetch("http://localhost:3000/marcas");
+      const response = await fetch(`${process.env.REACT_APP_URL}/marcas`);
       const data = await response.json();
       const marcas = data.results.map((marca) => marca.marca);
       setMarcasDisponibles(marcas);
@@ -66,7 +66,7 @@ function EditProducto(props) {
 
     
 
-      await fetch(`http://localhost:3000/products/deleteImg/${idimg(imageUrlToDelete)}`, {
+      await fetch(`${process.env.REACT_APP_URL}/products/deleteImg/${idimg(imageUrlToDelete)}`, {
         method: "Delete",
         headers: {
           "Content-Type": "application/json",
@@ -85,7 +85,7 @@ function EditProducto(props) {
   useEffect(() => {
     const fetchProductosDisponibles = async () => {
       try {
-        const response = await fetch("http://localhost:3000/products");
+        const response = await fetch(`${process.env.REACT_APP_URL}/products`);
         const data = await response.json();
         console.log(data);
         const foundProducto = data.results.find((item) => item._id === id);
@@ -107,7 +107,7 @@ function EditProducto(props) {
   
     if (confirmDelete) {
       try {
-        await fetch(`http://localhost:3000/products/${productoData._id}`, {
+        await fetch(`${process.env.REACT_APP_URL}/products/${productoData._id}`, {
           method: "DELETE",
         }); 
         alert("Producto eliminado exitosamente");
@@ -132,7 +132,7 @@ function EditProducto(props) {
       const uploadPromises = formDataArray.map((formData) => {
         if (!formData) return null;
 
-        return fetch("http://localhost:3000/upimage", {
+        return fetch(`${process.env.REACT_APP_URL}/upimage`, {
           method: "POST",
           body: formData,
         }).then((response) => response.json());
@@ -148,7 +148,7 @@ function EditProducto(props) {
       console.log("Archivos subidos exitosamente");
 
       try {
-        await fetch(`http://localhost:3000/products/${productoData._id}`, {
+        await fetch(`${process.env.REACT_APP_URL}/products/${productoData._id}`, {
           method: "PUT",
           headers: {
             "Content-Type": "application/json",

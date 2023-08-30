@@ -42,7 +42,7 @@ const Carrito = ({ cerrarCarrito }) => {
     const estado = "pendiente";
 
     // Realizar solicitud al backend con los datos del cliente y productos
-    fetch("http://127.0.0.1:3000/ordenCompra", {
+    fetch(`${process.env.REACT_APP_URL}/ordenCompra`, {
       method: "POST",
       headers: {
         "Content-Type": "application/json"
