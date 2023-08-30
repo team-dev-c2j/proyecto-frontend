@@ -5,7 +5,7 @@ const OrdenesCompra = () => {
   const [ordenes, setOrdenes] = useState([]);
 
   useEffect(() => {
-    fetch("http://127.0.0.1:3000/ordenCompra")
+    fetch(`${process.env.REACT_APP_URL}/ordenCompra`)
       .then((response) => response.json())
       .then((data) => {
         setOrdenes(data.results);
@@ -19,7 +19,7 @@ const OrdenesCompra = () => {
     const confirmDelete = window.confirm("¿Estás seguro de eliminar esta orden de compra?");
     if (confirmDelete) {
       try {
-        await fetch(`http://127.0.0.1:3000/ordenCompra/${ordenId}`, {
+        await fetch(`${process.env.REACT_APP_URL}/ordenCompra/${ordenId}`, {
           method: "DELETE"
         })
         .then((response) => response.json())
@@ -38,7 +38,7 @@ const OrdenesCompra = () => {
   
   const finalizarOrden = async (ordenId) => {
     try {
-      await fetch(`http://127.0.0.1:3000/ordenCompra/${ordenId}`, {
+      await fetch(`${process.env.REACT_APP_URL}/ordenCompra/${ordenId}`, {
         method: "PUT",
         headers: {
           "Content-Type": "application/json"
@@ -65,7 +65,7 @@ const OrdenesCompra = () => {
 
   const pendienteOrden = async (ordenId) => {
     try {
-      await fetch(`http://127.0.0.1:3000/ordenCompra/${ordenId}`, {
+      await fetch(`${process.env.REACT_APP_URL}/ordenCompra/${ordenId}`, {
         method: "PUT",
         headers: {
           "Content-Type": "application/json"

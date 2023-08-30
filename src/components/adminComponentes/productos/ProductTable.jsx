@@ -15,7 +15,7 @@ function ProductTable() {
 
     const fetchProducts = async () => {
       try {
-        const response = await fetch('http://127.0.0.1:3000/products');
+        const response = await fetch(`${process.env.REACT_APP_URL}/products`);
         const data = await response.json();
         if (response.ok) {
           setProducts(data.results);
@@ -42,7 +42,7 @@ function ProductTable() {
 
     try {
       setLoadingMatchingUnits(true); // Activar el estado de carga
-      const response = await fetch('http://localhost:3000/unidades');
+      const response = await fetch(`${process.env.REACT_APP_URL}/unidades`);
       const data = await response.json();
       if (response.ok) {
         const matchingUnits = data.results.filter((unit) => unit.modeloUnidad === productId);

@@ -18,7 +18,7 @@ function AddProduct() {
   }, []);
 
   const fetchMarcasDisponibles = () => {
-    return fetch('http://localhost:3000/marcas')
+    return fetch(`${process.env.REACT_APP_URL}/marcas`)
       .then((response) => response.json())
       .then((data) => data.results.map((marca) => marca.marca));
   };
@@ -68,7 +68,7 @@ function AddProduct() {
         const uploadPromises = formDataArray.map((formData) => {
           if (!formData) return null;
 
-          return fetch('http://localhost:3000/upimage', {
+          return fetch(`${process.env.REACT_APP_URL}/upimage`, {
             method: 'POST',
             body: formData,
           }).then((response) => response.json());
@@ -84,7 +84,7 @@ function AddProduct() {
         console.log('Archivos subidos exitosamente');
 
         try {
-          await fetch('http://localhost:3000/Products', {
+          await fetch(`${process.env.REACT_APP_URL}/Products`, {
             method: 'POST',
             headers: {
               'Content-Type': 'application/json',
