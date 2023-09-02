@@ -26,19 +26,22 @@ function AddUnidad() {
   };
 
   useEffect(() => {
-    fetchModelosDisponibles()
-      .then((modelos) => {
-        setModelosDisponibles(modelos);
-      })
-      .catch((error) => {
-        console.error('Error al obtener los modelos:', error);
-      });
-  }, []);
+    if (marca) { // Verifica si marca no está vacío antes de hacer la solicitud fetch
+      fetchModelosDisponibles(marca)
+        .then((modelos) => {
+          setModelosDisponibles(modelos);
+        })
+        .catch((error) => {
+          console.error('Error al obtener los modelos:', error);
+        });
+    }
+  }, [marca]);
+  
 
-  const fetchModelosDisponibles = () => {
-    return fetch(`${process.env.REACT_APP_URL}/products`)
+  const fetchModelosDisponibles = (marca) => {
+    return fetch(`${process.env.REACT_APP_URL}/products/marca/${marca}`)
       .then((response) => response.json())
-      .then((data) => data.results.map((product) => product.modelo));
+      .then((data) => data.map((product) => product.modelo));
   };
 
   const handleMarcaChange = (event) => {
