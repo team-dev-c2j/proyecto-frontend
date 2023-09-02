@@ -6,7 +6,8 @@ function AddProduct() {
   const [marca, setMarca] = useState('');
   const [precio, setPrecio] = useState('');
   const [marcasDisponibles, setMarcasDisponibles] = useState([]);
-
+  const [loading, setLoading] = useState(false); 
+  
   useEffect(() => {
     fetchMarcasDisponibles()
       .then((marcas) => {
@@ -57,6 +58,7 @@ function AddProduct() {
 
     try {
       if (modelo && marca && precio) {
+        setLoading(true);
         const formDataArray = selectedFiles.map((file) => {
           if (!file) return null;
 
@@ -102,6 +104,8 @@ function AddProduct() {
           
         } catch (error) {
           console.error('Error al agregar el producto:', error);
+        } finally {
+          setLoading(false); 
         }
       }
     } catch (error) {
@@ -158,7 +162,11 @@ function AddProduct() {
           +
         </button>
         <br />
-        <button type="submit">Submit</button>
+        {loading ? ( // Mostrar el spinner cuando loading es true
+          <div className="loading-spinner"></div>
+        ) : (
+          <button type="submit">Submit</button>
+        )}
       </form>
     </div>
   );
