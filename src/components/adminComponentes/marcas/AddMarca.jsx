@@ -5,6 +5,7 @@ function AddProduct() {
   const [selectedFile, setSelectedFile] = useState(null);
   const [marca, setMarca] = useState('');
   const [imageUrl, setImageUrl] = useState('');
+  const [loading, setLoading] = useState(false); // Estado para controlar la animación de carga
 
   const formRef = useRef(null);
 
@@ -32,6 +33,8 @@ function AddProduct() {
         console.log('Debe seleccionar una imagen y proporcionar una marca');
         return;
       }
+
+      setLoading(true); // Activar la animación de carga
 
       const formData = new FormData();
       formData.append('archivo', selectedFile);
@@ -62,6 +65,8 @@ function AddProduct() {
         alert('Marca agregada exitosamente');
       } catch (error) {
         console.error('Error al agregar la marca:', error);
+      } finally {
+        setLoading(false); // Desactivar la animación de carga después de completar la solicitud
       }
     } catch (error) {
       console.error('Error al subir el archivo:', error);
@@ -84,11 +89,15 @@ function AddProduct() {
         <br />
         {imageUrl && (
           <div>
-            <img src={imageUrl} alt="Selected" style={{marginBottom: '15px', marginLeft: '120px', width: '100px', height: '100px', borderRadius: '50%' }} />
+            <img src={imageUrl} alt="Selected" style={{ marginBottom: '15px', marginLeft: '120px', width: '100px', height: '100px', borderRadius: '50%' }} />
             <br />
           </div>
         )}
-        <button type="submit">Submit</button>
+        {loading ? ( // Mostrar el spinner cuando loading es true
+          <div className="loading-spinner"></div>
+        ) : (
+          <button type="submit">Submit</button>
+        )}
       </form>
     </div>
   );

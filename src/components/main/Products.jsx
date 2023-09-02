@@ -29,13 +29,13 @@ function ProductsComponent() {
   }, []);
 
   return (
-    <div class="main-cointainer">
+    <div className="main-cointainer">
       {products.length === 0 ? (
         <p>Loading products...</p>
       ) : (
-        <div class="main">
+        <div className="main">
           {products.map((product) => (
-            <div  class="card-container" key={product.modelo}>
+            <div  className="card-container" key={product.modelo}>
               <Link to={`/productoDetail/${product._id}`} style={{ textDecoration: 'none' }}>
               <div className="divCard">
                 <div>

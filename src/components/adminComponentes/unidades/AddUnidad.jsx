@@ -8,6 +8,7 @@ function AddUnidad() {
   const [stock, setStock] = useState('');
   const [modelosDisponibles, setModelosDisponibles] = useState([]);
   const [marcasDisponibles, setMarcasDisponibles] = useState([]);
+  const [loading, setLoading] = useState(false); 
 
   useEffect(() => {
     fetchMarcasDisponibles()
@@ -26,19 +27,22 @@ function AddUnidad() {
   };
 
   useEffect(() => {
-    fetchModelosDisponibles()
-      .then((modelos) => {
-        setModelosDisponibles(modelos);
-      })
-      .catch((error) => {
-        console.error('Error al obtener los modelos:', error);
-      });
-  }, []);
+    if (marca) { // Verifica si marca no está vacío antes de hacer la solicitud fetch
+      fetchModelosDisponibles(marca)
+        .then((modelos) => {
+          setModelosDisponibles(modelos);
+        })
+        .catch((error) => {
+          console.error('Error al obtener los modelos:', error);
+        });
+    }
+  }, [marca]);
+  
 
-  const fetchModelosDisponibles = () => {
-    return fetch(`${process.env.REACT_APP_URL}/products`)
+  const fetchModelosDisponibles = (marca) => {
+    return fetch(`${process.env.REACT_APP_URL}/products/marca/${marca}`)
       .then((response) => response.json())
-      .then((data) => data.results.map((product) => product.modelo));
+      .then((data) => data.map((product) => product.modelo));
   };
 
   const handleMarcaChange = (event) => {
@@ -66,6 +70,7 @@ function AddUnidad() {
 
     if (marca && modeloUnidad && color && talle && stock) {
       try {
+        setLoading(true);
         await fetch(`${process.env.REACT_APP_URL}/unidades`, {
           method: 'POST',
           headers: {
@@ -88,6 +93,8 @@ function AddUnidad() {
         setStock('');
       } catch (error) {
         console.error('Error al agregar el producto:', error);
+      } finally {
+        setLoading(false); 
       }
     }
   };
@@ -134,7 +141,11 @@ function AddUnidad() {
           <input type="text" value={stock} onChange={handleStockChange} required/>
         </label>
         <br />
-        <button type="submit">Submit</button>
+        {loading ? ( // Mostrar el spinner cuando loading es true
+          <div className="loading-spinner"></div>
+        ) : (
+          <button type="submit">Submit</button>
+        )}
       </form>
     </div>
   );
