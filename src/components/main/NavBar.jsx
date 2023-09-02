@@ -47,14 +47,14 @@ function Navbar () {
                     <FaRegUser className='userIcono'/>
 
                 </Link>  
-                <h8 className="userNav">{userNav}</h8> 
+                <p className="userNav">{userNav}</p> 
             </div>
             
         </div>
         <div className="logout">
         {userNav && (
                 
-                <h8 className="logoutChild" onClick={() => logout()}>Cerrar sesión</h8>
+                <p className="logoutChild" onClick={() => logout()}>Cerrar sesión</p>
                 )}  
         </div>
         <div className='pp'>
