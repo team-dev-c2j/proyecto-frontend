@@ -9,7 +9,7 @@ function Admin() {
   console.log(userNav)
   return (
     <div>
-      {userNav === "juli" ? (
+      {userNav === `${process.env.REACT_APP_USER_ADMIN}` ? (
         <Vistas></Vistas>
       ) : (
         <VistasVendedores/>
