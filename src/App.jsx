@@ -27,7 +27,7 @@ import ContactosPanel from './components/adminComponentes/contactos/contactosPan
 function App() {
 
     const divStyle = {
-        backgroundColor: 'black', // Aquí debes usar comillas para 'red'
+        backgroundColor: process.env.REACT_APP_BACKGROUND, 
     };
 
   return (
