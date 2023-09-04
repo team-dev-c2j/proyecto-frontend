@@ -33,7 +33,7 @@ function Navbar () {
         <div>
         <div className='barra1'>
             <Link to={'/'} style={{ textDecoration: 'none' }}>
-                <h2 className='name'>KZ</h2>
+                <h2 className='name'>{process.env.REACT_APP_NAME_NAV}</h2>
             </Link>
             <div className='sector2'>
                 <Link to="/contacto" style={{ textDecoration: 'none' }}>
