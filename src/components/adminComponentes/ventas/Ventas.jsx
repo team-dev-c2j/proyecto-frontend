@@ -12,7 +12,7 @@ const Ventas = () => {
 
   const obtenerVentas = async () => {
     try {
-      const response = await fetch(`${process.env.REACT_APP_URL}/ventas`);
+      const response = await fetch(`${import.meta.env.VITE_REACT_APP_API_URL}/ventas`);
       const data = await response.json();
       setVentas(data.results);
       setVentasCargadas(true);
@@ -30,7 +30,7 @@ const Ventas = () => {
     const confirmDelete = window.confirm("¿Estás seguro de eliminar esta venta?");
     if (confirmDelete) {
       try {
-        await fetch(`${process.env.REACT_APP_URL}/ventas/${ventaId}`, {
+        await fetch(`${import.meta.env.VITE_REACT_APP_API_URL}/ventas/${ventaId}`, {
           method: "DELETE",
         })
           .then((response) => response.json())

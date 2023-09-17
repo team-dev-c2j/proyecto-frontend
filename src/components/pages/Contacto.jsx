@@ -1,6 +1,6 @@
 import { useForm } from "react-hook-form";
 import "../../styles/contacto.css";
-import { contactoRequest } from "../api/contacto";
+import { contactoRequest } from "../api/contacto.jsx";
 
 const Contacto = () => {
   const {

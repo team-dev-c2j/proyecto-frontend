@@ -21,7 +21,7 @@ function AddUnidad() {
   }, []);
 
   const fetchMarcasDisponibles = () => {
-    return fetch(`${process.env.REACT_APP_URL}/marcas`)
+    return fetch(`${import.meta.env.VITE_REACT_APP_API_URL}/marcas`)
       .then((response) => response.json())
       .then((data) => data.results.map((marca) => marca.marca));
   };
@@ -40,7 +40,7 @@ function AddUnidad() {
   
 
   const fetchModelosDisponibles = (marca) => {
-    return fetch(`${process.env.REACT_APP_URL}/products/marca/${marca}`)
+    return fetch(`${import.meta.env.VITE_REACT_APP_API_URL}/products/marca/${marca}`)
       .then((response) => response.json())
       .then((data) => data.map((product) => product.modelo));
   };
@@ -71,7 +71,7 @@ function AddUnidad() {
     if (marca && modeloUnidad && color && talle && stock) {
       try {
         setLoading(true);
-        await fetch(`${process.env.REACT_APP_URL}/unidades`, {
+        await fetch(`${import.meta.env.VITE_REACT_APP_API_URL}/unidades`, {
           method: 'POST',
           headers: {
             'Content-Type': 'application/json',

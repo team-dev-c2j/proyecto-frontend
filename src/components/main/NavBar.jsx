@@ -10,7 +10,7 @@ import { logoutRequest } from '../api/auth';
 import { useNavigate } from "react-router-dom";
 
 function Navbar () {
-
+    const appName = import.meta.env.VITE_REACT_APP_NAME_NAV;
     const navigate = useNavigate()
     const { setUserNav, setIsAuthenticated } = useAuth()
     const logout = () => {
@@ -33,7 +33,7 @@ function Navbar () {
         <div>
         <div className='barra1'>
             <Link to={'/'} style={{ textDecoration: 'none' }}>
-                <h2 className='name'>{process.env.REACT_APP_NAME_NAV}</h2>
+                <h2 className='name'>{appName}</h2>
             </Link>
             <div className='sector2'>
                 <Link to="/contacto" style={{ textDecoration: 'none' }}>

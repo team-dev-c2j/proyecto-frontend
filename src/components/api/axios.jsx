@@ -1,7 +1,7 @@
 import axios from "axios"
 
 const instance = axios.create({
-    baseURL: `${process.env.REACT_APP_URL}/api`,
+    baseURL: `${import.meta.env.VITE_REACT_APP_API_URL}/api`,
     withCredentials: true // envio de cookies
 })
 

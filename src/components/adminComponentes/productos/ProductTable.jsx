@@ -15,7 +15,7 @@ function ProductTable() {
 
     const fetchProducts = async () => {
       try {
-        const response = await fetch(`${process.env.REACT_APP_URL}/products`);
+        const response = await fetch(`${import.meta.env.VITE_REACT_APP_API_URL}/products`);
         const data = await response.json();
         if (response.ok) {
           setProducts(data.results);
@@ -42,7 +42,7 @@ function ProductTable() {
 
     try {
       setLoadingMatchingUnits(true); // Activar el estado de carga
-      const response = await fetch(`${process.env.REACT_APP_URL}/unidades`);
+      const response = await fetch(`${import.meta.env.VITE_REACT_APP_API_URL}/unidades`);
       const data = await response.json();
       if (response.ok) {
         const matchingUnits = data.results.filter((unit) => unit.modeloUnidad === productId);

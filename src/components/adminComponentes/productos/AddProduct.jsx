@@ -4,6 +4,7 @@ function AddProduct() {
   const [selectedFiles, setSelectedFiles] = useState([null, null]);
   const [modelo, setModelo] = useState('');
   const [marca, setMarca] = useState('');
+  const [descripcion, setDescripcion] = useState('');
   const [precio, setPrecio] = useState('');
   const [marcasDisponibles, setMarcasDisponibles] = useState([]);
   const [loading, setLoading] = useState(false); 
@@ -19,7 +20,7 @@ function AddProduct() {
   }, []);
 
   const fetchMarcasDisponibles = () => {
-    return fetch(`${process.env.REACT_APP_URL}/marcas`)
+    return fetch(`${import.meta.env.VITE_REACT_APP_API_URL}/marcas`)
       .then((response) => response.json())
       .then((data) => data.results.map((marca) => marca.marca));
   };
@@ -30,6 +31,10 @@ function AddProduct() {
 
   const handleMarcaChange = (event) => {
     setMarca(event.target.value);
+  };
+
+  const handleDescripcionChange = (event) => {
+    setDescripcion(event.target.value);
   };
 
   const handlePrecioChange = (event) => {
@@ -70,7 +75,7 @@ function AddProduct() {
         const uploadPromises = formDataArray.map((formData) => {
           if (!formData) return null;
 
-          return fetch(`${process.env.REACT_APP_URL}/upimage`, {
+          return fetch(`${import.meta.env.VITE_REACT_APP_API_URL}/upimage`, {
             method: 'POST',
             body: formData,
           }).then((response) => response.json());
@@ -86,7 +91,7 @@ function AddProduct() {
         console.log('Archivos subidos exitosamente');
 
         try {
-          await fetch(`${process.env.REACT_APP_URL}/Products`, {
+          await fetch(`${import.meta.env.VITE_REACT_APP_API_URL}/Products`, {
             method: 'POST',
             headers: {
               'Content-Type': 'application/json',
@@ -94,6 +99,7 @@ function AddProduct() {
             body: JSON.stringify({
               modelo: modelo,
               marca: marca,
+              descripcion: descripcion,
               precio: precio,
               imageUrls: imageUrlArray,
             }),
@@ -132,6 +138,11 @@ function AddProduct() {
               </option>
             ))}
           </select>
+        </label>
+        <br />
+        <label>
+          Descripcion:
+          <textarea value={descripcion} onChange={handleDescripcionChange} rows="4" cols="50" maxLength="350" />
         </label>
         <br />
         <label>

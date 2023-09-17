@@ -3,11 +3,11 @@ import '../../styles/footer.css';
 import { FaFacebook, FaInstagram, FaTiktok } from 'react-icons/fa';
 
 function Footer() {
-  const telefono = process.env.REACT_APP_TELEFONO
-  const direcion = process.env.REACT_APP_DIRECION
-  const facebook= process.env.REACT_APP_FACEBOOK
-  const instagram = process.env.REACT_APP_INSTAGRAM
-  const tiktok = process.env.REACT_APP_TIKTOK
+  const telefono = import.meta.env.VITE_REACT_APP_TELEFONO
+  const direcion = import.meta.env.VITE_REACT_APP_DIRECION
+  const facebook= import.meta.env.VITE_REACT_APP_FACEBOOK
+  const instagram = import.meta.env.VITE_REACT_APP_INSTAGRAM
+  const tiktok = import.meta.env.VITE_REACT_APP_TIKTOK
   return (
     <div className="footer">
         <div className='contacto'>

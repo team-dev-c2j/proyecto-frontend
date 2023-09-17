@@ -39,7 +39,7 @@ function AddProduct() {
       const formData = new FormData();
       formData.append('archivo', selectedFile);
 
-      const response = await fetch(`${process.env.REACT_APP_URL}/upimage`, {
+      const response = await fetch(`${import.meta.env.VITE_REACT_APP_API_URL}/upimage`, {
         method: 'POST',
         body: formData,
       });
@@ -51,7 +51,7 @@ function AddProduct() {
       console.log('Archivo subido exitosamente:', imageUrl);
 
       try {
-        await fetch(`${process.env.REACT_APP_URL}/Marcas`, {
+        await fetch(`${import.meta.env.VITE_REACT_APP_API_URL}/Marcas`, {
           method: 'POST',
           headers: {
             'Content-Type': 'application/json',

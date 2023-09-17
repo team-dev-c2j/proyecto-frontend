@@ -199,7 +199,7 @@ const VentasForm = () => {
   
     try {
       // Hacer la solicitud para agregar la venta
-      await fetch(`${process.env.REACT_APP_URL}/ventas`, {
+      await fetch(`${import.meta.env.VITE_REACT_APP_API_URL}/ventas`, {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json',

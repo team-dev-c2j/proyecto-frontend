@@ -15,6 +15,7 @@ const ProductoDetail = (props) => {
   const [unidadSeleccionada, setUnidadSeleccionada] = useState(null);
   const [colorSeleccionado, setColorSeleccionado] = useState(null);
   const [cantidad, setCantidad] = useState(1)
+  const [descripcionVisible, setDescripcionVisible] = useState(false);
 
   const { agregarProducto } = useContext(CarritoContext); // Mover la llamada a useContext aquí
 
@@ -22,10 +23,14 @@ const ProductoDetail = (props) => {
     setUnidadSeleccionada({ talle, color, precio });
   };
 
+  const toggleDescripcion = () => {
+    setDescripcionVisible(!descripcionVisible);
+  };
+
   useEffect(() => {
     const fetchData = async () => {
       try {
-        const response = await fetch(`${process.env.REACT_APP_URL}/products/${id}`);
+        const response = await fetch(`${import.meta.env.VITE_REACT_APP_API_URL}/products/${id}`);
         const data = await response.json();
         setProducto(data);
       } catch (error) {
@@ -40,7 +45,7 @@ const ProductoDetail = (props) => {
     if (producto && producto.modelo) {
       const fetchUnidades = async () => {
         try {
-          const response = await fetch(`${process.env.REACT_APP_URL}/unidades/modelo/${producto.modelo}/marca/${producto.marca}`);
+          const response = await fetch(`${import.meta.env.VITE_REACT_APP_API_URL}/unidades/modelo/${producto.modelo}/marca/${producto.marca}`);
           const data2 = await response.json();
           setUnidades(data2);
           console.log(data2)
@@ -139,6 +144,12 @@ const ProductoDetail = (props) => {
       <div className="before-after"></div>
       <div className="detalles">
         <h3>{producto.modelo} ${producto.precio}</h3>
+        {descripcionVisible ? (
+          <h6>{producto.descripcion}</h6>
+        ) : (
+          <button class="buttonMain" onClick={toggleDescripcion}>Descripción</button>
+        )}
+
         <div>
           <p>Seleccionar color</p>
           {coloresUnicos.map((color, index) => (

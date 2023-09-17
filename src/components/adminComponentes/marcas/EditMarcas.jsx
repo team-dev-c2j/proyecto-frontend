@@ -23,7 +23,7 @@ function EditMarcas(props) {
   useEffect(() => {
     const fetchMarcasDisponibles = async () => {
       try {
-        const response = await fetch(`${process.env.REACT_APP_URL}/marcas`);
+        const response = await fetch(`${import.meta.env.VITE_REACT_APP_API_URL}/marcas`);
         console.log(response)
         console.log(id)
         const data = await response.json();
@@ -48,7 +48,7 @@ function EditMarcas(props) {
         const formData = new FormData();
         formData.append('archivo', selectedFile);
 
-        const response = await fetch(`${process.env.REACT_APP_URL}/upimage`, {
+        const response = await fetch(`${import.meta.env.VITE_REACT_APP_API_URL}/upimage`, {
           method: 'POST',
           body: formData,
         });
@@ -60,7 +60,7 @@ function EditMarcas(props) {
       }
 
       try {
-        await fetch(`${process.env.REACT_APP_URL}/marcas/${marcaData._id}`, {
+        await fetch(`${import.meta.env.VITE_REACT_APP_API_URL}/marcas/${marcaData._id}`, {
           method: 'PUT',
           headers: {
             'Content-Type': 'application/json',
@@ -88,7 +88,7 @@ function EditMarcas(props) {
   
     if (confirmDelete) {
       try {
-        await fetch(`${process.env.REACT_APP_URL}/marcas/${marcaData._id}`, {
+        await fetch(`${import.meta.env.VITE_REACT_APP_API_URL}/marcas/${marcaData._id}`, {
           method: 'DELETE',
         });
   
