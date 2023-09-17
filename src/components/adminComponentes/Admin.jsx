@@ -9,7 +9,7 @@ function Admin() {
   console.log(userNav)
   return (
     <div>
-      {userNav === `${process.env.REACT_APP_USER_ADMIN}` ? (
+      {userNav === `${import.meta.env.VITE_REACT_APP_USER_ADMIN}` ? (
         <Vistas></Vistas>
       ) : (
         <VistasVendedores/>

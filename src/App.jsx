@@ -26,8 +26,10 @@ import ContactosPanel from './components/adminComponentes/contactos/contactosPan
 
 function App() {
 
+  const appBackgroundColor = import.meta.env.VITE_REACT_APP_BACKGROUND;
+  
     const divStyle = {
-        backgroundColor: 'black', // Aquí debes usar comillas para 'red'
+        backgroundColor: appBackgroundColor, 
     };
 
   return (

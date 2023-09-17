@@ -39,7 +39,7 @@ function Login() {
                 }
                 <form onSubmit={onSubmit}>
                                 <div>
-                <label for="user">User</label><br/>
+                <label htmlFor="user">User</label><br/>
                 <input type="text"  {...register("username", {required: true})}  />
                 {errors.username && (<p className="error" >Username is required</p>)}
             </div>
@@ -52,7 +52,7 @@ function Login() {
         /><AiFillEyeInvisible className="eye" onClick={handleTogglePassword}/>
         {errors.password && <p className="error">Password is required</p>}
       </div>
-            <button type="submit" class="btn btn-outline-info">Ingresar</button>
+            <button type="submit" className="btn btn-outline-info">Ingresar</button>
                 </form>
                 
         </div>

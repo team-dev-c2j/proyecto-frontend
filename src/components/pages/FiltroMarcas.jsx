@@ -13,7 +13,7 @@ const FiltroMarcas = () => {
         // Función para obtener los productos
         const fetchProducts = async () => {
         try {
-            const response = await fetch(`${process.env.REACT_APP_URL}/products/marca/${marca}`);
+            const response = await fetch(`${import.meta.env.VITE_REACT_APP_API_URL}/products/marca/${marca}`);
             const data = await response.json();
         if (response.ok) {
           setProducts(data);

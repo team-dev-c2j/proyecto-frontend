@@ -11,7 +11,7 @@ function MarcasTable() {
 
   const fetchBrands = async () => {
     try {
-      const response = await fetch(`${process.env.REACT_APP_URL}/marcas`);
+      const response = await fetch(`${import.meta.env.VITE_REACT_APP_API_URL}/marcas`);
       const data = await response.json();
       setBrands(data.results);
     } catch (error) {

@@ -1,4 +1,4 @@
-import axios from "./axios"
+import axios from "./axios.jsx"
 
 
 export const contactoRequest = async (data) => {

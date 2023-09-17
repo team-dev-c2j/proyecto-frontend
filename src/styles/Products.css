@@ -6,7 +6,7 @@ article {
 }
 
 article img:first-child {
-    box-shadow: 0 60px 60px -60px rgb(255, 208, 0);
+    box-shadow: 0 70px 60px -60px rgb(255, 208, 0);
     border-radius: 4px;
     object-fit: cover;
     width: 100%;
@@ -45,8 +45,8 @@ article::before {
     linear-gradient(
         to bottom,
         transparent 10%,
-        rgba(0,0,0,0.5) 50%,
-        rgba(0,0,0) 95%
+        rgba(0,0,0,0.5) 20%,
+        rgba(0,0,0) 55%
     );
     opacity: 0;
     transition: all .3s ease;

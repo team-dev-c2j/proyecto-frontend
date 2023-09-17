@@ -42,7 +42,7 @@ const Carrito = ({ cerrarCarrito }) => {
     const estado = "pendiente";
 
     // Realizar solicitud al backend con los datos del cliente y productos
-    fetch(`${process.env.REACT_APP_URL}/ordenCompra`, {
+    fetch(`${import.meta.env.VITE_REACT_APP_API_URL}/ordenCompra`, {
       method: "POST",
       headers: {
         "Content-Type": "application/json"
@@ -83,21 +83,24 @@ const Carrito = ({ cerrarCarrito }) => {
   };
 
   return (
-    <div className="">
-      <div className="iconoCarrito"><FaArrowCircleRight size="30px" onClick={cerrarCarrito} /></div>
-      <form className="formCarro">
-        <div className="box">
-        <h6 className="boxItem">Nombre:<span className="spanNom"></span></h6>
-        <input type="text" value={name} onChange={(e) => setName(e.target.value)} required />
-        <br/>
-        <h6 className="boxItem">Teléfono:<span className="spanTel"></span> </h6>
-        <input type="text" value={telefono} onChange={(e) => setTelefono(e.target.value)} required />
-        <br /></div>
-        <h6 className="boxItem correo">Correo: <span className="spanCorreo"></span>  </h6>
-        <input type="text" value={email} onChange={(e) => setEmail(e.target.value)} required />
-        <br />
-      </form>
-      <div className="carritoItems">
+<div className="">
+  <div className="iconoCarrito">
+    <FaArrowCircleRight size="30px" onClick={cerrarCarrito} />
+  </div>
+  <div className="formCarro"> {/* Use <div> instead of <htmlFor> */}
+    <div className="box">
+      <h6 className="boxItem">Nombre:<span className="spanNom"></span></h6>
+      <input type="text" value={name} onChange={(e) => setName(e.target.value)} required />
+      <br />
+      <h6 className="boxItem">Teléfono:<span className="spanTel"></span> </h6>
+      <input type="text" value={telefono} onChange={(e) => setTelefono(e.target.value)} required />
+      <br />
+    </div>
+    <h6 className="boxItem correo">Correo: <span className="spanCorreo"></span>  </h6>
+    <input type="text" value={email} onChange={(e) => setEmail(e.target.value)} required />
+    <br />
+  </div>
+  <div className="carritoItems">
       {carrito.map((producto, index) => (
         <div className="itemPro" key={producto.id}>
           <div className="itemCarro">
@@ -125,12 +128,12 @@ const Carrito = ({ cerrarCarrito }) => {
         </div>
       ))}
       </div>
+  <h4>Total ${total}</h4>
+  <button className="btn btn-outline-success" onClick={enviarPeticion} style={{ color: "blue" }}>
+    Enviar
+  </button>
+</div>
 
-      <h4>Total ${total}</h4>
-      <button className="btn btn-outline-success" onClick={enviarPeticion} style={{ color: "blue" }}>
-        Enviar
-      </button>
-    </div>
   );
 };
 

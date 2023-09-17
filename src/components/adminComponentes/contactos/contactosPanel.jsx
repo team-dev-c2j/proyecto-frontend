@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from "react";
-import { seeContactosRquest, deleteContactoRequest } from "../../api/contacto.js";
+import { seeContactosRquest, deleteContactoRequest } from "../../api/contacto.jsx";
 import "../../../styles/contactosPanel.css";
 
 const ContactosPanel = () => {

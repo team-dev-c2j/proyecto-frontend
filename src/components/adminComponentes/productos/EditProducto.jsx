@@ -11,12 +11,13 @@ function EditProducto(props) {
   const [selectedFiles, setSelectedFiles] = useState([]);
   const [marcasDisponibles, setMarcasDisponibles] = useState([]);
   const [imageUrls, setImageUrls] = useState([]);
+  const [descripcion, setDescripcion] = useState("")
 
   const navigate = useNavigate()
 
   const fetchMarcasDisponibles = async () => {
     try {
-      const response = await fetch(`${process.env.REACT_APP_URL}/marcas`);
+      const response = await fetch(`${import.meta.env.VITE_REACT_APP_API_URL}/marcas`);
       const data = await response.json();
       const marcas = data.results.map((marca) => marca.marca);
       setMarcasDisponibles(marcas);
@@ -31,6 +32,10 @@ function EditProducto(props) {
 
   const handlePrecioChange = (event) => {
     setPrecio(event.target.value);
+  };
+
+  const handleDescripcionChange = (event) => {
+    setDescripcion(event.target.value);
   };
 
   const handleFileChange = (index, event) => {
@@ -66,7 +71,7 @@ function EditProducto(props) {
 
     
 
-      await fetch(`${process.env.REACT_APP_URL}/products/deleteImg/${idimg(imageUrlToDelete)}`, {
+      await fetch(`${import.meta.env.VITE_REACT_APP_API_URL}/products/deleteImg/${idimg(imageUrlToDelete)}`, {
         method: "Delete",
         headers: {
           "Content-Type": "application/json",
@@ -85,13 +90,14 @@ function EditProducto(props) {
   useEffect(() => {
     const fetchProductosDisponibles = async () => {
       try {
-        const response = await fetch(`${process.env.REACT_APP_URL}/products`);
+        const response = await fetch(`${import.meta.env.VITE_REACT_APP_API_URL}/products`);
         const data = await response.json();
         console.log(data);
         const foundProducto = data.results.find((item) => item._id === id);
         setProductoData(foundProducto);
         setMarca(foundProducto.marca);
         setPrecio(foundProducto.precio);
+        setDescripcion(foundProducto.descripcion);
         setImageUrls(foundProducto.imageUrls || []);
       } catch (error) {
         console.error("Error al obtener los productos:", error);
@@ -107,7 +113,7 @@ function EditProducto(props) {
   
     if (confirmDelete) {
       try {
-        await fetch(`${process.env.REACT_APP_URL}/products/${productoData._id}`, {
+        await fetch(`${import.meta.env.VITE_REACT_APP_API_URL}/products/${productoData._id}`, {
           method: "DELETE",
         }); 
         alert("Producto eliminado exitosamente");
@@ -132,7 +138,7 @@ function EditProducto(props) {
       const uploadPromises = formDataArray.map((formData) => {
         if (!formData) return null;
 
-        return fetch(`${process.env.REACT_APP_URL}/upimage`, {
+        return fetch(`${import.meta.env.VITE_REACT_APP_API_URL}/upimage`, {
           method: "POST",
           body: formData,
         }).then((response) => response.json());
@@ -148,7 +154,7 @@ function EditProducto(props) {
       console.log("Archivos subidos exitosamente");
 
       try {
-        await fetch(`${process.env.REACT_APP_URL}/products/${productoData._id}`, {
+        await fetch(`${import.meta.env.VITE_REACT_APP_API_URL}/products/${productoData._id}`, {
           method: "PUT",
           headers: {
             "Content-Type": "application/json",
@@ -157,6 +163,7 @@ function EditProducto(props) {
             modelo: productoData.modelo,
             marca: marca,
             precio: precio,
+            descripcion: descripcion,
             imageUrls: [...imageUrls, ...imageUrlArray],
           }),
         });
@@ -211,6 +218,16 @@ function EditProducto(props) {
                       value={precio}
                       className="form-control"
                       onChange={handlePrecioChange}
+                    />
+                  </div>
+                  <div className="form-group mb-1">
+                    Descripcion:
+                    <textarea rows="4" cols="50" maxLength="350"
+                      type="text"
+                      name="precio"
+                      value={descripcion}
+                      className="form-control"
+                      onChange={handleDescripcionChange}
                     />
                   </div>
                   <div className="form-group mb-1">

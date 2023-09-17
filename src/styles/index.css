@@ -8,5 +8,17 @@ body {
     font-family: "Century Gothic";
   }
 
+.buttonMain {
+    background-color: #000000;
+    color: #1ee2e7;
+    border-radius: 10px;
+    border-color: #1ee2e7;
+    margin-bottom: 10px;
+  }
+
+.buttonMain:hover {
+  background-color: #1ee2e7;
+  color: #000000;
+}
   
 
