@@ -5,6 +5,7 @@ import "slick-carousel/slick/slick.css";
 import "slick-carousel/slick/slick-theme.css";
 import "../../styles/productoDetail.css";
 import { CarritoContext } from "../context/CarritoContext";
+import Loader from "../utils/Loader";
 
 
 const ProductoDetail = (props) => {
@@ -75,7 +76,7 @@ const ProductoDetail = (props) => {
     : unidades;
 
   if (!producto) {
-    return <p>Cargando...</p>;
+    return <Loader></Loader>
   }
 
   let toShow; // Declarar toShow fuera del bloque if-else

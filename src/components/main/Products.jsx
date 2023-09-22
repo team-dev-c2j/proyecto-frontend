@@ -1,6 +1,7 @@
 import React, { useEffect, useState } from "react";
 import { Link } from 'react-router-dom';
 import '../../styles/Products.css';
+import Loader from "../utils/Loader";
 
 
 
@@ -31,7 +32,7 @@ function ProductsComponent() {
   return (
     <div className="main-cointainer">
       {products.length === 0 ? (
-        <p>Loading products...</p>
+        <Loader></Loader>
       ) : (
         <div className="main">
           {products.map((product) => (
