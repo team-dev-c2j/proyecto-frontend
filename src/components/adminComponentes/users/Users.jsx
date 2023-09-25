@@ -1,13 +1,14 @@
 import React, { useState, useEffect } from "react";
 import "../../../styles/user.css";
 import { deleteUserRequest, getUsersRequest } from "../../api/auth";
+import { useAuth } from "../../context/AuthContext";
 
 const Users = ({ userCreated }) => {
   const [users, setUsers] = useState([]);
-
+  const { userNav } = useAuth()
   const deleteUser = (id) => {
     const confirmDelete = window.confirm("¿Estás seguro de eliminar este usuario?");
-    if (confirmDelete) {
+    if (confirmDelete && userNav === `${import.meta.env.VITE_REACT_APP_USER_ADMIN}` ) {
       deleteUserRequest(id)
         .then(() => {
           getUsersRequest()
@@ -51,7 +52,9 @@ const Users = ({ userCreated }) => {
             <tr key={user._id}>
               <td>
                 {user.username}
-                <button className="buttonDelete" onClick={() => deleteUser(user._id)}>x</button>
+                {user.username === `${import.meta.env.VITE_REACT_APP_USER_ADMIN}` ? ('') : (
+                  <button className="buttonDelete" onClick={() => deleteUser(user._id)}>x</button>
+                )}
               </td>
             </tr>
           ))}

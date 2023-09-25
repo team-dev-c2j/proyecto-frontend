@@ -2,6 +2,7 @@ import { useParams } from "react-router-dom";
 import React, { useEffect, useState } from "react";
 import { Link } from 'react-router-dom';
 import '../../styles/Products.css';
+import Loader from "../utils/Loader";
 
 const FiltroMarcas = () => {
 
@@ -33,12 +34,12 @@ const FiltroMarcas = () => {
   return (
     <div class="main-cointainer">
       {products.length === 0 ? (
-        <p>Loading products...</p>
+        <Loader></Loader>
       ) : (
-        <div class="main">
+        <div class="main" style={{marginTop: '35px'}}>
           {products.map((product) => (
             <div  class="card-container" key={product.modelo}>
-              <Link to={`/productoDetail/${product._id}`}>
+              <Link to={`/productoDetail/${product._id}`} style={{ textDecoration: 'none' }}>
               <div className="divCard">
                 <div>
                   <article>
