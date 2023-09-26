@@ -75,7 +75,7 @@ function ProductTable() {
                         {product.modelo} {product.marca}
                       </button>
                       <Link to={`/productos/${product._id}`}>
-                      {userNav === "juli" && <button className="editBoton">Edit</button>}</Link>
+                      {userNav === `${import.meta.env.VITE_REACT_APP_USER_ADMIN}` && <button className="editBoton">Edit</button>}</Link>
                     </td>
                   </tr>
                   {expandedProduct === product.modelo && (
@@ -100,7 +100,7 @@ function ProductTable() {
                                   <td>
                                     {unit.stock}
                                     <Link to={`/unidad/${unit._id}`}>
-                                      {userNav === "juli" && <button className="editBoton">Edit</button>}
+                                      {userNav === `${import.meta.env.VITE_REACT_APP_USER_ADMIN}` && <button className="editBoton">Edit</button>}
                                     </Link>
                                   </td>
                                 </tr>
@@ -122,3 +122,4 @@ function ProductTable() {
 }
 
 export default ProductTable;
+
